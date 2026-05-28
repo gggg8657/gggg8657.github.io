@@ -1,0 +1,75 @@
+{
+  "name": "김동주",
+  "nameEn": "DongJu Kim",
+  "title": "Post-Master Researcher · KAERI AI Application Lab",
+  "tagline": "AI-Scientist E2E pipelines — CV, physics-informed ML, and agentic AI in high-integrity environments.",
+  "location": "Seoul, Korea",
+  "email": "dongjukim.dev@gmail.com",
+  "links": {
+    "github": "https://github.com/gggg8657",
+    "linkedin": "https://www.linkedin.com/in/dongju-kim-ai/",
+    "surfit": "https://my.surfit.io/w/167689643",
+    "portfolio": "https://gggg8657.github.io"
+  },
+  "education": [
+    {
+      "school": "Kwangwoon University",
+      "degree": "M.Eng., Computer Engineering",
+      "period": "2022.03 – 2024.08",
+      "note": "AUDISP thesis · F1 0.88"
+    },
+    {
+      "school": "Kwangwoon University",
+      "degree": "B.Eng., Computer Engineering",
+      "period": "2017.03 – 2022.02",
+      "note": "GPA 3.06 / 4.5"
+    }
+  ],
+  "experience": [
+    {
+      "org": "KAERI · AI Application Lab",
+      "role": "Post-Master Researcher",
+      "period": "2025.03 – present",
+      "highlight": "CCTV / battery / radiopharmaceutical AI-Scientist pipelines"
+    },
+    {
+      "org": "Kwangwoon University",
+      "role": "M.Eng. research",
+      "period": "2022.03 – 2024.08",
+      "highlight": "AUDISP — 3D face detail restoration"
+    }
+  ],
+  "projects": [
+    {
+      "name": "KAERI CCTV AI-Scientist",
+      "url": "https://github.com/gggg8657/AI_CCTV_final",
+      "tags": ["VAD", "VLM", "Agentic AI", "Web UI"],
+      "metric": "AUC 82.4% · 265 FPS"
+    },
+    {
+      "name": "PyBAMM Experiment Protocol Generator",
+      "url": "https://github.com/gggg8657/PyBAMM-Experiment-Protocol-Generator",
+      "tags": ["PyBaMM", "Battery", "Automation"],
+      "metric": "Open-source tooling"
+    },
+    {
+      "name": "AI-SCI",
+      "url": "https://github.com/gggg8657/AI-SCI",
+      "tags": ["MCP", "Agents", "Scientific computing"],
+      "metric": "Workflow docs & tooling"
+    },
+    {
+      "name": "AUDISP",
+      "url": "https://github.com/gggg8657/AU_Detail",
+      "tags": ["3D Face", "AU", "Thesis"],
+      "metric": "F1 0.88"
+    }
+  ],
+  "awards": [
+    "KAERI Outstanding Researcher Award 2025",
+    "Korea Industrial Information Society Best Paper Award 2025",
+    "KCC Best Paper Award 2021",
+    "Embedded SW Contest — Chairman's Award 2024"
+  ],
+  "updated": "2026-05-28"
+}

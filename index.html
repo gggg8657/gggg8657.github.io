@@ -1,44 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kim Dong-joo's Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="DongJu Kim — AI Researcher at KAERI. AI-Scientist pipelines, computer vision, agentic AI." />
+  <title>DongJu Kim · AI Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
 </head>
 <body>
-  <header>
-    <h1>Kim Dong-joo's Portfolio</h1>
-    <nav>
-      <ul>
-        <li><a href="#about">About Me</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="#">DJ</a>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#awards">Awards</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>안녕하세요, 저는 AI 서비스 개발과 기획에 중점을 두고 있는 AI 개발자 김동주입니다.</p>
-  </section>
+  <main class="wrap">
+    <section class="hero" id="top">
+      <p class="eyebrow" id="hero-title">Loading…</p>
+      <h1 id="hero-name">DongJu Kim</h1>
+      <p class="lead" id="hero-tagline"></p>
+      <div class="hero-links" id="hero-links"></div>
+    </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <ul>
-      <li><strong>3D Face Reconstruction</strong> - 2D 이미지로부터 3D 얼굴 복원 연구</li>
-      <li><strong>Poopy - 반려동물 건강 관리 AI 서비스</strong> - GPT4-mini와 RAG 기법을 사용한 챗봇 개발</li>
-    </ul>
-  </section>
+    <section id="about" class="section">
+      <h2>About</h2>
+      <p id="about-text"></p>
+      <ul class="edu-list" id="education"></ul>
+    </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:dongjukim.dev@gmail.com">dongjukim.dev@gmail.com</a></p>
-    <p>GitHub: <a href="https://github.com/gggg8657">https://github.com/gggg8657</a></p>
-  </section>
+    <section id="experience" class="section">
+      <h2>Experience</h2>
+      <div class="timeline" id="experience"></div>
+    </section>
 
-  <footer>
-    <p>&copy; 2024 Kim Dong-joo</p>
+    <section id="projects" class="section">
+      <h2>Featured Projects</h2>
+      <div class="cards" id="projects"></div>
+    </section>
+
+    <section id="awards" class="section">
+      <h2>Awards</h2>
+      <ul class="awards" id="awards"></ul>
+    </section>
+
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <p id="contact-email"></p>
+      <div class="hero-links" id="contact-links"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span id="footer-copy"></span>
+      <span class="muted">Updated <span id="footer-updated"></span></span>
+    </div>
   </footer>
+
+  <script src="assets/site.js"></script>
 </body>
 </html>
