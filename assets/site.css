@@ -90,6 +90,7 @@ nav a:hover { color: var(--text); }
 .card h3 { font-size: 1rem; margin-bottom: 0.35rem; }
 .card h3 a { color: var(--text); text-decoration: none; }
 .card h3 a:hover { color: var(--accent); }
+.card-note { font-size: 0.82rem; color: var(--muted); margin: 0.25rem 0 0.35rem; }
 .card .metric { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); margin: 0.4rem 0; }
 .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.5rem; }
 .tags span {

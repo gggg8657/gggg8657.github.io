@@ -52,14 +52,19 @@ function render(p) {
     .join("");
 
   document.getElementById("projects").innerHTML = p.projects
-    .map(
-      (pr) => `
+    .map((pr) => {
+      const title = pr.url
+        ? `<h3><a href="${pr.url}" target="_blank" rel="noopener">${pr.name}</a></h3>`
+        : `<h3>${pr.name}</h3>`;
+      const note = pr.note ? `<p class="card-note">${pr.note}</p>` : "";
+      return `
       <article class="card">
-        <h3><a href="${pr.url}" target="_blank" rel="noopener">${pr.name}</a></h3>
+        ${title}
+        ${note}
         <div class="metric">${pr.metric || ""}</div>
         <div class="tags">${(pr.tags || []).map((t) => `<span>${t}</span>`).join("")}</div>
-      </article>`
-    )
+      </article>`;
+    })
     .join("");
 
   document.getElementById("awards").innerHTML = p.awards

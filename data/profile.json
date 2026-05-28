@@ -30,7 +30,7 @@
       "org": "KAERI · AI Application Lab",
       "role": "Post-Master Researcher",
       "period": "2025.03 – present",
-      "highlight": "CCTV / battery / radiopharmaceutical AI-Scientist pipelines"
+      "highlight": "CCTV · LFP battery · SST14-M_scr radiopharmaceutical (SSTR2) AI-Scientist pipelines"
     },
     {
       "org": "Kwangwoon University",
@@ -45,6 +45,13 @@
       "url": "https://github.com/gggg8657/AI_CCTV_final",
       "tags": ["VAD", "VLM", "Agentic AI", "Web UI"],
       "metric": "AUC 82.4% · 265 FPS"
+    },
+    {
+      "name": "SST14-M_scr · SSTR2 Radiopharmaceutical AI-Scientist",
+      "url": "",
+      "note": "Private (KAERI) · Lead architect & main developer",
+      "tags": ["SSTR2", "Dual Silo", "5-Agent Flow", "PyRosetta", "Boltz-2"],
+      "metric": "184 in-silico candidates · KNS Spring 2026"
     },
     {
       "name": "PyBAMM Experiment Protocol Generator",
