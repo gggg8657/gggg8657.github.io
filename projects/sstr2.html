@@ -74,6 +74,23 @@
   </section>
 
   <section>
+    <div class="sec-head"><span class="sec-num">설계 출발점</span><h2>SST-14 구조</h2></div>
+    <p class="lede">공개된 native ligand <strong>SST-14</strong>(소마토스타틴-14, 서열 AGCKNFFWKTFTSC)의 3차원 구조. 이 구조를 출발점으로 점 돌연변이와 De Novo 후보를 탐색한다. 프로젝트의 실제 후보 구조는 비공개(대외비)이며 여기에 포함하지 않는다.</p>
+    <div class="mol-wrap" data-reveal>
+      <canvas id="mol" aria-label="SST-14 3차원 구조 뷰어 (드래그로 회전)"></canvas>
+      <div class="mol-legend">
+        <div><span class="dot" style="background:#8b929c"></span>C 탄소</div>
+        <div><span class="dot" style="background:#4674ff"></span>N 질소</div>
+        <div><span class="dot" style="background:#ff5555"></span>O 산소</div>
+        <div><span class="dot" style="background:#e6b422"></span>S 황 · 이황화결합 Cys3–Cys14</div>
+        <div style="margin-top:10px;color:var(--ink-faint)">드래그로 회전 · 자동 회전</div>
+        <div style="color:var(--ink-faint)">출처: RCSB PDB 2MI1 (공개, NMR)</div>
+      </div>
+    </div>
+    <p class="chart-cap">공개 구조(RCSB PDB 2MI1)의 중원자 표현. 실제 후보 펩타이드 구조·서열은 대외비로 포함하지 않는다.</p>
+  </section>
+
+  <section>
     <div class="prose">
       <h3>문제</h3>
       <p>SSTR2 발현 신경내분비종양(NET) 진단·치료용 방사성의약품 후보 발굴은 후보 생성과 평가, 정리, 의사결정이 반복돼 수작업 부담이 컸다. 계산 결과와 파라미터, 평가 근거가 흩어져 재현성과 추적성이 떨어졌고, 단일 지표 중심 선별은 과적합과 오판 위험이 있었다.</p>
@@ -113,6 +130,8 @@
   </div>
 </footer>
 
+<script src="/projects/sst14-atoms.js"></script>
+<script src="/projects/mol.js"></script>
 <script src="/main.js"></script>
 </body>
 </html>

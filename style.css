@@ -233,6 +233,13 @@ blockquote.motto { font-family: var(--serif); font-size: clamp(20px, 3vw, 27px);
 .roc-wrap .roc-note { font-size: 13.5px; color: var(--ink-soft); max-width: 34ch; }
 .roc-wrap .roc-note b { font-family: var(--mono); color: var(--accent); font-size: 20px; }
 
+/* ---- 3D molecule viewer ---- */
+.mol-wrap { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+#mol { width: min(340px, 100%); height: 300px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; cursor: grab; touch-action: none; box-shadow: var(--shadow); }
+#mol:active { cursor: grabbing; }
+.mol-legend { font-family: var(--mono); font-size: 12.5px; color: var(--ink-soft); display: flex; flex-direction: column; gap: 6px; }
+.mol-legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; vertical-align: middle; }
+
 /* ---- Footer ---- */
 footer { padding: 40px 0 64px; color: var(--ink-faint); font-size: 13px; }
 footer .note { font-family: var(--mono); font-size: 12px; line-height: 1.7; display: flex; gap: 10px; align-items: flex-start; }
