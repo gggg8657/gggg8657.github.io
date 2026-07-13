@@ -77,6 +77,21 @@
       <div class="result" data-reveal><div class="rv">4<small>편</small></div><div class="rk">학회 논문 (주저자 1 + 공저 3)</div></div>
       <div class="result" data-reveal><div class="rv">1<small>회</small></div><div class="rk">우수논문상 수상</div></div>
     </div>
+    <div class="chart" data-reveal>
+      <p class="chart-title">이상행위 탐지 성능 (ROC)</p>
+      <div class="roc-wrap">
+        <svg width="180" height="180" viewBox="0 0 180 180" role="img" aria-label="대표 ROC 곡선, AUC 82.4%">
+          <rect x="24" y="12" width="144" height="144" fill="none" stroke="var(--line)" stroke-width="1"/>
+          <line x1="24" y1="84" x2="168" y2="84" stroke="var(--line)" stroke-width="0.5"/>
+          <line x1="96" y1="12" x2="96" y2="156" stroke="var(--line)" stroke-width="0.5"/>
+          <line x1="24" y1="156" x2="168" y2="12" stroke="var(--ink-faint)" stroke-width="1" stroke-dasharray="4 4"/>
+          <path d="M24,156 Q40,40 168,12" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+          <text x="96" y="174" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="var(--ink-faint)">False Positive Rate</text>
+          <text x="12" y="84" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="var(--ink-faint)" transform="rotate(-90 12 84)">True Positive Rate</text>
+        </svg>
+        <div class="roc-note"><b>AUC 82.4%</b><br>폐쇄망 온프레미스 환경에서 측정. 곡선은 대표 형태이며 AUC 값은 실측 공개 수치다.</div>
+      </div>
+    </div>
     <div class="prose">
       <p>한국산업정보학회 추계학술발표회 3편과 한국원자력학회 춘계학술발표회 1편을 발표했고, "고수준 보안 환경에서의 이상 행동 탐지를 위한 지능형 CCTV 시스템 개발"로 <strong>한국산업정보학회 우수논문상</strong>을 받았다. 폐쇄망에서 VLM(Qwen2.5-VL)을 온프레미스로 운영해 클라우드 API 없이 완전 동작했고, KAERI 우수연구원상 수상에도 기여했다.</p>
 
