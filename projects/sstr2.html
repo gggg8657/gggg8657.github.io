@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>방사성의약품 SSTR2 in silico (Dual Silo) — 김동주</title>
+<meta name="description" content="SSTR2 표적 방사성의약품 후보를 자동 생성·평가·선별하는 Dual Silo Agentic AI in silico 파이프라인. 후보 184개, 한국원자력학회 2026 발표, Wet-lab 검증 진행 중.">
+<meta property="og:title" content="방사성의약품 SSTR2 in silico (Dual Silo) — 김동주">
+<meta property="og:description" content="De Novo 설계 + LLM 5-Agent 검증 Dual Silo 파이프라인. 후보 184개, Wet-lab 진행 중.">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="/">김동주<span class="dot">.</span></a>
+    <nav><a href="/#projects">프로젝트</a><a href="/#career">이력</a><a href="/#contact">연락</a></nav>
+  </div>
+</div>
+
+<header class="detail-hero wrap">
+  <a class="back-link" href="/#projects">&larr; 프로젝트 목록</a>
+  <p class="cat">KAERI 현직 · Bio AI · Drug Discovery</p>
+  <h1>방사성의약품 SSTR2 in silico 파이프라인</h1>
+  <p class="sub">종양에 과발현되는 SSTR2 수용체를 표적으로, 결합 펩타이드 후보를 자동 생성하고 평가·선별하는 Dual Silo Agentic AI in silico 워크플로우를 설계하고 메인 개발했다.</p>
+  <div class="meta">
+    <span><b>기간</b> 2026.02 ~ 진행 중</span>
+    <span><b>소속</b> KAERI 첨단방사선연구소</span>
+    <span><b>역할</b> 전체 아키텍처 설계 · 메인 개발</span>
+    <span><b>발표</b> 한국원자력학회 춘계학술대회 2026</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="sec-head"><span class="sec-num">아키텍처</span></div>
+    <div class="silo" data-reveal>
+      <div class="lane">
+        <span class="lane-label">Silo A · De Novo 구조 설계</span>
+        <div class="flow">
+          <div class="stage"><div class="s-t">RFdiffusion</div><div class="s-d">backbone</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage"><div class="s-t">ProteinMPNN</div><div class="s-d">sequence</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage"><div class="s-t">ESMFold</div><div class="s-d">QC</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage"><div class="s-t">Boltz-2</div><div class="s-d">docking</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage"><div class="s-t">PyRosetta</div><div class="s-d">ddG</div></div>
+        </div>
+      </div>
+      <div class="lane">
+        <span class="lane-label">Silo B · LLM 5-Agent 변이 탐색</span>
+        <div class="flow">
+          <div class="stage"><div class="s-t">Planner</div><div class="s-d">라운드 설계</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage"><div class="s-t">Builder</div><div class="s-d">후보 생성</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage"><div class="s-t">QCRanker</div><div class="s-d">게이트·랭킹</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage"><div class="s-t">Critic</div><div class="s-d">실패 분석</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage"><div class="s-t">Reporter</div><div class="s-d">로그화</div></div>
+        </div>
+      </div>
+      <div class="merge">
+        <span class="m-label">통합 랭킹·트리아지</span>
+        <span class="arrow">&rarr;</span>
+        <div class="stage out"><div class="s-t">Wet-lab 후보 제안</div><div class="s-d">최상위 후보군 실험 진행 중</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="prose">
+      <h3>문제</h3>
+      <p>SSTR2 발현 신경내분비종양(NET) 진단·치료용 방사성의약품 후보 발굴은 후보 생성과 평가, 정리, 의사결정이 반복돼 수작업 부담이 컸다. 계산 결과와 파라미터, 평가 근거가 흩어져 재현성과 추적성이 떨어졌고, 단일 지표 중심 선별은 과적합과 오판 위험이 있었다.</p>
+
+      <h3>접근</h3>
+      <ul>
+        <li><strong>Dual Silo 설계.</strong> De Novo 구조 설계(Silo A)와 LLM 5-Agent 점 돌연변이 탐색(Silo B)을 병렬로 두고, 결과를 통합 랭킹으로 합쳤다.</li>
+        <li><strong>멀티에이전트 자율 의사결정.</strong> Planner가 상위 후보의 공통 패턴과 Critic의 실패 분석을 바탕으로 다음 라운드의 보존·변이 위치를 자동 제안하고, QCRanker가 게이트 평가와 Top-K 랭킹을, Reporter가 의사결정 기록을 담당한다. 에이전트 플로우 3종을 벤치마크했다.</li>
+        <li><strong>다중 기준 트리아지.</strong> 단일 결합 점수가 아니라 상호작용 패턴, pharmacophore 일치도, 핵심 잔기 접촉, 구조 안정성, 후보 다양성을 함께 보는 랭킹 로직을 썼다.</li>
+        <li><strong>재현성.</strong> 입력 서열, 출력 후보, 모델 버전, 하이퍼파라미터, 스코어, QC 사유, 최종 랭킹을 실험 단위 로그로 표준화하고 후보별 근거 리포트를 자동 생성했다.</li>
+      </ul>
+
+      <h3>결과</h3>
+    </div>
+    <div class="result-grid">
+      <div class="result" data-reveal><div class="rv">184</div><div class="rk">in silico 후보 도출</div></div>
+      <div class="result" data-reveal><div class="rv">진행 중</div><div class="rk">최상위 후보군 Wet-lab 검증</div></div>
+      <div class="result" data-reveal><div class="rv">2026</div><div class="rk">한국원자력학회 춘계 발표</div></div>
+    </div>
+    <div class="prose">
+      <h3>연구 정직성</h3>
+      <p>구조 예측 신뢰도 지표(iPTM)가 실제 결합력의 대리 지표로 쓰일 수 있는지를 다섯 표적(SST-14, SSTR1~5)의 실측 데이터로 교차검증했고, 상관이 약해 결합력 proxy로 부적합함을 <strong>자발적으로 보고</strong>했다. 정량 선택성은 별도 계산·실측 경로로 분리했다. 성능 숫자를 방어하기보다 지표의 한계를 먼저 드러내는 것이 이 연구의 태도다.</p>
+
+      <h3>기술</h3>
+      <p>RFdiffusion · ProteinMPNN · ESMFold · Boltz-2 · PyRosetta · DiffDock · FoldMason · LLM 멀티에이전트 · NHN Cloud 광주 AICA 서버 병렬 실행.</p>
+    </div>
+    <div class="arch-note"><span class="chip conf">대외비</span><span>기관 보안 규정상 코드와 세부 구현은 공개 제한 대상이다. 8-step 게이트 임계값, 후보 구조·서열, 내부 정량 결과, 파이프라인 세부는 공개하지 않는다. 이 페이지는 공개 발표된 범위의 개념 구조와 결과만 담는다.</span></div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="foot-links">
+    <a href="/#projects">← 프로젝트 목록</a>
+    <a href="mailto:dongjukim.dev@gmail.com">Email</a>
+    <a href="https://github.com/gggg8657" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+<script src="/main.js"></script>
+</body>
+</html>

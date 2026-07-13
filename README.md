@@ -6,7 +6,12 @@
 
 ## 구조
 
-- `index.html` — 자체완결형 단일 페이지 (인라인 CSS, 외부 의존성 없음). GitHub Pages가 root에서 서빙.
+정적 멀티페이지 사이트. 빌드 도구·프레임워크 없음, GitHub Pages가 root에서 서빙.
+
+- `index.html` — 랜딩(허브). 프로젝트 카드 클릭 → 상세페이지로 이동.
+- `projects/*.html` — 프로젝트 상세페이지 (cctv, sstr2, audisp, battery, file-access).
+- `style.css` — 공용 스타일 (라이트/다크 대응).
+- `main.js` — 스크롤 리빌 (prefers-reduced-motion 존중).
 
 ## 공개 / 대외비 경계
 

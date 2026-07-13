@@ -3,501 +3,121 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="김동주 (Kim Dongju) — 한국원자력연구원 인공지능응용연구실 석사후연수생. 지능형 CCTV(VAD·VLM·Agentic), 방사성의약품 SSTR2 in silico, Robot AI, 배터리 Physics-Informed ML.">
+<title>김동주 — AI Scientist Portfolio</title>
+<meta name="description" content="김동주 (Kim Dongju) — 한국원자력연구원 인공지능응용연구실 AI Scientist. 지능형 CCTV(VAD·VLM·Agentic), 방사성의약품 SSTR2 in silico, Robot AI, 배터리 Physics-Informed ML, 3D 얼굴 복원.">
 <meta name="author" content="Kim Dongju">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="김동주 — AI Scientist Portfolio">
 <meta property="og:description" content="KAERI 인공지능응용연구실 AI Scientist. 지능형 CCTV, 방사성의약품 SSTR2, Robot AI, 배터리 ML.">
 <meta property="og:url" content="https://gggg8657.github.io">
 <meta name="twitter:card" content="summary">
-<title>김동주 — AI Scientist Portfolio</title>
-<style>
-  :root {
-    --bg: #F6F8FA;
-    --surface: #FFFFFF;
-    --surface-2: #EEF2F5;
-    --line: #DCE3E9;
-    --ink: #1B2530;
-    --ink-soft: #4A5763;
-    --ink-faint: #7B8894;
-    --accent: #0E8F86;
-    --accent-soft: #0E8F8618;
-    --signal: #B67A1E;
-    --signal-soft: #B67A1E1A;
-    --good: #2F8F5B;
-    --serif: "Iowan Old Style", "Charter", "Palatino Linotype", Palatino, Georgia, serif;
-    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
-    --maxw: 940px;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0E1216;
-      --surface: #161C22;
-      --surface-2: #1C242B;
-      --line: #2A343D;
-      --ink: #E6ECF1;
-      --ink-soft: #AEBAC5;
-      --ink-faint: #7B8894;
-      --accent: #35B8AD;
-      --accent-soft: #35B8AD1F;
-      --signal: #D6A24A;
-      --signal-soft: #D6A24A1F;
-      --good: #4FB57E;
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #0E1216; --surface: #161C22; --surface-2: #1C242B; --line: #2A343D;
-    --ink: #E6ECF1; --ink-soft: #AEBAC5; --ink-faint: #7B8894;
-    --accent: #35B8AD; --accent-soft: #35B8AD1F; --signal: #D6A24A; --signal-soft: #D6A24A1F; --good: #4FB57E;
-  }
-  :root[data-theme="light"] {
-    --bg: #F6F8FA; --surface: #FFFFFF; --surface-2: #EEF2F5; --line: #DCE3E9;
-    --ink: #1B2530; --ink-soft: #4A5763; --ink-faint: #7B8894;
-    --accent: #0E8F86; --accent-soft: #0E8F8618; --signal: #B67A1E; --signal-soft: #B67A1E1A; --good: #2F8F5B;
-  }
-
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--sans);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
-
-  /* Masthead */
-  header.mast { padding: 72px 0 40px; border-bottom: 1px solid var(--line); }
-  .eyebrow {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 18px;
-  }
-  h1.name {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: clamp(40px, 8vw, 68px);
-    line-height: 1.02;
-    letter-spacing: -0.01em;
-    margin: 0;
-    text-wrap: balance;
-  }
-  .name .en { display: block; font-size: 0.42em; color: var(--ink-faint); font-weight: 500; letter-spacing: 0.02em; margin-top: 12px; font-family: var(--sans); }
-  .role {
-    margin: 24px 0 0;
-    font-size: 18px;
-    color: var(--ink-soft);
-  }
-  .role strong { color: var(--ink); font-weight: 600; }
-  .thesis {
-    max-width: 62ch;
-    font-family: var(--serif);
-    font-size: clamp(19px, 2.4vw, 23px);
-    line-height: 1.5;
-    color: var(--ink);
-    margin: 28px 0 0;
-    text-wrap: pretty;
-  }
-  .contacts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
-  .contacts a {
-    font-family: var(--mono);
-    font-size: 13px;
-    text-decoration: none;
-    color: var(--ink-soft);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 7px 14px;
-    background: var(--surface);
-    transition: border-color .15s, color .15s;
-  }
-  .contacts a:hover { border-color: var(--accent); color: var(--accent); }
-  .contacts a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-  /* Metrics band */
-  .metrics {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    overflow: hidden;
-    margin: 44px 0 8px;
-  }
-  .metric { background: var(--surface); padding: 22px 20px; }
-  .metric .v {
-    font-family: var(--mono);
-    font-variant-numeric: tabular-nums;
-    font-size: 30px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    line-height: 1;
-  }
-  .metric .v small { font-size: 15px; color: var(--ink-faint); font-weight: 500; }
-  .metric .k { margin-top: 10px; font-size: 13px; color: var(--ink-soft); line-height: 1.35; }
-
-  /* Sections */
-  section { padding: 52px 0; border-bottom: 1px solid var(--line); }
-  .sec-head { display: flex; align-items: baseline; gap: 14px; margin: 0 0 28px; }
-  .sec-num { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.05em; }
-  h2 {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: clamp(24px, 4vw, 32px);
-    letter-spacing: -0.01em;
-    margin: 0;
-  }
-  .lede { color: var(--ink-soft); max-width: 68ch; margin: -14px 0 28px; }
-
-  /* Track cards */
-  .tracks { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .card .tag {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  .card h3 { font-size: 17px; margin: 0; font-weight: 650; color: var(--ink); }
-  .card p { margin: 0; font-size: 14.5px; color: var(--ink-soft); }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
-  .chip {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    padding: 3px 9px;
-    border-radius: 6px;
-    background: var(--accent-soft);
-    color: var(--accent);
-    white-space: nowrap;
-  }
-  .chip.conf {
-    background: var(--signal-soft);
-    color: var(--signal);
-    background-image: repeating-linear-gradient(45deg, transparent, transparent 4px, var(--signal-soft) 4px, var(--signal-soft) 5px);
-  }
-  .chip.metric-chip { background: var(--surface-2); color: var(--ink-soft); font-variant-numeric: tabular-nums; }
-
-  /* Timeline */
-  .timeline { display: flex; flex-direction: column; gap: 0; }
-  .row {
-    display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 24px;
-    padding: 20px 0;
-    border-top: 1px solid var(--line);
-  }
-  .row:first-child { border-top: none; }
-  .row .when { font-family: var(--mono); font-size: 13px; color: var(--ink-faint); padding-top: 2px; font-variant-numeric: tabular-nums; }
-  .row .what h3 { margin: 0 0 4px; font-size: 16.5px; font-weight: 650; }
-  .row .what .org { color: var(--accent); font-size: 13.5px; font-family: var(--mono); }
-  .row .what p { margin: 8px 0 0; font-size: 14.5px; color: var(--ink-soft); }
-  .badge {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    padding: 2px 8px;
-    border-radius: 5px;
-    border: 1px solid var(--line);
-    color: var(--ink-faint);
-    margin-left: 8px;
-    vertical-align: middle;
-  }
-
-  /* Stack */
-  .stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
-  .stack-group { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
-  .stack-group .label { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 12px; }
-  .stack-group .items { display: flex; flex-wrap: wrap; gap: 7px; }
-  .tech { font-size: 13px; padding: 4px 11px; border-radius: 7px; background: var(--surface-2); color: var(--ink); }
-
-  /* Awards */
-  .awards { display: flex; flex-direction: column; gap: 0; }
-  .award { display: grid; grid-template-columns: 108px 1fr auto; gap: 18px; align-items: baseline; padding: 13px 0; border-top: 1px solid var(--line); }
-  .award:first-child { border-top: none; }
-  .award .date { font-family: var(--mono); font-size: 12.5px; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
-  .award .title { font-size: 14.5px; color: var(--ink); }
-  .award .by { font-size: 12.5px; color: var(--ink-faint); font-family: var(--mono); text-align: right; }
-
-  /* Values */
-  .values { display: grid; gap: 14px; }
-  .value { display: flex; gap: 16px; align-items: flex-start; }
-  .value .mark { font-family: var(--mono); color: var(--accent); font-size: 14px; padding-top: 3px; }
-  .value p { margin: 0; color: var(--ink-soft); font-size: 15px; }
-  .value strong { color: var(--ink); }
-  blockquote.motto {
-    font-family: var(--serif);
-    font-size: clamp(20px, 3vw, 26px);
-    line-height: 1.4;
-    color: var(--ink);
-    border-left: 3px solid var(--accent);
-    margin: 0 0 28px;
-    padding: 6px 0 6px 22px;
-    text-wrap: balance;
-  }
-
-  /* Facts grid */
-  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
-  .fact { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
-  .fact .fk { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); }
-  .fact .fv { margin-top: 6px; font-size: 15px; color: var(--ink); }
-
-  /* Architecture */
-  .arch { display: flex; flex-direction: column; gap: 32px; }
-  .arch-block .a-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
-  .arch-block .a-head .a-t { font-size: 16px; font-weight: 650; color: var(--ink); }
-  .arch-block .a-head .a-tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
-  .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-  .stage { background: var(--surface); border: 1px solid var(--line); border-radius: 9px; padding: 10px 13px; }
-  .stage .s-t { font-size: 13.5px; font-weight: 600; color: var(--ink); line-height: 1.2; }
-  .stage .s-d { font-family: var(--mono); font-size: 10.5px; color: var(--ink-faint); margin-top: 4px; }
-  .stage.out { border-color: var(--accent); background: var(--accent-soft); }
-  .arrow { color: var(--accent); font-family: var(--mono); font-size: 15px; flex: none; }
-  .silo { display: flex; flex-direction: column; gap: 14px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
-  .lane { display: flex; flex-direction: column; gap: 8px; }
-  .lane .lane-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-faint); }
-  .merge { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; border-top: 1px dashed var(--line); padding-top: 14px; }
-  .merge .m-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.06em; }
-  .arch-note { display: flex; gap: 10px; align-items: flex-start; margin-top: 14px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; }
-  .arch-note .chip { flex: none; margin-top: 1px; }
-
-  .repos { margin-top: 26px; }
-  .repos .repos-label { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 12px; }
-
-  footer { padding: 40px 0 64px; color: var(--ink-faint); font-size: 13px; }
-  footer .note { font-family: var(--mono); font-size: 12px; line-height: 1.7; display: flex; gap: 10px; align-items: flex-start; }
-  footer .note .chip.conf { flex: none; }
-
-  @media (max-width: 620px) {
-    .row { grid-template-columns: 1fr; gap: 6px; }
-    .award { grid-template-columns: 90px 1fr; }
-    .award .by { grid-column: 2; text-align: left; }
-  }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-</style>
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<div class="wrap">
 
-  <header class="mast">
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="/">김동주<span class="dot">.</span></a>
+    <nav>
+      <a href="#projects">프로젝트</a>
+      <a href="#career">이력</a>
+      <a href="#skills">기술</a>
+      <a href="#contact">연락</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
     <p class="eyebrow">AI Scientist / KAERI 인공지능응용연구실</p>
     <h1 class="name">김동주<span class="en">Kim Dongju</span></h1>
     <p class="role"><strong>석사후연수생</strong>(원급), 연구분야 AI Scientist. 계약 재직 2025.02 ~ 2027.02.</p>
     <p class="thesis">AI 알고리즘과 자동화 시스템으로 현장의 AX화를 이룬다. 단발성 모델보다 재현성과 추적성을 갖춘 E2E 워크플로우를, 도메인 지식이 없는 분야도 공개 데이터와 물리 모델로 0에서 1까지 먼저 세우고 전문가 검증으로 닫는다.</p>
-    <div class="contacts">
+    <div class="contacts" id="contact">
       <a href="mailto:dongjukim.dev@gmail.com">dongjukim.dev@gmail.com</a>
       <a href="https://www.linkedin.com/in/dongju-kim-ai/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://github.com/gggg8657" target="_blank" rel="noopener">GitHub @gggg8657</a>
       <a href="https://my.surfit.io/w/167689643" target="_blank" rel="noopener">Surfit</a>
     </div>
-
     <div class="metrics">
       <div class="metric"><div class="v">82.4<small>%</small></div><div class="k">지능형 CCTV AUC, 265 FPS 실시간</div></div>
-      <div class="metric"><div class="v">184</div><div class="k">SSTR2 방사성의약품 후보 도출, Wet-lab 실험 진행 중</div></div>
-      <div class="metric"><div class="v">552<small>×</small></div><div class="k">배터리 수명 예측 추론 가속 (DeepONet)</div></div>
+      <div class="metric"><div class="v">184</div><div class="k">SSTR2 방사성의약품 후보 도출, Wet-lab 진행 중</div></div>
+      <div class="metric"><div class="v">0.88</div><div class="k">AUDISP 3D 얼굴 복원 F1 (SOTA 상회)</div></div>
       <div class="metric"><div class="v">8</div><div class="k">학회 논문상, 경진대회 수상</div></div>
-      <div class="metric"><div class="v">95<small>%</small></div><div class="k">로봇팔 자율 픽앤플레이스 성공 (19/20)</div></div>
+      <div class="metric"><div class="v">95<small>%</small></div><div class="k">로봇팔 자율 픽앤플레이스 (19/20)</div></div>
     </div>
-  </header>
+  </div>
+</header>
 
-  <section>
-    <div class="sec-head"><span class="sec-num">01</span><h2>현직 연구 트랙</h2></div>
-    <p class="lede">한국원자력연구원 인공지능응용연구실에서 서로 독립된 다섯 개 연구 트랙과 원내 인프라 운영을 병행한다. 각 트랙은 별개의 과제다.</p>
-    <div class="tracks">
-      <div class="card">
-        <span class="tag">Track 01 · Vision + Agentic</span>
+<main class="wrap">
+
+  <section id="projects">
+    <div class="sec-head"><span class="sec-num">01</span><h2>프로젝트</h2></div>
+    <p class="lede">카드를 누르면 각 프로젝트의 아키텍처와 결과 상세로 이동한다. 내부 과제의 정량치는 공개 발표 전까지 대외비로 남긴다.</p>
+    <div class="proj-grid">
+
+      <a class="proj-card" href="/projects/cctv.html" data-reveal>
+        <span class="tag">KAERI 현직 · Vision + Agentic</span>
         <h3>지능형 CCTV 이상행위 탐지</h3>
-        <p>VAD와 VLM, Agentic AI를 결합한 E2E 보안 관제 시스템. 인증과 비동기 DB, 실시간 스트리밍 백엔드부터 React 프론트, 컨테이너 배포까지 단독 제품화.</p>
-        <div class="chips"><span class="chip metric-chip">AUC 82.4%</span><span class="chip metric-chip">265 FPS</span><span class="chip">우수논문상 2025</span><span class="chip">논문 4편</span></div>
-      </div>
-      <div class="card">
-        <span class="tag">Track 02 · Bio AI</span>
+        <p>VAD와 VLM, Agentic AI를 결합한 3-Layer E2E 관제 시스템. 폐쇄망 온프레미스에서 완전 동작.</p>
+        <div class="chips"><span class="chip metric-chip">AUC 82.4%</span><span class="chip metric-chip">265 FPS</span><span class="chip">우수논문상</span></div>
+        <div class="card-foot"><span class="chips"><span class="chip">공개 레포</span></span><span class="go">상세 보기 &rarr;</span></div>
+      </a>
+
+      <a class="proj-card" href="/projects/sstr2.html" data-reveal>
+        <span class="tag">KAERI 현직 · Bio AI</span>
         <h3>방사성의약품 SSTR2 in silico</h3>
-        <p>De Novo 설계와 5-Agent 검증을 묶은 Dual Silo 파이프라인으로 후보 펩타이드 184개 도출. 최상위 후보군을 Wet-lab 실험으로 제안, 진행 중.</p>
-        <div class="chips"><span class="chip metric-chip">184 후보</span><span class="chip">KNS 춘계 2026</span><span class="chip conf">내부 정량치 대외비</span></div>
-      </div>
-      <div class="card">
-        <span class="tag">Track 03 · Facility AX</span>
-        <h3>SPARC 시설 AX화 추진</h3>
-        <p>연구원 내 가속기 및 실험 시설의 AI Transformation 추진.</p>
-        <div class="chips"><span class="chip conf">과제 범위 대외비</span></div>
-      </div>
-      <div class="card">
-        <span class="tag">Track 04 · Robot AI</span>
-        <h3>OMY 로봇 교시 기반 Robot AI Scientist</h3>
-        <p>로봇 교시와 로봇비전, LLM/VLM Agent, 실제 로봇 통합. Isaac Sim에서 Franka Panda 로봇팔 자율 픽앤플레이스를 YOLO MCP와 ROS MCP 자체 개발로 구현, 사람 개입 0. NIST 과제로 확장 중.</p>
-        <div class="chips"><span class="chip metric-chip">19/20 성공</span><span class="chip">YOLO MCP</span><span class="chip">ROS MCP</span></div>
-      </div>
-      <div class="card">
-        <span class="tag">Track 05 · Accelerator AX</span>
-        <h3>가속기 활용 EMP 시설 AX + AI Scientist</h3>
-        <p>가속기 기반 EMP 시설의 AX 추진과 AI Scientist 연구.</p>
-        <div class="chips"><span class="chip conf">과제 범위 대외비</span></div>
-      </div>
-      <div class="card">
-        <span class="tag">Ops · Infra</span>
-        <h3>연구용 서버와 원내 서비스 운영</h3>
-        <p>NHN Cloud 광주 AICA 서버 운영(자원, 계정, 환경, 접속 관리)과 모니터링 플랫폼 구동. GPU 사용량과 프로세스, auditd 접속감사 로그를 폴링해 이상 감지 시 텔레그램 봇으로 자동 알림. 원내 챗봇 서비스는 NGINX 리버스 프록시와 SSL 종료 구성으로 유지보수.</p>
-        <div class="chips"><span class="chip">텔레그램 알림 자동화</span><span class="chip">NGINX</span><span class="chip">auditd 감사</span></div>
-      </div>
-    </div>
-  </section>
+        <p>De Novo 설계와 LLM 5-Agent 검증을 묶은 Dual Silo 파이프라인. 후보 184개 도출, 최상위 후보군 Wet-lab 진행 중.</p>
+        <div class="chips"><span class="chip metric-chip">184 후보</span><span class="chip">KNS 2026</span><span class="chip conf">내부수치 대외비</span></div>
+        <div class="card-foot"><span class="chips"><span class="chip">아키텍처 설계·메인 개발</span></span><span class="go">상세 보기 &rarr;</span></div>
+      </a>
 
-  <section>
-    <div class="sec-head"><span class="sec-num">02</span><h2>시스템 아키텍처</h2></div>
-    <p class="lede">각 시스템은 감지와 판단, 대응이 이어지는 E2E 파이프라인으로 설계했다. 구조는 개념 수준으로 공개하고, 게이트 임계값 등 내부 정량치는 대외비로 남긴다.</p>
-    <div class="arch">
+      <a class="proj-card" href="/projects/audisp.html" data-reveal>
+        <span class="tag">석사 학위 · 3D Face</span>
+        <h3>AUDISP, AU 기반 3D 얼굴 복원</h3>
+        <p>얼굴 액션 유닛 정보로 DECA와 EMOCA가 놓치는 미세 3D 디테일을 복원. 게재 완료된 학위 논문.</p>
+        <div class="chips"><span class="chip metric-chip">F1 0.88</span><span class="chip">공개 레포</span></div>
+        <div class="card-foot"><span class="chips"><span class="chip">SOTA 재현·확장</span></span><span class="go">상세 보기 &rarr;</span></div>
+      </a>
 
-      <div class="arch-block">
-        <div class="a-head"><span class="a-tag">Track 01</span><span class="a-t">지능형 CCTV, 3-Layer E2E</span></div>
-        <div class="flow">
-          <div class="stage"><div class="s-t">Multi-camera</div><div class="s-d">실시간 입력</div></div>
-          <span class="arrow">&rarr;</span>
-          <div class="stage"><div class="s-t">VAD</div><div class="s-d">MNAD·MULDE·STEAD 비교통합</div></div>
-          <span class="arrow">&rarr;</span>
-          <div class="stage"><div class="s-t">VLM 2차 검증</div><div class="s-d">Qwen2.5-VL 온프레미스</div></div>
-          <span class="arrow">&rarr;</span>
-          <div class="stage"><div class="s-t">Agentic AI</div><div class="s-d">Seq·Hier·Collab Flow</div></div>
-          <span class="arrow">&rarr;</span>
-          <div class="stage out"><div class="s-t">알림·리포팅</div><div class="s-d">PyQt·WebSocket·이벤트 로그</div></div>
+      <a class="proj-card" href="/projects/battery.html" data-reveal>
+        <span class="tag">사이드 · Physics-Informed ML</span>
+        <h3>LFP 배터리 수명 예측</h3>
+        <p>PyBaMM 물리 시뮬레이션과 신경망 대체 학습을 결합해 초기 사이클만으로 수명을 예측. 관련 논문 진행 중.</p>
+        <div class="chips"><span class="chip">DeepONet</span><span class="chip">PyBaMM</span><span class="chip">공개 도구 레포</span></div>
+        <div class="card-foot"><span class="chips"><span class="chip conf">수치 게재 전</span></span><span class="go">상세 보기 &rarr;</span></div>
+      </a>
+
+      <a class="proj-card" href="/projects/file-access.html" data-reveal>
+        <span class="tag">학부 산학 · 시스템 보안</span>
+        <h3>파일 접근 제어 규칙 자동 생성</h3>
+        <p>MS Detours API hooking 위에 ML로 화이트리스트와 ABAC 규칙을 자동 생성. 랜섬웨어·유출 방어.</p>
+        <div class="chips"><span class="chip">KCC 우수논문상</span><span class="chip">협회장상</span></div>
+        <div class="card-foot"><span class="chips"><span class="chip">수상 3건</span></span><span class="go">상세 보기 &rarr;</span></div>
+      </a>
+
+      <div class="proj-card" data-reveal style="cursor: default;">
+        <span class="tag">그 외 트랙</span>
+        <h3>더 많은 작업</h3>
+        <p>현직 로봇·시설 AX와 산학·부트캠프 프로젝트.</p>
+        <div class="chips">
+          <span class="chip metric-chip">Robot AI (OMY)</span>
+          <span class="chip metric-chip">CAD 도면 추천</span>
+          <span class="chip metric-chip">AICA 서버 운영</span>
+          <span class="chip metric-chip">poopy_ai</span>
+          <span class="chip metric-chip">Physical AI 4족</span>
         </div>
-        <div class="arch-note"><span>폐쇄망 고보안 환경에서 외부 API 없이 완전 오프라인 동작. 단일 VAD 오탐을 VLM 의미 검증으로 억제하고, 모든 단계의 근거를 표준 포맷으로 저장해 추적성을 확보한다.</span></div>
-      </div>
-
-      <div class="arch-block">
-        <div class="a-head"><span class="a-tag">Track 02</span><span class="a-t">SSTR2 방사성의약품, Dual Silo</span></div>
-        <div class="silo">
-          <div class="lane">
-            <span class="lane-label">Silo A · De Novo 구조 설계</span>
-            <div class="flow">
-              <div class="stage"><div class="s-t">RFdiffusion</div><div class="s-d">backbone</div></div>
-              <span class="arrow">&rarr;</span>
-              <div class="stage"><div class="s-t">ProteinMPNN</div><div class="s-d">sequence</div></div>
-              <span class="arrow">&rarr;</span>
-              <div class="stage"><div class="s-t">ESMFold</div><div class="s-d">QC</div></div>
-              <span class="arrow">&rarr;</span>
-              <div class="stage"><div class="s-t">Boltz-2</div><div class="s-d">docking</div></div>
-              <span class="arrow">&rarr;</span>
-              <div class="stage"><div class="s-t">PyRosetta</div><div class="s-d">ddG</div></div>
-            </div>
-          </div>
-          <div class="lane">
-            <span class="lane-label">Silo B · LLM 5-Agent 변이 탐색</span>
-            <div class="flow">
-              <div class="stage"><div class="s-t">Planner</div><div class="s-d">라운드 설계</div></div>
-              <span class="arrow">&rarr;</span>
-              <div class="stage"><div class="s-t">Builder</div><div class="s-d">후보 생성</div></div>
-              <span class="arrow">&rarr;</span>
-              <div class="stage"><div class="s-t">QCRanker</div><div class="s-d">게이트·랭킹</div></div>
-              <span class="arrow">&rarr;</span>
-              <div class="stage"><div class="s-t">Critic</div><div class="s-d">실패 분석</div></div>
-              <span class="arrow">&rarr;</span>
-              <div class="stage"><div class="s-t">Reporter</div><div class="s-d">로그화</div></div>
-            </div>
-          </div>
-          <div class="merge">
-            <span class="m-label">통합 랭킹·트리아지</span>
-            <span class="arrow">&rarr;</span>
-            <div class="stage out"><div class="s-t">Wet-lab 후보 제안</div><div class="s-d">최상위 후보군 실험 진행 중</div></div>
-          </div>
-        </div>
-        <div class="arch-note"><span class="chip conf">대외비</span><span>8-step 게이트 임계값과 내부 정량 결과는 공개 발표 전까지 생략. iPTM이 결합력 proxy로 부적합함을 다섯 표적(SST-14, SSTR1~5) 실측으로 검증해 자발 보고한 것이 재현성 원칙의 예다.</span></div>
-      </div>
-
-      <div class="arch-block">
-        <div class="a-head"><span class="a-tag">Track 04</span><span class="a-t">Robot AI, 인지-계획-제어 루프</span></div>
-        <div class="flow">
-          <div class="stage"><div class="s-t">카메라</div><div class="s-d">장면 입력</div></div>
-          <span class="arrow">&rarr;</span>
-          <div class="stage"><div class="s-t">YOLO MCP</div><div class="s-d">물체 인지, 자체 개발</div></div>
-          <span class="arrow">&rarr;</span>
-          <div class="stage"><div class="s-t">LLM/VLM Agent</div><div class="s-d">계획 수립</div></div>
-          <span class="arrow">&rarr;</span>
-          <div class="stage"><div class="s-t">ROS MCP</div><div class="s-d">제어, 자체 개발</div></div>
-          <span class="arrow">&rarr;</span>
-          <div class="stage out"><div class="s-t">Franka Panda</div><div class="s-d">Isaac Sim 픽앤플레이스</div></div>
-          <span class="arrow">&circlearrowleft;</span>
-          <div class="stage"><div class="s-t">재인지</div><div class="s-d">가림 시 팔 회전</div></div>
-        </div>
-        <div class="arch-note"><span>무작위 시작과 목표 위치에서 사람 개입 0으로 20회 중 19회 성공. 그리퍼가 물체를 가리면 팔을 회전해 다시 인지한다.</span></div>
-      </div>
-
-      <div class="arch-block">
-        <div class="a-head"><span class="a-tag">Side</span><span class="a-t">LFP 배터리, 물리 시뮬레이션 대체 학습</span></div>
-        <div class="flow">
-          <div class="stage"><div class="s-t">PyBaMM SPM</div><div class="s-d">물리 시뮬레이션</div></div>
-          <span class="arrow">&rarr;</span>
-          <div class="stage"><div class="s-t">DeepONet</div><div class="s-d">Operator Learning, 9,185 params</div></div>
-          <span class="arrow">&rarr;</span>
-          <div class="stage out"><div class="s-t">EOL·Q(n) 예측</div><div class="s-d">MAPE 6.45%, 552× 가속</div></div>
-        </div>
-        <div class="arch-note"><span>TRI, HUST, CALCE 교차 데이터셋에서 셀 분리 평가. 5분 걸리던 물리 시뮬레이션 추론을 신경망 대체로 밀리초 단위까지 단축했다.</span></div>
+        <div class="card-foot"><span class="chips"><span class="chip">아래 이력 참고</span></span></div>
       </div>
 
     </div>
   </section>
 
-  <section>
-    <div class="sec-head"><span class="sec-num">03</span><h2>대표 성과</h2></div>
-    <p class="lede">정량 지표는 공개 발표와 자체 GitHub로 검증된 수치만 표기하고, 원내 미공개 정량치는 대외비로 남긴다.</p>
-    <div class="tracks">
-      <div class="card">
-        <span class="tag">현직 · Vision</span>
-        <h3>지능형 CCTV 시스템</h3>
-        <p>주저자 논문 1편과 공저 3편, 총 4편. 한국산업정보학회 우수논문상 수상.</p>
-        <div class="chips"><span class="chip metric-chip">AUC 82.4%</span><span class="chip metric-chip">265 FPS</span></div>
-      </div>
-      <div class="card">
-        <span class="tag">현직 · Bio AI</span>
-        <h3>SSTR2 방사성의약품 발굴</h3>
-        <p>Dual Silo 설계로 184개 후보 발표. iPTM과 실측 결합력의 상관을 다섯 표적에서 교차검증해 proxy 부적합을 자발 보고, 재현성 원칙을 실행.</p>
-        <div class="chips"><span class="chip">최상위 Wet-lab 진행</span><span class="chip conf">가속 정량치 대외비</span></div>
-      </div>
-      <div class="card">
-        <span class="tag">석사 학위</span>
-        <h3>AU 기반 3D 얼굴 디테일 복원</h3>
-        <p>모델명 AUDISP. DECA 0.86과 EMOCA 0.87 대비 상위 성능. 논문 제목은 얼굴 액션 유닛 정보 기반의 3차원 얼굴 세부 특징 복원 연구.</p>
-        <div class="chips"><span class="chip metric-chip">F1 0.88</span></div>
-      </div>
-      <div class="card">
-        <span class="tag">사이드 프로젝트</span>
-        <h3>LFP 배터리 Physics-Informed ML</h3>
-        <p>PyBaMM SPM과 DeepONet Operator Learning 결합. TRI, HUST, CALCE 교차 데이터셋에서 셀 분리 평가, Severson 9.1%를 능가.</p>
-        <div class="chips"><span class="chip metric-chip">EOL MAPE 6.45%</span><span class="chip metric-chip">552× 가속</span><span class="chip metric-chip">9,185 params</span></div>
-      </div>
-    </div>
-    <div class="repos">
-      <p class="repos-label">공개 저장소</p>
-      <div class="contacts">
-        <a href="https://github.com/gggg8657/AI_CCTV_final" target="_blank" rel="noopener">AI_CCTV_final</a>
-        <a href="https://github.com/gggg8657/PyBAMM_Inverse" target="_blank" rel="noopener">PyBAMM_Inverse</a>
-        <a href="https://github.com/gggg8657/PyBAMM-Experiment-Protocol-Generator" target="_blank" rel="noopener">PyBAMM Protocol Generator</a>
-        <a href="https://github.com/gggg8657/AI-SCI" target="_blank" rel="noopener">AI-SCI</a>
-        <a href="https://github.com/gggg8657/AU_Detail" target="_blank" rel="noopener">AU_Detail</a>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="sec-head"><span class="sec-num">04</span><h2>경력과 학력</h2></div>
-    <p class="lede">정식 고용 경력은 KAERI 한 건이다. 학위 과정과 산학협력 프로젝트, 부트캠프, 학내 활동은 별도로 구분해 표기한다.</p>
+  <section id="career">
+    <div class="sec-head"><span class="sec-num">02</span><h2>경력과 학력</h2></div>
+    <p class="lede">정식 고용 경력은 KAERI 한 건이다. 학위 과정과 산학협력 프로젝트, 부트캠프는 별도로 구분해 표기한다.</p>
     <div class="timeline">
-      <div class="row">
+      <div class="row" data-reveal>
         <div class="when">2025.02 ~ 현재</div>
         <div class="what">
           <h3>한국원자력연구원(KAERI) 인공지능응용연구실 <span class="badge">정식 경력</span></h3>
@@ -505,15 +125,15 @@
           <p>정규 업무 5개 트랙(CCTV, SSTR2, SPARC, OMY 로봇, 가속기 EMP)과 AICA 서버 및 원내 챗봇 운영. KAERI 우수연구원상 수상.</p>
         </div>
       </div>
-      <div class="row">
+      <div class="row" data-reveal>
         <div class="when">2022.03 ~ 2024.08</div>
         <div class="what">
           <h3>광운대학교 컴퓨터공학 석사 <span class="badge">학위</span></h3>
           <div class="org">GPA 4.18/4.5 · 지도교수 이혁준</div>
-          <p>학위 논문 AUDISP, F1 0.88. 재학 중 연구실 자체 GPU 서버실을 하드웨어부터 구축하고 시스템 관리, 연구실 홈페이지 리모델링과 유지보수.</p>
+          <p>학위 논문 AUDISP, F1 0.88. 재학 중 연구실 자체 GPU 서버실을 하드웨어부터 구축하고 시스템 관리.</p>
         </div>
       </div>
-      <div class="row">
+      <div class="row" data-reveal>
         <div class="when">2017.03 ~ 2022.02</div>
         <div class="what">
           <h3>광운대학교 정보공학 학사 <span class="badge">학위 · ABEEK</span></h3>
@@ -521,23 +141,23 @@
           <p>2020년 첫 AI 프로젝트로 제4회 전국 AI 아이디어 공모전 최우수상.</p>
         </div>
       </div>
-      <div class="row">
+      <div class="row" data-reveal>
         <div class="when">2021.06 ~ 2024.06</div>
         <div class="what">
           <h3>테르텐 × 광운대학교 파일 접근 제어 시스템 <span class="badge">학부 산학</span></h3>
           <div class="org">Windows 시스템 보안 도메인</div>
-          <p>MS Detours API hooking과 word2vec, 의사결정트리 기반 NIST ABAC 룰 자동 생성 담당. KCC 2021 우수논문상, 임베디드SW협회장상 등.</p>
+          <p>MS Detours API hooking과 ML 기반 규칙 자동 생성 담당. KCC 2021 우수논문상 등 수상 3건.</p>
         </div>
       </div>
-      <div class="row">
+      <div class="row" data-reveal>
         <div class="when">2022.06 ~ 2023.06</div>
         <div class="what">
           <h3>안세기술 × 광운대학교 CAD 도면 추천 시스템 <span class="badge">학부 산학</span></h3>
           <div class="org">NLP + CV + DB</div>
-          <p>도면 검색 시간 80% 단축. 2023 한국통신학회 동계학술대회 발표.</p>
+          <p>DWG/DXF 추출과 TF-IDF, Vision AI로 도면 검색 시간 80% 단축. 2023 한국통신학회 동계학술대회 발표.</p>
         </div>
       </div>
-      <div class="row">
+      <div class="row" data-reveal>
         <div class="when">2024.06 ~ 2024.08</div>
         <div class="what">
           <h3>SKT FLY AI Challenge 5기 <span class="badge">부트캠프</span></h3>
@@ -548,84 +168,55 @@
     </div>
   </section>
 
-  <section>
-    <div class="sec-head"><span class="sec-num">05</span><h2>기술 스택</h2></div>
+  <section id="skills">
+    <div class="sec-head"><span class="sec-num">03</span><h2>기술 스택</h2></div>
     <div class="stack">
-      <div class="stack-group">
-        <div class="label">Language</div>
-        <div class="items"><span class="tech">Python</span><span class="tech">C / C++</span></div>
-      </div>
-      <div class="stack-group">
-        <div class="label">ML / DL</div>
-        <div class="items"><span class="tech">PyTorch</span><span class="tech">TensorFlow</span><span class="tech">scikit-learn</span><span class="tech">Pandas</span><span class="tech">NumPy</span></div>
-      </div>
-      <div class="stack-group">
-        <div class="label">LLM / Agent</div>
-        <div class="items"><span class="tech">LangChain</span><span class="tech">vLLM</span><span class="tech">OpenAI API</span><span class="tech">RAG</span><span class="tech">MCP</span></div>
-      </div>
-      <div class="stack-group">
-        <div class="label">Bio / Science AI</div>
-        <div class="items"><span class="tech">PyRosetta</span><span class="tech">PyBaMM</span><span class="tech">RFdiffusion</span><span class="tech">ProteinMPNN</span><span class="tech">ESMFold</span><span class="tech">Boltz-2</span><span class="tech">DiffDock</span></div>
-      </div>
-      <div class="stack-group">
-        <div class="label">CV / VAD</div>
-        <div class="items"><span class="tech">MNAD</span><span class="tech">MULDE</span><span class="tech">MemAE</span><span class="tech">STEAD</span><span class="tech">Anomalib</span><span class="tech">Qwen2.5-VL</span></div>
-      </div>
-      <div class="stack-group">
-        <div class="label">MLOps / Infra</div>
-        <div class="items"><span class="tech">Docker</span><span class="tech">FastAPI</span><span class="tech">WebSocket</span><span class="tech">NGINX</span><span class="tech">Git</span><span class="tech">NHN Cloud</span><span class="tech">Azure</span></div>
-      </div>
-      <div class="stack-group">
-        <div class="label">UI</div>
-        <div class="items"><span class="tech">PyQt</span><span class="tech">React</span><span class="tech">Figma</span></div>
-      </div>
-      <div class="stack-group">
-        <div class="label">도메인 지식</div>
-        <div class="items"><span class="tech">보안 환경</span><span class="tech">방사성의약품</span><span class="tech">전기화학·배터리</span><span class="tech">수의</span></div>
-      </div>
+      <div class="stack-group" data-reveal><div class="label">Language</div><div class="items"><span class="tech">Python</span><span class="tech">C / C++</span></div></div>
+      <div class="stack-group" data-reveal><div class="label">ML / DL</div><div class="items"><span class="tech">PyTorch</span><span class="tech">TensorFlow</span><span class="tech">scikit-learn</span><span class="tech">NumPy</span></div></div>
+      <div class="stack-group" data-reveal><div class="label">LLM / Agent</div><div class="items"><span class="tech">LangChain</span><span class="tech">vLLM</span><span class="tech">OpenAI API</span><span class="tech">RAG</span><span class="tech">MCP</span></div></div>
+      <div class="stack-group" data-reveal><div class="label">Bio / Science AI</div><div class="items"><span class="tech">PyRosetta</span><span class="tech">PyBaMM</span><span class="tech">RFdiffusion</span><span class="tech">ProteinMPNN</span><span class="tech">ESMFold</span><span class="tech">Boltz-2</span></div></div>
+      <div class="stack-group" data-reveal><div class="label">CV / VAD</div><div class="items"><span class="tech">MNAD</span><span class="tech">MULDE</span><span class="tech">STEAD</span><span class="tech">Anomalib</span><span class="tech">Qwen2.5-VL</span></div></div>
+      <div class="stack-group" data-reveal><div class="label">MLOps / Infra</div><div class="items"><span class="tech">Docker</span><span class="tech">FastAPI</span><span class="tech">WebSocket</span><span class="tech">NGINX</span><span class="tech">NHN Cloud</span></div></div>
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">06</span><h2>수상</h2></div>
+    <div class="sec-head"><span class="sec-num">04</span><h2>수상</h2></div>
     <div class="awards">
-      <div class="award"><span class="date">2025.11.25</span><span class="title">KAERI 우수연구원상</span><span class="by">한국원자력연구원</span></div>
-      <div class="award"><span class="date">2025.11.21</span><span class="title">우수논문상 · 지능형 CCTV VAD·VLM·Agentic</span><span class="by">한국산업정보학회</span></div>
-      <div class="award"><span class="date">2025.11.10</span><span class="title">우수포스터상 · Physical AI 4족 로봇</span><span class="by">한국원자력학회</span></div>
-      <div class="award"><span class="date">2024</span><span class="title">임베디드SW협회장상 · 제22회 임베디드SW 경진대회</span><span class="by">산업통상자원부</span></div>
-      <div class="award"><span class="date">2023.11.28</span><span class="title">신산업융합형 임베디드시스템 장려상 · 파일 접근 제어</span><span class="by">임베디드SW 경진대회</span></div>
-      <div class="award"><span class="date">2021.07.23</span><span class="title">우수논문상 KCC 2021 · 파일 접근 제어</span><span class="by">한국정보과학회</span></div>
-      <div class="award"><span class="date">2020.11.18</span><span class="title">산학협력단장상 · 제4회 전국 AI 아이디어 공모전 최우수상</span><span class="by">광운대학교</span></div>
+      <div class="award" data-reveal><span class="date">2025.11.25</span><span class="title">KAERI 우수연구원상</span><span class="by">한국원자력연구원</span></div>
+      <div class="award" data-reveal><span class="date">2025.11.21</span><span class="title">우수논문상 · 지능형 CCTV VAD·VLM·Agentic</span><span class="by">한국산업정보학회</span></div>
+      <div class="award" data-reveal><span class="date">2025.11.10</span><span class="title">우수포스터상 · Physical AI 4족 로봇</span><span class="by">한국원자력학회</span></div>
+      <div class="award" data-reveal><span class="date">2024</span><span class="title">임베디드SW협회장상 · 제22회 임베디드SW 경진대회</span><span class="by">산업통상자원부</span></div>
+      <div class="award" data-reveal><span class="date">2023.11.28</span><span class="title">신산업융합형 임베디드시스템 장려상 · 파일 접근 제어</span><span class="by">임베디드SW 경진대회</span></div>
+      <div class="award" data-reveal><span class="date">2021.07.23</span><span class="title">우수논문상 KCC 2021 · 파일 접근 제어</span><span class="by">한국정보과학회</span></div>
+      <div class="award" data-reveal><span class="date">2020.11.18</span><span class="title">산학협력단장상 · 제4회 전국 AI 아이디어 공모전 최우수상</span><span class="by">광운대학교</span></div>
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">07</span><h2>일하는 방식</h2></div>
-    <blockquote class="motto">AI 알고리즘으로, 자동화 시스템을 통해, AX화를 이룬다.</blockquote>
+    <div class="sec-head"><span class="sec-num">05</span><h2>일하는 방식</h2></div>
+    <blockquote class="motto" data-reveal>AI 알고리즘으로, 자동화 시스템을 통해, AX화를 이룬다.</blockquote>
     <div class="values">
-      <div class="value"><span class="mark">01</span><p><strong>E2E 자동화 워크플로우.</strong> 단발성 모델보다 데이터 수집부터 평가, 배포까지 이어지는 자동화 파이프라인을 우선한다.</p></div>
-      <div class="value"><span class="mark">02</span><p><strong>재현성과 추적성.</strong> 실험 로그와 모델 버전, 평가 근거의 표준화를 모델 성능과 동급으로 다룬다. 결합력 proxy가 부적합할 때 이를 자발적으로 보고한 것이 그 예다.</p></div>
-      <div class="value"><span class="mark">03</span><p><strong>0에서 1.</strong> 도메인 지식이 없는 분야도 공개 데이터와 물리 모델로 먼저 파이프라인을 세우고 전문가 검증으로 닫는다.</p></div>
+      <div class="value" data-reveal><span class="mark">01</span><p><strong>E2E 자동화 워크플로우.</strong> 단발성 모델보다 데이터 수집부터 평가, 배포까지 이어지는 자동화 파이프라인을 우선한다.</p></div>
+      <div class="value" data-reveal><span class="mark">02</span><p><strong>재현성과 추적성.</strong> 실험 로그와 모델 버전, 평가 근거의 표준화를 모델 성능과 동급으로 다룬다.</p></div>
+      <div class="value" data-reveal><span class="mark">03</span><p><strong>0에서 1.</strong> 도메인 지식이 없는 분야도 공개 데이터와 물리 모델로 먼저 파이프라인을 세우고 전문가 검증으로 닫는다.</p></div>
     </div>
   </section>
 
-  <section>
-    <div class="sec-head"><span class="sec-num">08</span><h2>자격과 기본 정보</h2></div>
-    <div class="facts">
-      <div class="fact"><div class="fk">자격증</div><div class="fv">ADsP, 한국데이터산업진흥원</div></div>
-      <div class="fact"><div class="fk">어학</div><div class="fv">TOEIC Speaking IH, YBM</div></div>
-      <div class="fact"><div class="fk">지원 방향</div><div class="fv">정출연·공기업 AI 연구, 대기업 SW·AI</div></div>
-      <div class="fact"><div class="fk">병역</div><div class="fv">면제</div></div>
-    </div>
-  </section>
+</main>
 
-  <footer>
-    <div class="note">
-      <span class="chip conf">대외비</span>
-      <span>이 페이지는 공개 가능한 범위만 담았다. 표시된 항목은 한국원자력연구원 내부 과제의 정량치 또는 범위로, 공개 발표 전까지 세부 수치를 생략했다. 공개 수치는 학회 발표와 공개 저장소로 검증된 값이며, 상세 자료는 요청 시 제공한다.</span>
-    </div>
-  </footer>
+<footer class="wrap">
+  <div class="note">
+    <span class="chip conf">대외비</span>
+    <span>이 사이트는 공개 가능한 범위만 담았다. 표시된 항목은 한국원자력연구원 내부 과제의 정량치 또는 범위로, 공개 발표 전까지 세부 수치를 생략했다. 공개 수치는 학회 발표와 공개 저장소로 검증된 값이며, 상세 자료는 요청 시 제공한다.</span>
+  </div>
+  <div class="foot-links">
+    <a href="mailto:dongjukim.dev@gmail.com">Email</a>
+    <a href="https://github.com/gggg8657" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/dongju-kim-ai/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</footer>
 
-</div>
+<script src="/main.js"></script>
 </body>
 </html>

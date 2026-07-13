@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>지능형 CCTV (VAD·VLM·Agentic) — 김동주</title>
+<meta name="description" content="VAD·VLM·Agentic AI 3-Layer E2E 파이프라인으로 폐쇄망 고보안 환경에서 AUC 82.4% / 265 FPS 달성. 한국산업정보학회 우수논문상.">
+<meta property="og:title" content="지능형 CCTV (VAD·VLM·Agentic) — 김동주">
+<meta property="og:description" content="폐쇄망 온프레미스 3-Layer E2E 이상행위 탐지. AUC 82.4% / 265 FPS, 우수논문상.">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="/">김동주<span class="dot">.</span></a>
+    <nav><a href="/#projects">프로젝트</a><a href="/#career">이력</a><a href="/#contact">연락</a></nav>
+  </div>
+</div>
+
+<header class="detail-hero wrap">
+  <a class="back-link" href="/#projects">&larr; 프로젝트 목록</a>
+  <p class="cat">KAERI 현직 · Vision + Agentic AI</p>
+  <h1>지능형 CCTV 이상행위 탐지 시스템</h1>
+  <p class="sub">단순 녹화 중심 CCTV를 VAD → VLM → Agentic AI 3-Layer E2E 파이프라인으로 AX화해, 폐쇄망 고보안 환경에서 탐지부터 대응까지 자동화했다.</p>
+  <div class="meta">
+    <span><b>기간</b> 2025.02 ~ 2025.12</span>
+    <span><b>소속</b> KAERI 인공지능응용연구실</span>
+    <span><b>역할</b> 이상탐지 모델 연구 · 시스템 개발</span>
+  </div>
+  <div class="links">
+    <a class="btn primary" href="https://github.com/gggg8657/AI_CCTV_final" target="_blank" rel="noopener">공개 레포 AI_CCTV_final &rarr;</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="sec-head"><span class="sec-num">아키텍처</span></div>
+    <div class="arch">
+      <div class="arch-block" data-reveal>
+        <div class="a-head"><span class="a-tag">3-Layer E2E</span></div>
+        <div class="flow">
+          <div class="stage"><div class="s-t">Multi-camera</div><div class="s-d">실시간 입력</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage"><div class="s-t">VAD</div><div class="s-d">MNAD·MULDE·STEAD 비교통합</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage"><div class="s-t">VLM 2차 검증</div><div class="s-d">Qwen2.5-VL 온프레미스</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage"><div class="s-t">Agentic AI</div><div class="s-d">Seq·Hier·Collab Flow</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage out"><div class="s-t">알림·리포팅</div><div class="s-d">PyQt·WebSocket·이벤트 로그</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="prose">
+      <h3>문제</h3>
+      <p>KAERI 시설은 폐쇄망 고보안 환경이라 외부 API와 클라우드 모델을 쓸 수 없고, 시스템이 온프레미스에서 완전히 동작해야 했다. CCTV는 단순 녹화 중심이라 운영자가 화면을 직접 봐야 했고, 이상행동의 탐지와 분석, 대응이 분리된 수작업 프로세스였다. 단일 VAD 모델만으로는 오탐 최소화와 높은 감지율을 동시에 달성하기 어려웠다.</p>
+
+      <h3>접근</h3>
+      <ul>
+        <li><strong>3-Layer E2E 파이프라인.</strong> VAD 감지 → VLM 상황 분석 → Agentic AI 대응 계획 수립 → 알림과 리포팅까지 하나의 자동 흐름으로 묶었다.</li>
+        <li><strong>다중 VAD 비교 + VLM 2차 검증.</strong> 단일 VAD의 오탐 한계를 인지해 여러 VAD 모델을 비교 통합하고, VLM의 의미적 분석을 2차 검증 레이어로 두어 오탐을 억제하고 설명 가능한 판단 근거를 남겼다.</li>
+        <li><strong>Agent Flow 비교 실험.</strong> Sequential, Hierarchical, Collaborative 세 가지 에이전트 플로우를 직접 비교해 도메인 제약에 맞는 자율 의사결정 구조를 선택했다.</li>
+        <li><strong>재현성.</strong> 입력 영상, 감지 스코어, VLM 분석, 대응 계획, 타임스탬프를 이벤트 단위 표준 포맷으로 저장하고 자동 리포트화했다.</li>
+      </ul>
+
+      <h3>결과</h3>
+    </div>
+    <div class="result-grid">
+      <div class="result" data-reveal><div class="rv">82.4<small>%</small></div><div class="rk">AUC, 폐쇄망 온프레미스</div></div>
+      <div class="result" data-reveal><div class="rv">265<small> FPS</small></div><div class="rk">실시간 추론</div></div>
+      <div class="result" data-reveal><div class="rv">4<small>편</small></div><div class="rk">학회 논문 (주저자 1 + 공저 3)</div></div>
+      <div class="result" data-reveal><div class="rv">1<small>회</small></div><div class="rk">우수논문상 수상</div></div>
+    </div>
+    <div class="prose">
+      <p>한국산업정보학회 추계학술발표회 3편과 한국원자력학회 춘계학술발표회 1편을 발표했고, "고수준 보안 환경에서의 이상 행동 탐지를 위한 지능형 CCTV 시스템 개발"로 <strong>한국산업정보학회 우수논문상</strong>을 받았다. 폐쇄망에서 VLM(Qwen2.5-VL)을 온프레미스로 운영해 클라우드 API 없이 완전 동작했고, KAERI 우수연구원상 수상에도 기여했다.</p>
+
+      <h3>기술</h3>
+      <p>VAD(MNAD, MULDE, MemAE, STAE, STEAD, Anomalib) · VLM(Qwen2.5-VL 로컬) · Agentic Flow 3종 · PyQt 실시간 대시보드 · FastAPI, WebSocket, Docker · NHN Cloud 광주 AICA 서버.</p>
+    </div>
+    <div class="arch-note"><span class="chip conf">대외비</span><span>보안 특화 데이터셋과 어노테이션 내부 규격, 폐쇄망 운영 세부, KAERI_CCTV 비공개 레포 구현은 공개하지 않는다.</span></div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="foot-links">
+    <a href="/#projects">← 프로젝트 목록</a>
+    <a href="mailto:dongjukim.dev@gmail.com">Email</a>
+    <a href="https://github.com/gggg8657" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+<script src="/main.js"></script>
+</body>
+</html>
