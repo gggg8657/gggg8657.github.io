@@ -1,10 +1,9 @@
-// SST-14 agent mutation-search animation (illustrative). PUBLIC SST-14 only;
-// mutations are random illustrations, NOT real candidate sequences.
+// SST-14 agent mutation-search animation (illustrative, slow & legible).
+// PUBLIC SST-14 only; mutations are random illustrations, NOT real candidates.
 (function () {
   const root = document.getElementById('sst14-mut');
   if (!root) return;
   const beadsEl = root.querySelector('.beads');
-  const stageEl = root.querySelector('.mut-stage');
   const callout = root.querySelector('.mut-callout');
   const agentEl = root.querySelector('.mut-agent');
   const iterEl = root.querySelector('.mut-iter');
@@ -23,10 +22,11 @@
   const seq = NATIVE.slice();
   const wraps = seq.map((a, i) => {
     const w = document.createElement('div'); w.className = 'bead-wrap';
-    const b = document.createElement('div'); b.className = 'bead' + (FIXED.has(i) ? ' fixed' : ''); b.dataset.cls = cls(a); b.textContent = a;
+    const b = document.createElement('div'); b.className = 'bead' + (FIXED.has(i) ? ' fixed' : ''); b.dataset.cls = cls(a);
+    const aa = document.createElement('span'); aa.className = 'aa'; aa.textContent = a; b.appendChild(aa);
     const p = document.createElement('span'); p.className = 'pos'; p.textContent = String(i + 1);
     w.appendChild(b); w.appendChild(p); beadsEl.appendChild(w);
-    return { w, b };
+    return { w, b, aa };
   });
 
   if (reduce) { if (agentEl) agentEl.textContent = 'native SST-14 (설계 출발점)'; return; }
@@ -40,44 +40,52 @@
 
   function step() {
     const i = pickPos();
-    const { w, b } = wraps[i];
+    const { w, b, aa } = wraps[i];
     const old = seq[i];
-    // Planner
+
+    // 1) Planner — 위치 선택 (지목 + 떠오름)
     setStep('planner');
-    if (agentEl) agentEl.textContent = 'Planner · ' + (i + 1) + '번 위치 선택';
-    b.classList.add('active');
+    if (agentEl) agentEl.textContent = 'Planner · ' + (i + 1) + '번 잔기 선택';
+    b.classList.add('active'); w.classList.add('lift');
+
     setTimeout(() => {
-      // Builder + callout
+      // 2) Builder — 변이 (모프)
       setStep('builder');
+      if (agentEl) agentEl.textContent = 'Builder · 새 잔기로 변이';
       let na; do { na = POOL[rint(POOL.length)]; } while (na === old);
-      seq[i] = na; b.textContent = na; b.dataset.cls = cls(na); b.classList.add('pulse');
-      if (agentEl) agentEl.textContent = 'Builder · 변이 생성';
+      b.classList.add('morph');
       if (callout) {
-        callout.textContent = old + ' → ' + na + '  (' + NAME[old] + '→' + NAME[na] + ')';
+        callout.className = 'mut-callout';
+        callout.textContent = old + ' → ' + na + '  ·  ' + NAME[old] + ' → ' + NAME[na];
         callout.style.left = (beadsEl.offsetLeft + w.offsetLeft + w.offsetWidth / 2) + 'px';
-        callout.classList.add('show');
+        // reflow then show
+        void callout.offsetWidth; callout.classList.add('show');
       }
+      setTimeout(() => { seq[i] = na; aa.textContent = na; b.dataset.cls = cls(na); b.classList.remove('morph'); }, 480);
+
       setTimeout(() => {
-        // QCRanker
+        // 3) QCRanker — 게이트 평가
         setStep('qc');
         evald += 1;
         const ok = Math.random() > 0.4; if (ok) pass += 1;
-        if (agentEl) agentEl.textContent = 'QCRanker · 게이트 ' + (ok ? '통과' : '탈락 → 재샘플');
         b.classList.add(ok ? 'pass' : 'fail');
+        if (agentEl) agentEl.textContent = 'QCRanker · 게이트 ' + (ok ? '통과' : '탈락') + ' → ' + (ok ? '보존' : '재샘플');
+        if (callout) { callout.classList.add(ok ? 'ok' : 'no'); callout.textContent = old + ' → ' + na + '   ' + (ok ? '✓ 통과' : '✗ 탈락'); }
         updMeta();
+
         setTimeout(() => {
-          b.classList.remove('active', 'pulse', 'pass', 'fail');
-          if (callout) callout.classList.remove('show');
-          // 주기적으로 native로 리셋 (native 주변 탐색)
+          // 4) 정리
+          b.classList.remove('active', 'pass', 'fail'); w.classList.remove('lift');
+          if (callout) callout.classList.remove('show', 'ok', 'no');
           if (evald % 8 === 0) {
-            wraps.forEach((o, k) => { seq[k] = NATIVE[k]; o.b.textContent = NATIVE[k]; o.b.dataset.cls = cls(NATIVE[k]); });
+            wraps.forEach((o, k) => { seq[k] = NATIVE[k]; o.aa.textContent = NATIVE[k]; o.b.dataset.cls = cls(NATIVE[k]); });
             round += 1; updMeta();
-            if (agentEl) agentEl.textContent = 'Reporter · 라운드 정리 → native 재출발';
+            setStep(''); if (agentEl) agentEl.textContent = 'Reporter · 라운드 정리 → native 재출발';
           }
-          setTimeout(step, 550);
-        }, 750);
-      }, 650);
-    }, 650);
+          setTimeout(step, 1000);
+        }, 1700);
+      }, 1700);
+    }, 1600);
   }
-  setTimeout(step, 700);
+  setTimeout(step, 800);
 })();

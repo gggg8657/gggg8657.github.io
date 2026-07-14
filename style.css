@@ -297,22 +297,31 @@ blockquote.motto { font-family: var(--serif); font-size: clamp(20px, 3vw, 27px);
 .mut-stage { position: relative; overflow-x: auto; padding: 22px 6px 6px; }
 .beads { position: relative; display: flex; gap: 10px; justify-content: center; min-width: max-content; margin: 0 auto; }
 .beads::before { content: ""; position: absolute; top: 21px; left: 22px; right: 22px; height: 3px; background: var(--line); z-index: 0; }
-.bead-wrap { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; }
-.bead { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-weight: 650; font-size: 16px; color: #10171d; border: 2px solid transparent; box-shadow: 0 1px 3px rgba(0,0,0,.12); transition: transform .25s ease, border-color .25s ease; }
+.bead-wrap { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; transition: transform .45s cubic-bezier(.2,.7,.2,1); }
+.bead-wrap.lift { transform: translateY(-8px); }
+.bead { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-weight: 650; font-size: 16px; color: #10171d; border: 2px solid transparent; box-shadow: 0 1px 3px rgba(0,0,0,.12); transition: border-color .35s ease, background-color .5s ease, box-shadow .35s ease; }
+.bead .aa { display: block; transition: opacity .45s ease, transform .45s cubic-bezier(.3,.8,.3,1); }
+.bead.morph .aa { opacity: 0; transform: scale(.2) rotate(-25deg); }
 .bead[data-cls="hyd"] { background: #d9dee4; }
 .bead[data-cls="pol"] { background: #a9ded6; }
 .bead[data-cls="pos"] { background: #a9c4ff; }
 .bead[data-cls="neg"] { background: #ffb3b3; }
 .bead[data-cls="cys"] { background: #f0cf7a; }
-.bead-wrap .pos { font-family: var(--mono); font-size: 10px; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+.bead-wrap .pos { font-family: var(--mono); font-size: 10px; color: var(--ink-faint); font-variant-numeric: tabular-nums; transition: color .3s; }
+.bead-wrap.lift .pos { color: var(--accent); }
 .bead.fixed { box-shadow: inset 0 0 0 2px var(--signal), 0 1px 3px rgba(0,0,0,.12); }
-.bead.active { border-color: var(--accent); }
-.bead.pulse { transform: scale(1.3); }
-.bead.pass { border-color: var(--good); }
-.bead.fail { border-color: #d64545; }
+.bead.active { border-color: var(--accent); animation: beadGlow 1.6s ease-in-out infinite; }
+.bead.pass { border-color: var(--good); box-shadow: 0 0 12px 1px color-mix(in srgb, var(--good) 55%, transparent); }
+.bead.fail { border-color: #d64545; box-shadow: 0 0 12px 1px rgba(214,69,69,.5); }
+@keyframes beadGlow { 0%,100% { box-shadow: 0 0 0 0 var(--accent-soft), 0 1px 3px rgba(0,0,0,.12); } 50% { box-shadow: 0 0 16px 3px color-mix(in srgb, var(--accent) 55%, transparent); } }
 /* mutation callout */
-.mut-callout { position: absolute; top: 0; transform: translateX(-50%); font-family: var(--mono); font-size: 12px; padding: 3px 9px; border-radius: 7px; background: var(--accent); color: #06110f; white-space: nowrap; opacity: 0; transition: opacity .2s, top .2s; pointer-events: none; }
-.mut-callout.show { opacity: 1; }
+.mut-callout { position: absolute; top: 6px; transform: translateX(-50%); font-family: var(--mono); font-size: 12.5px; font-weight: 600; padding: 5px 11px; border-radius: 8px; background: var(--accent); color: #06110f; white-space: nowrap; opacity: 0; transition: opacity .35s ease, top .35s ease, background-color .35s ease; pointer-events: none; box-shadow: 0 4px 14px rgba(0,0,0,.18); }
+.mut-callout::after { content: ""; position: absolute; left: 50%; bottom: -5px; transform: translateX(-50%); border: 5px solid transparent; border-top-color: var(--accent); }
+.mut-callout.show { opacity: 1; top: 0; }
+.mut-callout.ok { background: var(--good); }
+.mut-callout.ok::after { border-top-color: var(--good); }
+.mut-callout.no { background: #d64545; color: #fff; }
+.mut-callout.no::after { border-top-color: #d64545; }
 /* meta + legend */
 .mut-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; margin-top: 18px; font-family: var(--mono); font-size: 12.5px; }
 .mut-agent { color: var(--accent); }
