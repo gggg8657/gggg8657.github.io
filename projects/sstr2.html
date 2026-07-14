@@ -91,6 +91,19 @@
   </section>
 
   <section>
+    <div class="sec-head"><span class="sec-num">변이 탐색</span><h2>Silo B · 에이전트 변이 시뮬레이션</h2></div>
+    <p class="lede">native SST-14를 출발점으로, LLM 에이전트가 변이 위치를 고르고 후보를 생성·평가하는 루프를 개념적으로 시각화한다. 아래 변이는 예시(랜덤)이며 실제 후보 서열이 아니다. 이황화결합(Cys3–Cys14) 위치는 고정.</p>
+    <div class="sst-mut" id="sst14-mut" data-reveal>
+      <div class="beads"></div>
+      <div class="mut-meta">
+        <span class="mut-agent">준비 중…</span>
+        <span class="mut-iter"></span>
+      </div>
+    </div>
+    <p class="chart-cap">SST-14(공개) 14잔기를 구슬로 표현 — 주황 테두리 = 이황화결합 고정, 초록/빨강 테두리 = 게이트 통과/탈락. 예시 변이이며 대외비 후보는 포함하지 않는다.</p>
+  </section>
+
+  <section>
     <div class="prose">
       <h3>문제</h3>
       <p>SSTR2 발현 신경내분비종양(NET) 진단·치료용 방사성의약품 후보 발굴은 후보 생성과 평가, 정리, 의사결정이 반복돼 수작업 부담이 컸다. 계산 결과와 파라미터, 평가 근거가 흩어져 재현성과 추적성이 떨어졌고, 단일 지표 중심 선별은 과적합과 오판 위험이 있었다.</p>
@@ -133,6 +146,7 @@
 
 <script src="/projects/sst14-atoms.js"></script>
 <script src="/projects/mol.js"></script>
+<script src="/projects/sst14-mut.js"></script>
 <script src="/main.js"></script>
 </body>
 </html>
