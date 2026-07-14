@@ -62,16 +62,23 @@
 
   <section>
     <div class="sec-head"><span class="sec-num">3D 복원</span><h2>복원 결과 뷰어</h2></div>
-    <p class="lede">저자 본인 얼굴에 AUDISP를 적용한 3D 복원 결과. <strong>Coarse</strong>(기본 형상)와 <strong>Detail</strong>(AU 기반 디테일 복원)을 토글해 비교한다. 드래그로 회전.</p>
-    <div class="face3d-wrap" data-reveal>
-      <div class="face-toggle">
-        <button id="face-coarse-btn" class="active" type="button">Coarse (기본)</button>
-        <button id="face-detail-btn" type="button">Detail (AUDISP)</button>
+    <p class="lede">저자 본인 얼굴 사진 한 장에서 3D를 복원한 결과. 왼쪽이 입력, 오른쪽은 <strong>Coarse</strong>(기본 형상) · <strong>Detail</strong>(AU 기반 디테일) · <strong>Textured</strong>(피부 텍스처)로 토글한다. 드래그로 회전.</p>
+    <div class="face-io" data-reveal>
+      <figure class="face-input">
+        <img src="/projects/assets/face-input.jpg" alt="AUDISP 입력 얼굴 사진" loading="lazy">
+        <figcaption>입력 이미지 (224×224)</figcaption>
+      </figure>
+      <div class="face3d-wrap">
+        <div class="face-toggle">
+          <button id="face-coarse-btn" class="active" type="button">Coarse</button>
+          <button id="face-detail-btn" type="button">Detail</button>
+          <button id="face-textured-btn" type="button">Textured</button>
+        </div>
+        <div id="face3d" aria-label="AUDISP 3D 얼굴 복원 뷰어, 드래그로 회전"></div>
+        <div id="face3d-status"></div>
       </div>
-      <div id="face3d" aria-label="AUDISP 3D 얼굴 복원 뷰어, 드래그로 회전"></div>
-      <div id="face3d-status"></div>
     </div>
-    <p class="chart-cap">저자 본인 얼굴 재구성. 조명을 받는 표면의 미세 굴곡이 Detail에서 드러난다.</p>
+    <p class="chart-cap">입력 사진 → 3D 형상(Coarse) → AU 기반 디테일(Detail) → 피부 텍스처(Textured). 조명을 받는 표면의 미세 굴곡이 Detail에서 드러난다. 저자 본인 얼굴.</p>
   </section>
 
   <section>
