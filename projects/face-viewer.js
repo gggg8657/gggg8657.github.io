@@ -1,4 +1,5 @@
-// AUDISP face mesh viewer — three.js. Coarse / Detail / Textured toggle, orbit, lighting.
+// AUDISP multi-sample face viewer — three.js. Pick a sample (own face, various expressions),
+// toggle Coarse / Textured (albedo + normal map). Lazy-loads per sample.
 import * as THREE from 'three';
 import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -11,7 +12,6 @@ if (mount) {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(35, 1, 0.01, 100);
   camera.position.set(0, 0.05, 3.2);
-
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   mount.appendChild(renderer.domElement);
@@ -21,42 +21,66 @@ if (mount) {
   const rim = new THREE.DirectionalLight(0x8fb4ff, 0.35); rim.position.set(-1.6, 0.4, -1.2); scene.add(rim);
 
   const greyMat = new THREE.MeshStandardMaterial({ color: 0xb9bec6, roughness: 0.72, metalness: 0.02 });
-  const texLoader = new THREE.TextureLoader();
-  const albedo = texLoader.load('/projects/assets/face-albedo.png');
-  if ('colorSpace' in albedo) albedo.colorSpace = THREE.SRGBColorSpace;
-  const normalTex = texLoader.load('/projects/assets/face-normals.png'); // linear (normal map)
-  const texMat = new THREE.MeshStandardMaterial({
-    map: albedo,
-    normalMap: normalTex,
-    normalScale: new THREE.Vector2(1, 1),
-    roughness: 0.68,
-    metalness: 0.0,
-  });
-
   const group = new THREE.Group();
   group.rotation.y = Math.PI; // 정면이 카메라를 향하도록
   scene.add(group);
 
-  const loader = new OBJLoader();
-  let coarse = null, detail = null, want = 'coarse';
+  const objLoader = new OBJLoader();
+  const texLoader = new THREE.TextureLoader();
+  const cache = {};
+  let mode = 'textured';
+  let cur = null;
 
-  function prep(o) { o.traverse((c) => { if (c.isMesh) { c.geometry.deleteAttribute('normal'); c.geometry.computeVertexNormals(); } }); return o; }
-  function setMat(o, m) { o.traverse((c) => { if (c.isMesh) c.material = m; }); }
-  function ready(mode) { return (mode === 'detail' ? detail : coarse); }
-  function show(mode) {
-    const o = ready(mode);
-    if (!o) return;
-    setMat(o, mode === 'textured' ? texMat : greyMat);
-    group.clear(); group.add(o); want = mode;
+  const base = (n) => `/projects/assets/faces/${n}`;
+
+  function apply(entry) {
+    const mat = mode === 'textured' ? entry.texMat : greyMat;
+    entry.obj.traverse((c) => { if (c.isMesh) c.material = mat; });
+    group.clear(); group.add(entry.obj);
     if (status) status.textContent = '';
   }
 
-  loader.load('/projects/assets/face-coarse.obj',
-    (o) => { coarse = prep(o); if (want !== 'detail') show(want); },
-    undefined,
-    () => { if (status) status.textContent = '메시를 불러오지 못했습니다.'; });
-  loader.load('/projects/assets/face-detail.obj',
-    (o) => { detail = prep(o); if (want === 'detail') show('detail'); });
+  function loadSample(n) {
+    cur = n;
+    if (cache[n]) { apply(cache[n]); return; }
+    if (status) status.textContent = '로딩 중…';
+    const albedo = texLoader.load(`${base(n)}/albedo.png`);
+    if ('colorSpace' in albedo) albedo.colorSpace = THREE.SRGBColorSpace;
+    const nrm = texLoader.load(`${base(n)}/normals.png`);
+    const texMat = new THREE.MeshStandardMaterial({
+      map: albedo, normalMap: nrm, normalScale: new THREE.Vector2(1, 1), roughness: 0.68, metalness: 0.0,
+    });
+    objLoader.load(`${base(n)}/coarse.obj`,
+      (o) => {
+        o.traverse((c) => { if (c.isMesh) { c.geometry.deleteAttribute('normal'); c.geometry.computeVertexNormals(); } });
+        cache[n] = { obj: o, texMat };
+        if (cur === n) apply(cache[n]);
+      },
+      undefined,
+      () => { if (status) status.textContent = '메시를 불러오지 못했습니다.'; });
+  }
+
+  // thumbnails
+  const thumbs = document.querySelectorAll('.face-thumb');
+  thumbs.forEach((el) => {
+    el.addEventListener('click', () => {
+      thumbs.forEach((x) => x.classList.remove('active'));
+      el.classList.add('active');
+      loadSample(el.getAttribute('data-sample'));
+    });
+  });
+
+  // mode toggle
+  const cb = document.getElementById('face-coarse-btn');
+  const tb = document.getElementById('face-textured-btn');
+  function setMode(m) {
+    mode = m;
+    if (cb) cb.classList.toggle('active', m === 'coarse');
+    if (tb) tb.classList.toggle('active', m === 'textured');
+    if (cur && cache[cur]) apply(cache[cur]);
+  }
+  if (cb) cb.addEventListener('click', () => setMode('coarse'));
+  if (tb) tb.addEventListener('click', () => setMode('textured'));
 
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true; controls.dampingFactor = 0.08;
@@ -67,17 +91,8 @@ if (mount) {
   window.addEventListener('resize', resize); resize();
   (function loop() { requestAnimationFrame(loop); controls.update(); renderer.render(scene, camera); })();
 
-  const btns = {
-    coarse: document.getElementById('face-coarse-btn'),
-    detail: document.getElementById('face-detail-btn'),
-    textured: document.getElementById('face-textured-btn'),
-  };
-  function setActive(m) { for (const k in btns) { if (btns[k]) btns[k].classList.toggle('active', k === m); } }
-  for (const m in btns) {
-    if (!btns[m]) continue;
-    btns[m].addEventListener('click', () => {
-      setActive(m);
-      if (ready(m)) show(m); else { want = m; if (status) status.textContent = '로딩 중…'; }
-    });
-  }
+  // default: sample 4, textured
+  setMode('textured');
+  const def = document.querySelector('.face-thumb[data-sample="4"]') || thumbs[0];
+  if (def) { def.classList.add('active'); loadSample(def.getAttribute('data-sample')); }
 }

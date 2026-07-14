@@ -62,23 +62,28 @@
 
   <section>
     <div class="sec-head"><span class="sec-num">3D 복원</span><h2>복원 결과 뷰어</h2></div>
-    <p class="lede">저자 본인 얼굴 사진 한 장에서 3D를 복원한 결과. 왼쪽이 입력, 오른쪽은 <strong>Coarse</strong>(기본 형상) · <strong>Detail</strong>(AU 기반 디테일) · <strong>Textured</strong>(피부 텍스처)로 토글한다. 드래그로 회전.</p>
-    <div class="face-io" data-reveal>
-      <figure class="face-input">
-        <img src="/projects/assets/face-input.jpg" alt="AUDISP 입력 얼굴 사진" loading="lazy">
-        <figcaption>입력 이미지 (224×224)</figcaption>
-      </figure>
+    <p class="lede">저자 본인 얼굴을 여러 AU(표정) 샘플로 3D 복원한 갤러리. 왼쪽 썸네일을 눌러 샘플을 고르고, <strong>Coarse</strong>(기본 형상)와 <strong>Textured</strong>(피부색 + 노멀맵 디테일)를 토글한다. 드래그로 회전.</p>
+    <div class="face-gallery" data-reveal>
+      <div class="face-thumbs" aria-label="얼굴 샘플 선택">
+        <button class="face-thumb" data-sample="2" type="button"><img src="/projects/assets/faces/2/input.jpg" alt="얼굴 샘플 2" loading="lazy"></button>
+        <button class="face-thumb" data-sample="3" type="button"><img src="/projects/assets/faces/3/input.jpg" alt="얼굴 샘플 3" loading="lazy"></button>
+        <button class="face-thumb" data-sample="4" type="button"><img src="/projects/assets/faces/4/input.jpg" alt="얼굴 샘플 4" loading="lazy"></button>
+        <button class="face-thumb" data-sample="5" type="button"><img src="/projects/assets/faces/5/input.jpg" alt="얼굴 샘플 5" loading="lazy"></button>
+        <button class="face-thumb" data-sample="6" type="button"><img src="/projects/assets/faces/6/input.jpg" alt="얼굴 샘플 6" loading="lazy"></button>
+        <button class="face-thumb" data-sample="8" type="button"><img src="/projects/assets/faces/8/input.jpg" alt="얼굴 샘플 8" loading="lazy"></button>
+        <button class="face-thumb" data-sample="9" type="button"><img src="/projects/assets/faces/9/input.jpg" alt="얼굴 샘플 9" loading="lazy"></button>
+        <button class="face-thumb" data-sample="10" type="button"><img src="/projects/assets/faces/10/input.jpg" alt="얼굴 샘플 10" loading="lazy"></button>
+      </div>
       <div class="face3d-wrap">
         <div class="face-toggle">
-          <button id="face-coarse-btn" class="active" type="button">Coarse</button>
-          <button id="face-detail-btn" type="button">Detail</button>
-          <button id="face-textured-btn" type="button">Textured</button>
+          <button id="face-coarse-btn" type="button">Coarse</button>
+          <button id="face-textured-btn" class="active" type="button">Textured</button>
         </div>
         <div id="face3d" aria-label="AUDISP 3D 얼굴 복원 뷰어, 드래그로 회전"></div>
         <div id="face3d-status"></div>
       </div>
     </div>
-    <p class="chart-cap">입력 사진 → 3D 형상(Coarse) → AU 기반 디테일(Detail) → 피부색 + 노멀맵 디테일(Textured). 조명을 돌려보면 피부 표면의 미세 굴곡이 드러난다. 저자 본인 얼굴.</p>
+    <p class="chart-cap">입력 사진 → 3D 형상 → 피부색 + 노멀맵 디테일. 썸네일로 표정(AU)별 복원을 비교한다. 조명을 돌리면 표면 미세 굴곡이 드러난다. 저자 본인 얼굴.</p>
   </section>
 
   <section>
