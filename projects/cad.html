@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CAD 도면 추천 · 엔지니어링 데이터 검색 — 김동주</title>
+<meta name="description" content="DWG/DXF 도면에서 특징을 추출하고 TF-IDF와 Vision을 결합해 유사 도면을 추천·초안 생성하는 클라우드 엔지니어링 데이터 검색 서비스. 검색 시간 80% 단축, 통신학회 2023. 안세기술 산학.">
+<meta property="og:title" content="CAD 도면 추천 · 엔지니어링 데이터 검색 — 김동주">
+<meta property="og:description" content="DWG/DXF 추출 + TF-IDF + Vision 도면 추천. 검색 시간 80% 단축, 통신학회 2023. 안세기술 산학.">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="/">김동주<span class="dot">.</span></a>
+    <nav><a href="/#projects">프로젝트</a><a href="/#career">이력</a><a href="/#contact">연락</a></nav>
+  </div>
+</div>
+
+<header class="detail-hero wrap">
+  <a class="back-link" href="/#projects">&larr; 프로젝트 목록</a>
+  <p class="cat">학부 산학 · NLP + CV + 검색</p>
+  <h1>CAD 도면 추천 · 엔지니어링 데이터 검색</h1>
+  <p class="sub">쌓여 있는 CAD 도면에서 특징을 자동 추출하고, 텍스트와 형상을 함께 이용해 유사 도면을 추천하고 초안 생성을 돕는 클라우드 검색 서비스다. 광운대학교와 안세기술의 산학협력으로 진행했다.</p>
+  <div class="meta">
+    <span><b>기간</b> 2022.06 ~ 2023.06</span>
+    <span><b>구분</b> 학부 재학 중 산학협력 (팀)</span>
+    <span><b>역할</b> 도면 특징 추출 · 추천 로직</span>
+    <span><b>발표</b> 2023 한국통신학회 동계학술대회</span>
+  </div>
+  <div class="links">
+    <a class="btn primary" href="https://github.com/YEONGORI/engineering_data_search_service" target="_blank" rel="noopener">팀 저장소 &rarr;</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="sec-head"><span class="sec-num">아키텍처</span></div>
+    <div class="arch">
+      <div class="arch-block" data-reveal>
+        <div class="a-head"><span class="a-tag">도면 검색 파이프라인</span></div>
+        <div class="flow">
+          <div class="stage"><div class="s-t">DWG / DXF 도면</div><div class="s-d">CAD 원본</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage"><div class="s-t">특징 추출</div><div class="s-d">텍스트·형상 파싱</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage"><div class="s-t">TF-IDF + Vision</div><div class="s-d">텍스트·형상 임베딩</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage out"><div class="s-t">유사 도면 추천 · 초안 생성</div><div class="s-d">클라우드 검색 서비스</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="prose">
+      <h3>문제</h3>
+      <p>엔지니어링 현장에는 도면이 방대하게 쌓이지만, 필요한 도면을 파일명·기억에 의존해 찾다 보면 시간이 오래 걸린다. 유사한 기존 도면을 빠르게 찾아 재사용하거나 초안의 출발점으로 삼을 수 있으면 설계 생산성이 크게 올라간다.</p>
+
+      <h3>접근</h3>
+      <ul>
+        <li><strong>도면 특징 추출.</strong> DWG/DXF에서 텍스트(주기·치수·표제란)와 형상 요소를 파싱해 검색 가능한 특징으로 변환.</li>
+        <li><strong>텍스트 + 형상 결합 검색.</strong> TF-IDF 기반 텍스트 유사도와 Vision 기반 형상 유사도를 함께 사용해 유사 도면을 추천.</li>
+        <li><strong>클라우드 서비스화.</strong> 웹 프런트와 클라우드 백엔드로 검색·추천을 서비스 형태로 제공(팀).</li>
+      </ul>
+
+      <h3>결과</h3>
+    </div>
+    <div class="result-grid">
+      <div class="result" data-reveal><div class="rv">80<small>%</small></div><div class="rk">도면 검색 시간 단축</div></div>
+      <div class="result" data-reveal><div class="rv">2023</div><div class="rk">한국통신학회 동계학술대회 발표</div></div>
+    </div>
+    <div class="prose">
+      <h3>기술</h3>
+      <p>DWG/DXF 파싱 · TF-IDF · Computer Vision · 검색·추천 · 웹/클라우드.</p>
+    </div>
+    <div class="arch-note"><span>광운대학교 × 안세기술 산학협력 팀 프로젝트다. 본인 담당은 도면 특징 추출과 추천 로직이며, 웹 프런트·클라우드 구성은 팀 공동 작업이다.</span></div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="foot-links">
+    <a href="/#projects">← 프로젝트 목록</a>
+    <a href="mailto:dongjukim.dev@gmail.com">Email</a>
+    <a href="https://github.com/gggg8657" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+<script src="/main.js"></script>
+</body>
+</html>
