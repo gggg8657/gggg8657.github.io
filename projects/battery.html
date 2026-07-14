@@ -68,12 +68,27 @@
       </ul>
 
       <h3>결과</h3>
-      <p>초기 사이클만으로 셀 분리 조건에서 수명을 예측하고, 물리 시뮬레이션 대비 추론을 크게 가속했다. <strong>정량 결과는 관련 논문 게재 후 공개할 예정</strong>이며, 실험 프로토콜 생성 도구는 공개 저장소에서 확인할 수 있다.</p>
-
+      <p>초기 사이클만으로 셀 분리(cell-disjoint) 조건에서 수명을 예측하고, 물리 시뮬레이션 대비 추론을 대폭 가속했다. 공개 데이터셋(TRI·HUST·CALCE) 기준 결과는 다음과 같다.</p>
+    </div>
+    <div class="result-grid">
+      <div class="result" data-reveal><div class="rv">6.45<small>%</small></div><div class="rk">EOL MAPE (cell-disjoint)</div></div>
+      <div class="result" data-reveal><div class="rv">1.95<small>%</small></div><div class="rk">Q(n) 궤적 MAPE</div></div>
+      <div class="result" data-reveal><div class="rv">552<small>×</small></div><div class="rk">추론 가속 (PyBaMM 대비)</div></div>
+      <div class="result" data-reveal><div class="rv">9,185</div><div class="rk">DeepONet 파라미터</div></div>
+    </div>
+    <div class="chart" data-reveal>
+      <p class="chart-title">EOL 예측 오차 — 낮을수록 좋음</p>
+      <div class="bars">
+        <div class="bar-row hi"><span class="bl">이 방법</span><span class="bt"><span class="bf" style="width:64.5%"></span></span><span class="bv">6.45%</span></div>
+        <div class="bar-row"><span class="bl">Severson 2019</span><span class="bt"><span class="bf" style="width:91%"></span></span><span class="bv">9.1%</span></div>
+      </div>
+      <p class="chart-cap">EOL MAPE, cell-disjoint 평가. 막대는 0~10% 기준.</p>
+    </div>
+    <div class="prose">
       <h3>기술</h3>
       <p>PyBaMM · DeepONet (Operator Learning) · PyTorch · Physics-Informed ML · GUI 도구 배포.</p>
     </div>
-    <div class="arch-note"><span class="chip conf">게재 전</span><span>구체 성능 수치(오차·가속 배수)와 예측 모델 세부는 논문 게재 전까지 공개하지 않는다.</span></div>
+    <div class="arch-note"><span>결과는 준비 중인 원고의 수치이며 공개 데이터셋(TRI·HUST·CALCE) 기준이다. 실험 프로토콜 생성 도구는 공개 저장소에서 확인할 수 있다.</span></div>
   </section>
 
 </main>
