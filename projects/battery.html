@@ -55,6 +55,23 @@
   </section>
 
   <section>
+    <div class="sec-head"><span class="sec-num">문제 → 해결</span><h2>무엇을 풀었나</h2></div>
+    <div class="ps-grid" data-reveal>
+      <div class="ps-panel problem">
+        <div class="ps-tag">문제 · 순환오류</div>
+        <h4>셀별 fit이 자기참조로 무너진다</h4>
+        <p>셀 하나하나에 물리 파라미터를 역산해 수명을 예측하면 추정과 목표가 서로를 참조하는 순환(circularity)에 빠진다. 같은 분포 안에서는 정확해 보여도, 새 제조 배치·공급사·급속충전 프로토콜로 옮기면 성능이 붕괴한다.</p>
+      </div>
+      <div class="ps-arrow">&rarr;</div>
+      <div class="ps-panel solution">
+        <div class="ps-tag">해결 · 분포 경계 + 연산자 학습</div>
+        <h4>외부 분포로 경계를 학습하고 궤적을 직접 예측</h4>
+        <p>개별 셀 fit 대신 공개 데이터의 분포로 물리 파라미터의 유효 경계를 학습하고, 사이클→열화 연산자(DeepONet)로 용량 궤적을 직접 예측한다. 분포 밖 입력은 외삽하지 않고 flag(abstain)해 조용한 오탐을 막는다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
     <div class="prose">
       <h3>문제</h3>
       <p>배터리 수명을 실측하려면 수백~수천 사이클을 돌려야 하고, 물리 시뮬레이션은 셀 하나당 수 분이 걸려 대규모 탐색에 부담이 크다. 초기 몇십 사이클만으로 수명과 열화를 신뢰성 있게 예측할 수 있으면 개발 주기를 크게 줄일 수 있다.</p>
@@ -75,6 +92,31 @@
       <div class="result" data-reveal><div class="rv">1.95<small>%</small></div><div class="rk">Q(n) 궤적 MAPE</div></div>
       <div class="result" data-reveal><div class="rv">552<small>×</small></div><div class="rk">추론 가속 (PyBaMM 대비)</div></div>
       <div class="result" data-reveal><div class="rv">9,185</div><div class="rk">DeepONet 파라미터</div></div>
+    </div>
+    <div class="fade-chart" data-reveal>
+      <p class="chart-title">용량 감소 궤적 — 예측 vs 실제</p>
+      <svg viewBox="0 0 480 240" role="img" aria-label="용량 감소 궤적, 예측이 실제를 근접 추종하고 EOL 80% 지점을 표시">
+        <rect x="56" y="28" width="52" height="180" fill="var(--accent-soft)"/>
+        <text x="82" y="22" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="var(--ink-faint)">초기 사이클 입력</text>
+        <line x1="56" y1="28" x2="56" y2="208" stroke="var(--line)" stroke-width="1"/>
+        <line x1="56" y1="208" x2="452" y2="208" stroke="var(--line)" stroke-width="1"/>
+        <line x1="56" y1="118" x2="452" y2="118" stroke="var(--signal)" stroke-width="1.2" stroke-dasharray="5 4"/>
+        <text x="452" y="114" text-anchor="end" font-family="ui-monospace,monospace" font-size="9" fill="var(--signal)">80% 용량 (EOL)</text>
+        <path d="M56,34 C170,44 250,58 330,92 C378,120 420,180 452,206" fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M56,37 C170,47 250,61 332,96 C380,124 422,184 452,208" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-dasharray="6 4" stroke-linecap="round"/>
+        <line x1="352" y1="118" x2="352" y2="208" stroke="var(--line)" stroke-width="0.8" stroke-dasharray="3 3"/>
+        <circle cx="352" cy="118" r="4" fill="var(--accent)"/>
+        <text x="352" y="222" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="var(--ink-faint)">EOL 예측</text>
+        <text x="148" y="150" font-family="ui-monospace,monospace" font-size="11" fill="var(--ink)">Q(n) MAPE 1.95%</text>
+        <text x="254" y="236" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="var(--ink-faint)">cycle &rarr;</text>
+        <text x="18" y="118" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="var(--ink-faint)" transform="rotate(-90 18 118)">capacity</text>
+      </svg>
+      <div class="fade-legend">
+        <span class="lg"><span class="swatch" style="background:var(--accent)"></span>실제 용량</span>
+        <span class="lg"><span class="swatch" style="background:var(--ink-faint)"></span>예측 (DeepONet)</span>
+        <span class="lg"><span class="swatch" style="background:var(--signal)"></span>EOL 임계</span>
+      </div>
+      <p class="chart-cap">곡선은 대표 형태(illustrative). 예측이 실제 용량 궤적을 근접 추종하며, 초기 사이클 입력만으로 EOL을 맞힌다. 정량 오차는 위 지표 참고.</p>
     </div>
     <div class="chart" data-reveal>
       <p class="chart-title">EOL 예측 오차 — 낮을수록 좋음</p>
