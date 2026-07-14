@@ -21,9 +21,17 @@ if (mount) {
   const rim = new THREE.DirectionalLight(0x8fb4ff, 0.35); rim.position.set(-1.6, 0.4, -1.2); scene.add(rim);
 
   const greyMat = new THREE.MeshStandardMaterial({ color: 0xb9bec6, roughness: 0.72, metalness: 0.02 });
-  const tex = new THREE.TextureLoader().load('/projects/assets/face-albedo.png');
-  if ('colorSpace' in tex) tex.colorSpace = THREE.SRGBColorSpace;
-  const texMat = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.68, metalness: 0.0 });
+  const texLoader = new THREE.TextureLoader();
+  const albedo = texLoader.load('/projects/assets/face-albedo.png');
+  if ('colorSpace' in albedo) albedo.colorSpace = THREE.SRGBColorSpace;
+  const normalTex = texLoader.load('/projects/assets/face-normals.png'); // linear (normal map)
+  const texMat = new THREE.MeshStandardMaterial({
+    map: albedo,
+    normalMap: normalTex,
+    normalScale: new THREE.Vector2(1, 1),
+    roughness: 0.68,
+    metalness: 0.0,
+  });
 
   const group = new THREE.Group();
   group.rotation.y = Math.PI; // 정면이 카메라를 향하도록
