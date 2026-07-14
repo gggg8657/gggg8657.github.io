@@ -284,23 +284,46 @@ blockquote.motto { font-family: var(--serif); font-size: clamp(20px, 3vw, 27px);
 .video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
 /* ---- SST-14 mutation animation ---- */
-.sst-mut { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; box-shadow: var(--shadow); }
-.sst-mut .beads { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-.bead { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-weight: 650; font-size: 15px; color: #10171d; border: 2px solid transparent; transition: transform .2s ease, border-color .2s ease; }
+.sst-mut { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; box-shadow: var(--shadow); }
+/* agent pipeline */
+.mut-pipeline { display: flex; align-items: stretch; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+.mut-step { display: flex; flex-direction: column; gap: 2px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); transition: border-color .2s, background .2s, box-shadow .2s; }
+.mut-step b { font-family: var(--mono); font-size: 13px; color: var(--ink-soft); }
+.mut-step small { font-size: 11px; color: var(--ink-faint); }
+.mut-step.on { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 3px var(--accent-soft); }
+.mut-step.on b { color: var(--accent); }
+.mut-sep { align-self: center; color: var(--ink-faint); font-family: var(--mono); }
+/* peptide chain */
+.mut-stage { position: relative; overflow-x: auto; padding: 22px 6px 6px; }
+.beads { position: relative; display: flex; gap: 10px; justify-content: center; min-width: max-content; margin: 0 auto; }
+.beads::before { content: ""; position: absolute; top: 21px; left: 22px; right: 22px; height: 3px; background: var(--line); z-index: 0; }
+.bead-wrap { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.bead { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-weight: 650; font-size: 16px; color: #10171d; border: 2px solid transparent; box-shadow: 0 1px 3px rgba(0,0,0,.12); transition: transform .25s ease, border-color .25s ease; }
 .bead[data-cls="hyd"] { background: #d9dee4; }
-.bead[data-cls="pol"] { background: #bfe3dd; }
-.bead[data-cls="pos"] { background: #bcd0ff; }
-.bead[data-cls="neg"] { background: #ffc9c9; }
-.bead[data-cls="cys"] { background: #f2d68a; }
-.bead.fixed { box-shadow: inset 0 0 0 2px var(--signal); }
+.bead[data-cls="pol"] { background: #a9ded6; }
+.bead[data-cls="pos"] { background: #a9c4ff; }
+.bead[data-cls="neg"] { background: #ffb3b3; }
+.bead[data-cls="cys"] { background: #f0cf7a; }
+.bead-wrap .pos { font-family: var(--mono); font-size: 10px; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+.bead.fixed { box-shadow: inset 0 0 0 2px var(--signal), 0 1px 3px rgba(0,0,0,.12); }
 .bead.active { border-color: var(--accent); }
-.bead.pulse { transform: scale(1.25); }
+.bead.pulse { transform: scale(1.3); }
 .bead.pass { border-color: var(--good); }
 .bead.fail { border-color: #d64545; }
-.mut-meta { display: flex; justify-content: space-between; gap: 12px; margin-top: 16px; font-family: var(--mono); font-size: 12.5px; }
+/* mutation callout */
+.mut-callout { position: absolute; top: 0; transform: translateX(-50%); font-family: var(--mono); font-size: 12px; padding: 3px 9px; border-radius: 7px; background: var(--accent); color: #06110f; white-space: nowrap; opacity: 0; transition: opacity .2s, top .2s; pointer-events: none; }
+.mut-callout.show { opacity: 1; }
+/* meta + legend */
+.mut-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; margin-top: 18px; font-family: var(--mono); font-size: 12.5px; }
 .mut-agent { color: var(--accent); }
-.mut-iter { color: var(--ink-faint); font-variant-numeric: tabular-nums; }
-@media (prefers-reduced-motion: reduce) { .bead { transition: none; } }
+.mut-iter, .mut-score { color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+.mut-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 14px; font-family: var(--mono); font-size: 11.5px; color: var(--ink-soft); }
+.mut-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.mut-legend .sw { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.mut-legend .sw.hyd { background: #d9dee4; } .mut-legend .sw.pol { background: #a9ded6; }
+.mut-legend .sw.pos { background: #a9c4ff; } .mut-legend .sw.neg { background: #ffb3b3; }
+.mut-legend .sw.cys { background: #f0cf7a; box-shadow: inset 0 0 0 2px var(--signal); }
+@media (prefers-reduced-motion: reduce) { .bead, .mut-step, .mut-callout { transition: none; } }
 
 /* ---- 3D molecule viewer ---- */
 .mol-wrap { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
