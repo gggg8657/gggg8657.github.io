@@ -21,7 +21,9 @@ if (mount) {
   const rim = new THREE.DirectionalLight(0x8fb4ff, 0.35); rim.position.set(-1.6, 0.4, -1.2); scene.add(rim);
 
   const mat = new THREE.MeshStandardMaterial({ color: 0xb9bec6, roughness: 0.72, metalness: 0.02 });
-  const group = new THREE.Group(); scene.add(group);
+  const group = new THREE.Group();
+  group.rotation.y = Math.PI; // 얼굴 정면이 카메라(+Z)를 향하도록
+  scene.add(group);
 
   const loader = new OBJLoader();
   let coarse = null, detail = null, want = 'coarse';
