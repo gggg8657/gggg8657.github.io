@@ -226,6 +226,9 @@ blockquote.motto { font-family: var(--serif); font-size: clamp(20px, 3vw, 27px);
 .ps-panel.solution .ps-tag { color: var(--accent); }
 .ps-panel h4 { margin: 0 0 10px; font-size: 16px; color: var(--ink); font-weight: 650; }
 .ps-panel p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
+.ps-panel ul { margin: 0; padding-left: 18px; }
+.ps-panel li { font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; margin: 7px 0; }
+.ps-panel li strong { color: var(--ink); }
 .ps-arrow { display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 24px; font-family: var(--mono); }
 @media (max-width: 640px) { .ps-grid { grid-template-columns: 1fr; } .ps-arrow { transform: rotate(90deg); padding: 4px 0; } }
 
