@@ -57,6 +57,24 @@
   </section>
 
   <section>
+    <div class="sec-head"><span class="sec-num">모델 선정</span><h2>온프레미스 VLM 비교</h2></div>
+    <p class="lede">폐쇄망에서 로컬로 돌릴 VLM을 고르기 위해 후보 모델들을 직접 추론하고 비교했다. 이해·생성 통합 방식, 생성 아키텍처(AR vs Rectified Flow), 모델 스케일, 문서·이미지 이해 특화를 기준으로 평가했다.</p>
+    <div class="chips" style="margin-bottom:14px;" data-reveal>
+      <span class="chip">DeepSeek Janus</span>
+      <span class="chip">Janus-Pro</span>
+      <span class="chip">JanusFlow</span>
+      <span class="chip">DeepSeek-VL2</span>
+      <span class="chip metric-chip">채택: Qwen2.5-VL</span>
+    </div>
+    <div class="prose">
+      <p>VLM 후보 검토의 일환으로 DeepSeek Janus 계열을 비교 분석했고, CCTV 파이프라인에는 폐쇄망 온프레미스 적합성과 상황 설명 품질을 고려해 Qwen2.5-VL을 2차 검증 레이어로 채택했다.</p>
+    </div>
+    <div class="links">
+      <a class="btn" href="https://github.com/gggg8657/DeepSeek_multimodal_understanding_comparison" target="_blank" rel="noopener">VLM 비교 스터디 &rarr;</a>
+    </div>
+  </section>
+
+  <section>
     <div class="prose">
       <h3>문제</h3>
       <p>KAERI 시설은 폐쇄망 고보안 환경이라 외부 API와 클라우드 모델을 쓸 수 없고, 시스템이 온프레미스에서 완전히 동작해야 했다. CCTV는 단순 녹화 중심이라 운영자가 화면을 직접 봐야 했고, 이상행동의 탐지와 분석, 대응이 분리된 수작업 프로세스였다. 단일 VAD 모델만으로는 오탐 최소화와 높은 감지율을 동시에 달성하기 어려웠다.</p>
