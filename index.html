@@ -19,6 +19,7 @@
   <div class="wrap">
     <a class="brand" href="/">김동주<span class="dot">.</span></a>
     <nav>
+      <a href="#research">연구</a>
       <a href="#projects">프로젝트</a>
       <a href="#career">이력</a>
       <a href="#skills">기술</a>
@@ -49,8 +50,21 @@
 
 <main class="wrap">
 
+  <section id="research">
+    <div class="sec-head"><span class="sec-num">01</span><h2>연구 분야</h2></div>
+    <p class="lede">보안, 원자력·방사선, 전기화학, 바이오까지 도메인을 가리지 않고, 단발성 모델이 아니라 재현성·추적성을 갖춘 E2E·에이전트 시스템으로 문제를 푸는 AI Scientist. 공개 데이터와 물리 모델로 0에서 1을 세우고 전문가 검증으로 닫는 접근.</p>
+    <div class="research-grid">
+      <div class="research-item" data-reveal><span class="r-tag">Computer Vision · VAD</span><h3>영상 이상행위 탐지</h3><p>VAD와 VLM, Agentic을 묶은 폐쇄망 관제. 다중 모델 비교와 2차 의미 검증.</p><a href="/projects/cctv.html">지능형 CCTV &rarr;</a></div>
+      <div class="research-item" data-reveal><span class="r-tag">Agentic AI · 멀티에이전트</span><h3>자율 의사결정 파이프라인</h3><p>Planner·Builder·QCRanker·Critic·Reporter 5-Agent, 플로우 3종 벤치마크.</p><a href="/projects/sstr2.html">SSTR2 Dual Silo &rarr;</a></div>
+      <div class="research-item" data-reveal><span class="r-tag">Bio AI · 신약 설계</span><h3>방사성의약품 in silico</h3><p>De Novo 구조 설계와 변이 탐색으로 결합 펩타이드 후보 자동 발굴.</p><a href="/projects/sstr2.html">방사성의약품 SSTR2 &rarr;</a></div>
+      <div class="research-item" data-reveal><span class="r-tag">3D Vision · Face</span><h3>3D 얼굴 디테일 복원</h3><p>얼굴 액션 유닛으로 미세 표정 디테일을 복원하는 학위 모델.</p><a href="/projects/audisp.html">AUDISP &rarr;</a></div>
+      <div class="research-item" data-reveal><span class="r-tag">Physics-Informed · Scientific ML</span><h3>물리 결합 예측</h3><p>물리 시뮬레이션과 연산자 학습을 결합한 배터리 수명 예측.</p><a href="/projects/battery.html">LFP 배터리 &rarr;</a></div>
+      <div class="research-item" data-reveal><span class="r-tag">Robot AI · Systems / MLOps</span><h3>로봇·연구 인프라</h3><p>매니퓰레이터 자율 픽앤플레이스, 연구 서버 무인 모니터링 운영.</p><a href="/projects/infra.html">서버 운영 &rarr;</a></div>
+    </div>
+  </section>
+
   <section id="projects">
-    <div class="sec-head"><span class="sec-num">01</span><h2>프로젝트</h2></div>
+    <div class="sec-head"><span class="sec-num">02</span><h2>프로젝트</h2></div>
     <p class="lede">카드를 누르면 각 프로젝트의 아키텍처와 결과 상세로 이동. 내부 과제의 정량치는 공개 발표 전까지 대외비.</p>
     <div class="proj-grid">
 
@@ -141,7 +155,7 @@
   </section>
 
   <section id="career">
-    <div class="sec-head"><span class="sec-num">02</span><h2>경력과 학력</h2></div>
+    <div class="sec-head"><span class="sec-num">03</span><h2>경력과 학력</h2></div>
     <p class="lede">정식 고용 경력은 KAERI 한 건. 학위 과정과 산학협력 프로젝트, 부트캠프는 별도 구분 표기.</p>
     <div class="timeline">
       <div class="row" data-reveal>
@@ -196,7 +210,7 @@
   </section>
 
   <section id="skills">
-    <div class="sec-head"><span class="sec-num">03</span><h2>기술 스택</h2></div>
+    <div class="sec-head"><span class="sec-num">04</span><h2>기술 스택</h2></div>
     <div class="stack">
       <div class="stack-group" data-reveal><div class="label">Language</div><div class="items"><span class="tech">Python</span><span class="tech">C / C++</span></div></div>
       <div class="stack-group" data-reveal><div class="label">ML / DL</div><div class="items"><span class="tech">PyTorch</span><span class="tech">TensorFlow</span><span class="tech">scikit-learn</span><span class="tech">NumPy</span></div></div>
@@ -208,7 +222,7 @@
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">04</span><h2>수상</h2></div>
+    <div class="sec-head"><span class="sec-num">05</span><h2>수상 · 발표</h2></div>
     <div class="awards">
       <div class="award" data-reveal><span class="date">2025.11.25</span><span class="title">KAERI 우수연구원상</span><span class="by">한국원자력연구원</span></div>
       <div class="award" data-reveal><span class="date">2025.11.21</span><span class="title">우수논문상 · 지능형 CCTV VAD·VLM·Agentic</span><span class="by">한국산업정보학회</span></div>
@@ -218,10 +232,18 @@
       <div class="award" data-reveal><span class="date">2021.07.23</span><span class="title">우수논문상 KCC 2021 · 파일 접근 제어</span><span class="by">한국정보과학회</span></div>
       <div class="award" data-reveal><span class="date">2021.11.18</span><span class="title">산학협력단장상 · 제4회 전국 AI 아이디어 공모전 최우수상</span><span class="by">광운대학교</span></div>
     </div>
+    <p class="subhead">발표</p>
+    <div class="talks">
+      <div class="talk" data-reveal><span class="tw">2026</span><span class="tt">국가 AI 연구센터(NST) 발표 — 방사성의약품 SSTR2 in silico 시스템</span></div>
+      <div class="talk" data-reveal><span class="tw">2026 춘계</span><span class="tt">한국원자력학회 — 방사성의약품 SSTR2</span></div>
+      <div class="talk" data-reveal><span class="tw">2025 추계</span><span class="tt">한국산업정보학회 — 지능형 CCTV (VAD·VLM·Agentic, 3편)</span></div>
+      <div class="talk" data-reveal><span class="tw">2023 동계</span><span class="tt">한국통신학회 — CAD 도면 추천</span></div>
+      <div class="talk" data-reveal><span class="tw">2021</span><span class="tt">KCC 한국정보과학회 — 파일 접근 제어</span></div>
+    </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">05</span><h2>일하는 방식</h2></div>
+    <div class="sec-head"><span class="sec-num">06</span><h2>일하는 방식</h2></div>
     <blockquote class="motto" data-reveal>AI 알고리즘으로, 자동화 시스템을 통해, AX화 실현.</blockquote>
     <div class="values">
       <div class="value" data-reveal><span class="mark">01</span><p><strong>E2E 자동화 워크플로우.</strong> 단발성 모델보다 데이터 수집부터 평가, 배포까지 이어지는 자동화 파이프라인 우선.</p></div>
