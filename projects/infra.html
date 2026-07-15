@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>연구 서버 운영 · 모니터링 자동화 — 김동주</title>
+<meta name="description" content="공유 GPU 연구 서버의 자원·프로세스·디스크·접속을 실시간 감시하고 텔레그램으로 자동 알림하는 무인 모니터링 운영. 중복 억제·rate-limit 대응 등 실전 안정화. KAERI 인공지능응용연구실.">
+<meta property="og:title" content="연구 서버 운영 · 모니터링 자동화 — 김동주">
+<meta property="og:description" content="GPU·프로세스·디스크·접속 실시간 감시 → 텔레그램 자동 알림. 무인 운영 안정화. KAERI AICA 서버.">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="/">김동주<span class="dot">.</span></a>
+    <nav><a href="/#projects">프로젝트</a><a href="/#career">이력</a><a href="/#contact">연락</a></nav>
+  </div>
+</div>
+
+<header class="detail-hero wrap">
+  <a class="back-link" href="/#projects">&larr; 프로젝트 목록</a>
+  <p class="cat">KAERI 현직 · Infra / MLOps</p>
+  <h1>연구 서버 운영 · 모니터링 자동화</h1>
+  <p class="sub">여러 사용자가 공유하는 GPU 연구 서버의 자원·프로세스·디스크·접속을 실시간으로 감시하고, 이상이 생기면 텔레그램으로 즉시 알리는 무인 모니터링 체계를 직접 구축·운영했다.</p>
+  <div class="meta">
+    <span><b>소속</b> KAERI 인공지능응용연구실 (NHN Cloud 광주 AICA)</span>
+    <span><b>역할</b> 서버 운영 · 모니터링 자동화</span>
+    <span><b>공개</b> 기관 내부 운영 도구 — 코드 비공개</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="sec-head"><span class="sec-num">아키텍처</span></div>
+    <div class="arch">
+      <div class="arch-block" data-reveal>
+        <div class="a-head"><span class="a-tag">실시간 감시 · 알림</span></div>
+        <div class="flow">
+          <div class="stage"><div class="s-t">서버 이벤트</div><div class="s-d">GPU·프로세스·디스크·접속</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage"><div class="s-t">폴링 · 감사</div><div class="s-d">nvidia-smi·ps·auditd·who</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage"><div class="s-t">이상 · 임계 감지</div><div class="s-d">점유·폭주·비정상 접속</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage out"><div class="s-t">텔레그램 봇 알림</div><div class="s-d">중복 억제 · 429 대응</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="prose">
+      <h3>문제</h3>
+      <p>공유 GPU 연구 서버는 누가 어떤 자원을 점유하는지, 디스크가 언제 임계에 닿는지, 비정상 접속·명령이 있는지 실시간으로 알기 어렵다. 운영자가 계속 붙어 있을 수 없으니, 이상을 사람이 없어도 즉시 포착하는 자동 체계가 필요했다.</p>
+
+      <h3>접근</h3>
+      <ul>
+        <li><strong>자원 모니터링.</strong> GPU별 점유(어느 사용자가 어떤 명령으로), 상위 CPU/RAM 프로세스, 전체 사용량을 포맷팅해 텔레그램으로 보고.</li>
+        <li><strong>디스크 임계 알림.</strong> 사용량이 임계치를 넘으면 사용자/디렉터리별 TOP 분석과 함께 경보.</li>
+        <li><strong>접속·명령 감사.</strong> auditd, PROMPT_COMMAND, who 폴링 등 여러 방식으로 로그인·명령 이벤트를 감시.</li>
+        <li><strong>실전 안정화.</strong> 중복 알림, 감지 누락, 권한 문제, 텔레그램 rate-limit(429)를 반복적으로 개선해 운영에서 견디도록 만듦.</li>
+      </ul>
+
+      <h3>결과</h3>
+      <p>운영자가 상주하지 않아도 자원 점유·디스크 폭주·비정상 접속을 즉시 포착하는 무인 모니터링 운영을 확립했다. 원내 챗봇 서비스 유지보수와 AICA 서버 자원·계정·환경 관리도 함께 담당했다.</p>
+
+      <h3>기술</h3>
+      <p>Bash · nvidia-smi · auditd · Telegram Bot API · cron/polling · Docker · NHN Cloud 광주 AICA.</p>
+    </div>
+    <div class="arch-note"><span>KAERI 인공지능응용연구실 내부 운영 도구다. 기관 서버 보안과 관련되어 코드·스크립트 세부는 공개하지 않으며, 여기서는 역량과 접근만 개념 수준으로 서술한다.</span></div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="foot-links">
+    <a href="/#projects">← 프로젝트 목록</a>
+    <a href="mailto:dongjukim.dev@gmail.com">Email</a>
+    <a href="https://github.com/gggg8657" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+<script src="/main.js"></script>
+</body>
+</html>
