@@ -26,7 +26,7 @@
   <a class="back-link" href="/#projects">&larr; 프로젝트 목록</a>
   <p class="cat">석사 학위 · 3D Face Reconstruction</p>
   <h1>AUDISP, AU 기반 3D 얼굴 디테일 복원</h1>
-  <p class="sub">얼굴 액션 유닛(Facial Action Unit) 정보를 활용해, 기존 3D 복원 모델이 놓치는 미세한 표정 디테일을 변위 맵으로 복원하는 석사 학위 모델이다.</p>
+  <p class="sub">얼굴 액션 유닛(Facial Action Unit) 정보를 활용해, 기존 3D 복원 모델이 놓치는 미세한 표정 디테일을 변위 맵으로 복원하는 석사 학위 모델.</p>
   <div class="meta">
     <span><b>학위</b> 광운대학교 컴퓨터공학 석사</span>
     <span><b>완료</b> 2024.08 (게재)</span>
@@ -62,7 +62,7 @@
 
   <section>
     <div class="sec-head"><span class="sec-num">3D 복원</span><h2>복원 결과 뷰어</h2></div>
-    <p class="lede">저자 본인 얼굴을 여러 AU(표정) 샘플로 3D 복원한 갤러리. 왼쪽 썸네일을 눌러 샘플을 고르고, <strong>Coarse</strong>(기본 형상)와 <strong>Textured</strong>(피부색 + 노멀맵 디테일)를 토글한다. 드래그로 회전.</p>
+    <p class="lede">저자 본인 얼굴을 여러 AU(표정) 샘플로 3D 복원한 갤러리. 왼쪽 썸네일을 눌러 샘플을 고르고, <strong>Coarse</strong>(기본 형상)와 <strong>Textured</strong>(피부색 + 노멀맵 디테일)를 토글. 드래그로 회전.</p>
     <div class="face-gallery" data-reveal>
       <div class="face-thumbs" aria-label="얼굴 샘플 선택">
         <button class="face-thumb" data-sample="2" type="button"><img src="/projects/assets/faces/2/input.jpg" alt="얼굴 샘플 2" loading="lazy"></button>
@@ -83,19 +83,19 @@
         <div id="face3d-status"></div>
       </div>
     </div>
-    <p class="chart-cap">입력 사진 → 3D 형상 → 피부색 + 노멀맵 디테일. 썸네일로 표정(AU)별 복원을 비교한다. 조명을 돌리면 표면 미세 굴곡이 드러난다. 저자 본인 얼굴.</p>
+    <p class="chart-cap">입력 사진 → 3D 형상 → 피부색 + 노멀맵 디테일. 썸네일로 표정(AU)별 복원 비교. 조명을 돌리면 표면 미세 굴곡이 드러남. 저자 본인 얼굴.</p>
   </section>
 
   <section>
     <div class="prose">
       <h3>문제</h3>
-      <p>DECA와 EMOCA 같은 단일 이미지 3D 얼굴 복원 모델은 전체 형상은 잘 잡지만, 표정에서 생기는 미세한 주름과 굴곡 같은 세부 디테일을 잃는다. 이 디테일은 표정의 실제 근육 움직임, 즉 얼굴 액션 유닛과 직접 연결된다.</p>
+      <p>DECA와 EMOCA 같은 단일 이미지 3D 얼굴 복원 모델은 전체 형상은 잘 잡지만, 표정에서 생기는 미세한 주름과 굴곡 같은 세부 디테일을 잃음. 이 디테일은 표정의 실제 근육 움직임, 즉 얼굴 액션 유닛과 직접 연결.</p>
 
       <h3>접근</h3>
       <ul>
-        <li><strong>AU를 디테일의 조건으로.</strong> 얼굴 액션 유닛 정보를 변위 맵(displacement) 복원의 조건 신호로 사용해, 표정 근육 움직임과 일치하는 세부 굴곡을 복원했다.</li>
-        <li><strong>손실 함수 설계.</strong> AU 일치도와 기하 정합을 함께 반영하도록 손실을 구성했다.</li>
-        <li><strong>SOTA 재현·비교.</strong> DECA, EMOCA, ME-GraphAU 등 얼굴 분석·3D 복원 SOTA를 직접 재현해 baseline으로 놓고 비교했다.</li>
+        <li><strong>AU를 디테일의 조건으로.</strong> 얼굴 액션 유닛 정보를 변위 맵(displacement) 복원의 조건 신호로 사용해, 표정 근육 움직임과 일치하는 세부 굴곡 복원.</li>
+        <li><strong>손실 함수 설계.</strong> AU 일치도와 기하 정합을 함께 반영하도록 손실 구성.</li>
+        <li><strong>SOTA 재현·비교.</strong> DECA, EMOCA, ME-GraphAU 등 얼굴 분석·3D 복원 SOTA를 직접 재현해 baseline으로 놓고 비교.</li>
       </ul>
 
       <h3>결과</h3>
@@ -115,10 +115,10 @@
       <p class="chart-cap">막대 길이는 0.80~0.90 구간 기준(차이 강조). 값은 실측 F1.</p>
     </div>
     <div class="prose">
-      <p>AU 검출 F1 0.88로 DECA(0.86)와 EMOCA(0.87)를 상회했고, 학위 논문으로 게재됐다.</p>
+      <p>AU 검출 F1 0.88로 DECA(0.86)와 EMOCA(0.87)를 상회, 학위 논문으로 게재.</p>
 
       <h3>재현한 SOTA baseline</h3>
-      <p>학위 연구 과정에서 얼굴 분석·3D 복원 분야의 여러 SOTA를 재현하고 확장했다. 공개 저장소로 남긴 baseline은 다음과 같다.</p>
+      <p>학위 연구 과정에서 얼굴 분석·3D 복원 분야의 여러 SOTA를 재현·확장. 공개 저장소로 남긴 baseline은 다음과 같음.</p>
       <div class="chips" style="margin-top:8px;">
         <span class="chip">ME-GraphAU (IJCAI 2022)</span>
         <span class="chip">EMOCA (CVPR 2022)</span>

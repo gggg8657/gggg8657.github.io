@@ -23,7 +23,7 @@
   <a class="back-link" href="/#projects">&larr; 프로젝트 목록</a>
   <p class="cat">KAERI 현직 · Vision + Agentic AI</p>
   <h1>지능형 CCTV 이상행위 탐지 시스템</h1>
-  <p class="sub">단순 녹화 중심 CCTV를 VAD → VLM → Agentic AI 3-Layer E2E 파이프라인으로 AX화해, 폐쇄망 고보안 환경에서 탐지부터 대응까지 자동화했다.</p>
+  <p class="sub">단순 녹화 중심 CCTV를 VAD → VLM → Agentic AI 3-Layer E2E 파이프라인으로 AX화해, 폐쇄망 고보안 환경에서 탐지부터 대응까지 자동화.</p>
   <div class="meta">
     <span><b>기간</b> 2025.02 ~ 2025.12</span>
     <span><b>소속</b> KAERI 인공지능응용연구실</span>
@@ -58,7 +58,7 @@
 
   <section>
     <div class="sec-head"><span class="sec-num">모델 선정</span><h2>온프레미스 VLM 비교</h2></div>
-    <p class="lede">폐쇄망에서 로컬로 돌릴 VLM을 고르기 위해 후보 모델들을 직접 추론하고 비교했다. 이해·생성 통합 방식, 생성 아키텍처(AR vs Rectified Flow), 모델 스케일, 문서·이미지 이해 특화를 기준으로 평가했다.</p>
+    <p class="lede">폐쇄망에서 로컬로 돌릴 VLM을 고르기 위해 후보 모델들을 직접 추론·비교. 이해·생성 통합 방식, 생성 아키텍처(AR vs Rectified Flow), 모델 스케일, 문서·이미지 이해 특화를 기준으로 평가.</p>
     <div class="chips" style="margin-bottom:14px;" data-reveal>
       <span class="chip">DeepSeek Janus</span>
       <span class="chip">Janus-Pro</span>
@@ -67,7 +67,7 @@
       <span class="chip metric-chip">채택: Qwen2.5-VL</span>
     </div>
     <div class="prose">
-      <p>VLM 후보 검토의 일환으로 DeepSeek Janus 계열을 비교 분석했고, CCTV 파이프라인에는 폐쇄망 온프레미스 적합성과 상황 설명 품질을 고려해 Qwen2.5-VL을 2차 검증 레이어로 채택했다.</p>
+      <p>VLM 후보 검토의 일환으로 DeepSeek Janus 계열을 비교 분석, CCTV 파이프라인에는 폐쇄망 온프레미스 적합성과 상황 설명 품질을 고려해 Qwen2.5-VL을 2차 검증 레이어로 채택.</p>
     </div>
     <div class="links">
       <a class="btn" href="https://github.com/gggg8657/DeepSeek_multimodal_understanding_comparison" target="_blank" rel="noopener">VLM 비교 스터디 &rarr;</a>
@@ -77,14 +77,14 @@
   <section>
     <div class="prose">
       <h3>문제</h3>
-      <p>KAERI 시설은 폐쇄망 고보안 환경이라 외부 API와 클라우드 모델을 쓸 수 없고, 시스템이 온프레미스에서 완전히 동작해야 했다. CCTV는 단순 녹화 중심이라 운영자가 화면을 직접 봐야 했고, 이상행동의 탐지와 분석, 대응이 분리된 수작업 프로세스였다. 단일 VAD 모델만으로는 오탐 최소화와 높은 감지율을 동시에 달성하기 어려웠다.</p>
+      <p>KAERI 시설은 폐쇄망 고보안 환경이라 외부 API와 클라우드 모델을 쓸 수 없고, 시스템이 온프레미스에서 완전히 동작해야 하는 제약. CCTV는 단순 녹화 중심이라 운영자가 화면을 직접 봐야 했고, 이상행동의 탐지와 분석, 대응이 분리된 수작업 프로세스. 단일 VAD 모델만으로는 오탐 최소화와 높은 감지율을 동시에 달성하기 어려운 한계.</p>
 
       <h3>접근</h3>
       <ul>
-        <li><strong>3-Layer E2E 파이프라인.</strong> VAD 감지 → VLM 상황 분석 → Agentic AI 대응 계획 수립 → 알림과 리포팅까지 하나의 자동 흐름으로 묶었다.</li>
-        <li><strong>다중 VAD 비교 + VLM 2차 검증.</strong> 단일 VAD의 오탐 한계를 인지해 여러 VAD 모델을 비교 통합하고, VLM의 의미적 분석을 2차 검증 레이어로 두어 오탐을 억제하고 설명 가능한 판단 근거를 남겼다.</li>
-        <li><strong>Agent Flow 비교 실험.</strong> Sequential, Hierarchical, Collaborative 세 가지 에이전트 플로우를 직접 비교해 도메인 제약에 맞는 자율 의사결정 구조를 선택했다.</li>
-        <li><strong>재현성.</strong> 입력 영상, 감지 스코어, VLM 분석, 대응 계획, 타임스탬프를 이벤트 단위 표준 포맷으로 저장하고 자동 리포트화했다.</li>
+        <li><strong>3-Layer E2E 파이프라인.</strong> VAD 감지 → VLM 상황 분석 → Agentic AI 대응 계획 수립 → 알림과 리포팅까지 하나의 자동 흐름으로 통합.</li>
+        <li><strong>다중 VAD 비교 + VLM 2차 검증.</strong> 단일 VAD의 오탐 한계를 인지해 여러 VAD 모델을 비교 통합하고, VLM의 의미적 분석을 2차 검증 레이어로 두어 오탐 억제 및 설명 가능한 판단 근거 확보.</li>
+        <li><strong>Agent Flow 비교 실험.</strong> Sequential, Hierarchical, Collaborative 세 가지 에이전트 플로우를 직접 비교해 도메인 제약에 맞는 자율 의사결정 구조 선택.</li>
+        <li><strong>재현성.</strong> 입력 영상, 감지 스코어, VLM 분석, 대응 계획, 타임스탬프를 이벤트 단위 표준 포맷으로 저장, 자동 리포트화.</li>
       </ul>
 
       <h3>결과</h3>
@@ -107,16 +107,16 @@
           <text x="96" y="174" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="var(--ink-faint)">False Positive Rate</text>
           <text x="12" y="84" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="var(--ink-faint)" transform="rotate(-90 12 84)">True Positive Rate</text>
         </svg>
-        <div class="roc-note"><b>AUC 82.4%</b><br>폐쇄망 온프레미스 환경에서 측정. 곡선은 대표 형태이며 AUC 값은 실측 공개 수치다.</div>
+        <div class="roc-note"><b>AUC 82.4%</b><br>폐쇄망 온프레미스 환경에서 측정. 곡선은 대표 형태이며 AUC 값은 실측 공개 수치.</div>
       </div>
     </div>
     <div class="prose">
-      <p>한국산업정보학회 추계학술발표회 3편과 한국원자력학회 춘계학술발표회 1편을 발표했고, "고수준 보안 환경에서의 이상 행동 탐지를 위한 지능형 CCTV 시스템 개발"로 <strong>한국산업정보학회 우수논문상</strong>을 받았다. 폐쇄망에서 VLM(Qwen2.5-VL)을 온프레미스로 운영해 클라우드 API 없이 완전 동작했고, KAERI 우수연구원상 수상에도 기여했다.</p>
+      <p>한국산업정보학회 추계학술발표회 3편과 한국원자력학회 춘계학술발표회 1편 발표, "고수준 보안 환경에서의 이상 행동 탐지를 위한 지능형 CCTV 시스템 개발"로 <strong>한국산업정보학회 우수논문상</strong> 수상. 폐쇄망에서 VLM(Qwen2.5-VL)을 온프레미스로 운영해 클라우드 API 없이 완전 동작, KAERI 우수연구원상 수상에도 기여.</p>
 
       <h3>기술</h3>
       <p>VAD(MNAD, MULDE, MemAE, STAE, STEAD, Anomalib) · VLM(Qwen2.5-VL 로컬) · Agentic Flow 3종 · PyQt 실시간 대시보드 · FastAPI, WebSocket, Docker · NHN Cloud 광주 AICA 서버.</p>
     </div>
-    <div class="arch-note"><span class="chip conf">대외비</span><span>보안 특화 데이터셋과 어노테이션 내부 규격, 폐쇄망 운영 세부, KAERI_CCTV 비공개 레포 구현은 공개하지 않는다.</span></div>
+    <div class="arch-note"><span class="chip conf">대외비</span><span>보안 특화 데이터셋과 어노테이션 내부 규격, 폐쇄망 운영 세부, KAERI_CCTV 비공개 레포 구현은 공개하지 않음.</span></div>
   </section>
 
 </main>

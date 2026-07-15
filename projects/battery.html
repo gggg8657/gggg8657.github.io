@@ -23,7 +23,7 @@
   <a class="back-link" href="/#projects">&larr; 프로젝트 목록</a>
   <p class="cat">사이드 프로젝트 · Physics-Informed ML</p>
   <h1>LFP 배터리 수명 예측</h1>
-  <p class="sub">PyBaMM 전기화학 물리 시뮬레이션과 신경망 대체 학습을 결합해, 초기 사이클 데이터만으로 배터리 수명과 열화를 예측하는 Physics-Informed ML 파이프라인이다.</p>
+  <p class="sub">PyBaMM 전기화학 물리 시뮬레이션과 신경망 대체 학습을 결합해, 초기 사이클 데이터만으로 배터리 수명과 열화를 예측하는 Physics-Informed ML 파이프라인.</p>
   <div class="meta">
     <span><b>구분</b> 사이드 프로젝트 (KAERI 정규 업무 아님)</span>
     <span><b>상태</b> 관련 논문 진행 중</span>
@@ -61,17 +61,17 @@
         <div class="ps-tag">문제 · 겹겹의 난제</div>
         <h4>LFP 수명은 왜 예측이 어려운가</h4>
         <ul>
-          <li><strong>Knee-point.</strong> 전압이 평탄해 전압만으론 SOH를 못 읽고, 용량이 수백 사이클 유지되다 급락한다. 동일 사양 셀도 꺾이는 시점이 제각각.</li>
+          <li><strong>Knee-point.</strong> 전압이 평탄해 전압만으론 SOH를 못 읽고, 용량이 수백 사이클 유지되다 급락. 동일 사양 셀도 꺾이는 시점이 제각각.</li>
           <li><strong>전이 실패.</strong> 데이터 기반 특징은 다른 충전 프로토콜로 옮기면 붕괴(직접 전이 시 80%+ MAPE). 한 배치 안에서만 낮은 오차.</li>
-          <li><strong>물리의 한계.</strong> PyBaMM은 knee를 직접 재현하지 못하고 셀당 ~5분으로 느리다.</li>
-          <li><strong>순환오류.</strong> 그래서 셀별로 역산해 학습데이터를 만들면 테스트 셀이 학습 분포를 오염시키는 자기참조에 빠진다.</li>
+          <li><strong>물리의 한계.</strong> PyBaMM은 knee를 직접 재현하지 못하고 셀당 ~5분으로 느림.</li>
+          <li><strong>순환오류.</strong> 그래서 셀별로 역산해 학습데이터를 만들면 테스트 셀이 학습 분포를 오염시키는 자기참조에 빠짐.</li>
         </ul>
       </div>
       <div class="ps-arrow">&rarr;</div>
       <div class="ps-panel solution">
         <div class="ps-tag">해결 · 분포 경계 + 연산자 학습</div>
         <h4>외부 분포로 경계를 학습하고 궤적을 직접 예측</h4>
-        <p>개별 셀 fit 대신 공개 데이터의 분포로 물리 파라미터의 유효 경계를 학습하고, 사이클→열화 연산자(DeepONet)로 용량 궤적을 직접 예측한다. 분포 밖 입력은 외삽하지 않고 flag(abstain)해 조용한 오탐을 막는다.</p>
+        <p>개별 셀 fit 대신 공개 데이터의 분포로 물리 파라미터의 유효 경계를 학습하고, 사이클→열화 연산자(DeepONet)로 용량 궤적을 직접 예측. 분포 밖 입력은 외삽하지 않고 flag(abstain)해 조용한 오탐을 차단.</p>
       </div>
     </div>
   </section>
@@ -79,18 +79,18 @@
   <section>
     <div class="prose">
       <h3>문제</h3>
-      <p>LFP는 저비용과 안정성으로 ESS·EV에 널리 쓰이지만, 수명(RUL) 조기 예측은 미해결 난제다. 전압이 평탄해 전압만으론 상태를 읽기 어렵고, 용량이 수백 사이클 유지되다 급격히 꺾이는 knee-point의 시점이 동일 사양 셀에서도 크게 달라진다. 기존 데이터 기반 특징은 충전 프로토콜이 바뀌면 전이에 실패하고, 물리 시뮬레이터는 knee를 재현하지 못한 채 셀당 수 분이 걸린다. 초기 사이클만으로 신뢰성 있게 예측하면 2차전지 재사용·보증 리스크·충전 스케줄링에 직접적 가치가 있다.</p>
+      <p>LFP는 저비용과 안정성으로 ESS·EV에 널리 쓰이지만, 수명(RUL) 조기 예측은 미해결 난제. 전압이 평탄해 전압만으론 상태를 읽기 어렵고, 용량이 수백 사이클 유지되다 급격히 꺾이는 knee-point의 시점이 동일 사양 셀에서도 크게 상이. 기존 데이터 기반 특징은 충전 프로토콜이 바뀌면 전이에 실패하고, 물리 시뮬레이터는 knee를 재현하지 못한 채 셀당 수 분 소요. 초기 사이클만으로 신뢰성 있게 예측하면 2차전지 재사용·보증 리스크·충전 스케줄링에 직접적 가치 존재.</p>
 
       <h3>접근</h3>
       <ul>
-        <li><strong>물리 + 데이터 결합.</strong> PyBaMM SPM 전기화학 모델을 기반으로 삼고, 무거운 시뮬레이션을 DeepONet(Operator Learning) 신경망으로 대체해 추론을 가속했다.</li>
-        <li><strong>초기 사이클 기반 예측.</strong> 초기 사이클의 특징만으로 수명(EOL)과 열화 궤적을 예측하도록 구성했다.</li>
-        <li><strong>교차 데이터셋 검증.</strong> TRI, HUST, CALCE 공개 데이터셋에서 셀 분리(cell-disjoint) 방식으로 평가해 과적합을 통제했다.</li>
-        <li><strong>도구화.</strong> 실험 프로토콜 생성을 드래그앤드롭 GUI 도구로 제품화해 공개 저장소로 배포했다.</li>
+        <li><strong>물리 + 데이터 결합.</strong> PyBaMM SPM 전기화학 모델을 기반으로 삼고, 무거운 시뮬레이션을 DeepONet(Operator Learning) 신경망으로 대체해 추론 가속.</li>
+        <li><strong>초기 사이클 기반 예측.</strong> 초기 사이클의 특징만으로 수명(EOL)과 열화 궤적을 예측하도록 구성.</li>
+        <li><strong>교차 데이터셋 검증.</strong> TRI, HUST, CALCE 공개 데이터셋에서 셀 분리(cell-disjoint) 방식으로 평가해 과적합 통제.</li>
+        <li><strong>도구화.</strong> 실험 프로토콜 생성을 드래그앤드롭 GUI 도구로 제품화해 공개 저장소로 배포.</li>
       </ul>
 
       <h3>결과</h3>
-      <p>초기 사이클만으로 셀 분리(cell-disjoint) 조건에서 수명을 예측하고, 물리 시뮬레이션 대비 추론을 대폭 가속했다. 공개 데이터셋(TRI·HUST·CALCE) 기준 결과는 다음과 같다.</p>
+      <p>초기 사이클만으로 셀 분리(cell-disjoint) 조건에서 수명을 예측하고, 물리 시뮬레이션 대비 추론을 대폭 가속. 공개 데이터셋(TRI·HUST·CALCE) 기준 결과는 다음과 같음.</p>
     </div>
     <div class="result-grid">
       <div class="result" data-reveal><div class="rv">6.45<small>%</small></div><div class="rk">EOL MAPE (cell-disjoint)</div></div>
@@ -121,7 +121,7 @@
         <span class="lg"><span class="swatch" style="background:var(--ink-faint)"></span>예측 (DeepONet)</span>
         <span class="lg"><span class="swatch" style="background:var(--signal)"></span>EOL 임계</span>
       </div>
-      <p class="chart-cap">곡선은 대표 형태(illustrative). 예측이 실제 용량 궤적을 근접 추종하며, 초기 사이클 입력만으로 EOL을 맞힌다. 정량 오차는 위 지표 참고.</p>
+      <p class="chart-cap">곡선은 대표 형태(illustrative). 예측이 실제 용량 궤적을 근접 추종하며, 초기 사이클 입력만으로 EOL 예측. 정량 오차는 위 지표 참고.</p>
     </div>
     <div class="chart" data-reveal>
       <p class="chart-title">EOL 예측 오차 — 낮을수록 좋음</p>
@@ -135,7 +135,7 @@
       <h3>기술</h3>
       <p>PyBaMM · DeepONet (Operator Learning) · PyTorch · Physics-Informed ML · GUI 도구 배포.</p>
     </div>
-    <div class="arch-note"><span>결과는 준비 중인 원고의 수치이며 공개 데이터셋(TRI·HUST·CALCE) 기준이다. 실험 프로토콜 생성 도구는 공개 저장소에서 확인할 수 있다.</span></div>
+    <div class="arch-note"><span>결과는 준비 중인 원고의 수치이며 공개 데이터셋(TRI·HUST·CALCE) 기준. 실험 프로토콜 생성 도구는 공개 저장소에서 확인 가능.</span></div>
   </section>
 
 </main>

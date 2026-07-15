@@ -23,7 +23,7 @@
   <a class="back-link" href="/#projects">&larr; 프로젝트 목록</a>
   <p class="cat">부트캠프 · SKT FLY AI · Computer Vision</p>
   <h1>poopy_ai — 반려견 대변 분석 AI</h1>
-  <p class="sub">반려견 대변 사진 한 장에서 배경을 제거하고, 형태(Dog Fecal Chart 7단계)와 색을 자동으로 읽어 건강 신호를 알려주는 비전 파이프라인이다.</p>
+  <p class="sub">반려견 대변 사진 한 장에서 배경을 제거하고, 형태(Dog Fecal Chart 7단계)와 색을 자동으로 읽어 건강 신호를 알려주는 비전 파이프라인.</p>
   <div class="meta">
     <span><b>기간</b> 2024.06 ~ 2024.08</span>
     <span><b>구분</b> SKT FLY AI Challenge 5기 (부트캠프, 팀)</span>
@@ -38,16 +38,16 @@
 
   <section>
     <div class="sec-head"><span class="sec-num">파이프라인</span><h2>1. Promptless-SAM 분할</h2></div>
-    <p class="lede">SAM(Segment Anything, Meta)의 프롬프트 인코더와 마스크 디코더를 떼어내고, 커스텀 디코더(4×Conv2d-Transpose · LayerNorm2D · ReLU/Dropout)로 대체해 <strong>프롬프트 없이</strong> 대변 영역을 바로 분할한다.</p>
+    <p class="lede">SAM(Segment Anything, Meta)의 프롬프트 인코더와 마스크 디코더를 떼어내고, 커스텀 디코더(4×Conv2d-Transpose · LayerNorm2D · ReLU/Dropout)로 대체해 <strong>프롬프트 없이</strong> 대변 영역을 바로 분할.</p>
     <figure class="proj-figure" data-reveal>
       <img src="/projects/assets/poopy/arch-sam.png" alt="Promptless-SAM 분할 아키텍처: SAM 이미지 인코더 + 커스텀 디코더, 프롬프트/마스크 디코더 제거">
-      <figcaption>입력 사진 → SAM 이미지 인코더 → 커스텀 디코더 → 분할 마스크. 표준 SAM의 프롬프트 기반 경로(points/box/text)는 제거했다.</figcaption>
+      <figcaption>입력 사진 → SAM 이미지 인코더 → 커스텀 디코더 → 분할 마스크. 표준 SAM의 프롬프트 기반 경로(points/box/text)는 제거.</figcaption>
     </figure>
   </section>
 
   <section>
     <div class="sec-head"><span class="sec-num">파이프라인</span><h2>2. 분류 + 색상 양자화</h2></div>
-    <p class="lede">분할된 마스크 영역을 두 갈래로 분석한다. Res2Net으로 Dog Fecal Chart <strong>7단계 형태</strong>를 분류하고, K-means(n=5)로 <strong>대표 색 5개와 비율</strong>을 뽑아 색 신호를 정량화한다.</p>
+    <p class="lede">분할된 마스크 영역을 두 갈래로 분석. Res2Net으로 Dog Fecal Chart <strong>7단계 형태</strong>를 분류하고, K-means(n=5)로 <strong>대표 색 5개와 비율</strong>을 뽑아 색 신호를 정량화.</p>
     <figure class="proj-figure" data-reveal>
       <img src="/projects/assets/poopy/arch-classify.png" alt="분류 및 색상 양자화: Res2Net 7단계 분류 + K-means(n=5) 색상 팔레트 출력">
       <figcaption>마스크 이미지 → Res2Net 형태 분류(Type 1~7) + K-means 색상 양자화 → 형태 + 색상 팔레트 비율 출력.</figcaption>
@@ -57,23 +57,23 @@
   <section>
     <div class="prose">
       <h3>문제</h3>
-      <p>반려견 대변의 형태와 색은 건강의 신호지만, 보호자가 사진만으로 일관되게 판단하기 어렵다. 배경·조명이 제각각인 실사진에서 대변 영역만 안정적으로 떼어내고, 형태와 색을 표준 기준으로 읽어주는 자동화가 필요했다.</p>
+      <p>반려견 대변의 형태와 색은 건강의 신호지만, 보호자가 사진만으로 일관되게 판단하기 어려움. 배경·조명이 제각각인 실사진에서 대변 영역만 안정적으로 떼어내고, 형태와 색을 표준 기준으로 읽어주는 자동화가 필요.</p>
 
       <h3>접근</h3>
       <ul>
-        <li><strong>Promptless 분할.</strong> SAM은 강력하지만 point/box/text 프롬프트가 필요하다. 프롬프트 인코더·마스크 디코더를 커스텀 디코더로 대체해, 사용자 입력 없이 대변 마스크를 바로 예측하도록 만들었다.</li>
+        <li><strong>Promptless 분할.</strong> SAM은 강력하지만 point/box/text 프롬프트가 필요. 프롬프트 인코더·마스크 디코더를 커스텀 디코더로 대체해, 사용자 입력 없이 대변 마스크를 바로 예측하도록 구현.</li>
         <li><strong>형태 분류.</strong> 분할된 영역을 Res2Net으로 Dog Fecal Chart 7단계로 분류.</li>
         <li><strong>색상 정량화.</strong> K-means(n=5)로 대표 색과 비율을 추출해 색 기반 신호를 수치화.</li>
         <li><strong>배포.</strong> Docker 이미지로 패키징해 GPU 컨테이너에서 서비스로 실행.</li>
       </ul>
 
       <h3>결과</h3>
-      <p>사진 한 장에서 배경 제거 → 형태 분류 → 색상 팔레트까지 이어지는 엔드투엔드 모듈을 완성해 SKT FLY AI Challenge 5기 최종 발표로 마무리했다.</p>
+      <p>사진 한 장에서 배경 제거 → 형태 분류 → 색상 팔레트까지 이어지는 엔드투엔드 모듈을 완성해 SKT FLY AI Challenge 5기 최종 발표로 마무리.</p>
 
       <h3>기술</h3>
       <p>SAM(Segment Anything) · Res2Net · K-means · PyTorch · Docker.</p>
     </div>
-    <div class="arch-note"><span>SKT FLY AI Challenge 5기 팀 프로젝트다. SAM은 Meta의 모델이며, 본 프로젝트는 그 위에 프롬프트리스 커스텀 디코더와 분류·색상 분석을 얹었다. 아키텍처 도식은 팀 산출물이다.</span></div>
+    <div class="arch-note"><span>SKT FLY AI Challenge 5기 팀 프로젝트. SAM은 Meta의 모델이며, 본 프로젝트는 그 위에 프롬프트리스 커스텀 디코더와 분류·색상 분석을 추가. 아키텍처 도식은 팀 산출물.</span></div>
   </section>
 
 </main>
