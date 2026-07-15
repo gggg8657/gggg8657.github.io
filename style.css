@@ -175,6 +175,11 @@ h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(24px, 4vw, 33
 @media (max-width: 620px) { .talk { grid-template-columns: 1fr; gap: 3px; } }
 
 /* ---- Timeline ---- */
+.phase-title { font-family: var(--mono); font-size: 13px; letter-spacing: 0.03em; color: var(--accent); margin: 32px 0 2px; }
+.phase-title .yr { color: var(--ink-faint); margin-left: 8px; }
+.phase:first-of-type .phase-title { margin-top: 22px; }
+.trk { display: inline-block; font-family: var(--mono); font-size: 10.5px; padding: 2px 8px; border-radius: 5px; background: var(--surface-2); color: var(--ink-soft); margin: 3px 4px 0 0; }
+.edu-note { font-family: var(--mono); font-size: 12.5px; color: var(--ink-faint); margin-top: 24px; line-height: 1.6; }
 .timeline { display: flex; flex-direction: column; }
 .row { display: grid; grid-template-columns: 160px 1fr; gap: 24px; padding: 20px 0; border-top: 1px solid var(--line); }
 .row:first-child { border-top: none; }
