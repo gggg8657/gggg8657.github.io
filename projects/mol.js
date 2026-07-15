@@ -85,13 +85,20 @@
   function move(e) {
     if (!dragging) return;
     var t = e.touches ? e.touches[0] : e;
-    rotY += (t.clientX - lx) * 0.01; rotX += (t.clientY - ly) * 0.01;
-    lx = t.clientX; ly = t.clientY; if (e.cancelable) e.preventDefault();
+    var dx = t.clientX - lx, dy = t.clientY - ly;
+    if (e.touches) {
+      if (Math.abs(dy) > Math.abs(dx)) { dragging = false; return; } // 세로 드래그 → 페이지 스크롤 허용
+      rotY += dx * 0.01; lx = t.clientX; ly = t.clientY;
+      if (e.cancelable) e.preventDefault();
+    } else {
+      rotY += dx * 0.01; rotX += dy * 0.01; lx = t.clientX; ly = t.clientY;
+    }
   }
   function up() { dragging = false; }
   canvas.addEventListener('mousedown', down); window.addEventListener('mousemove', move); window.addEventListener('mouseup', up);
   canvas.addEventListener('touchstart', down, { passive: true }); canvas.addEventListener('touchmove', move, { passive: false }); canvas.addEventListener('touchend', up);
   window.addEventListener('resize', function () { resize(); if (reduce) render(); });
+  if (window.ResizeObserver) new ResizeObserver(function () { resize(); if (reduce) render(); }).observe(canvas);
 
   resize();
   if (reduce) { render(); } else { requestAnimationFrame(tick); }

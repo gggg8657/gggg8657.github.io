@@ -87,8 +87,10 @@ if (mount) {
   controls.enablePan = false; controls.minDistance = 1.9; controls.maxDistance = 6;
   controls.autoRotate = !reduce; controls.autoRotateSpeed = 1.1;
 
-  function resize() { const w = mount.clientWidth, h = mount.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h || 1; camera.updateProjectionMatrix(); }
-  window.addEventListener('resize', resize); resize();
+  function resize() { const w = mount.clientWidth, h = mount.clientHeight; if (!w || !h) return; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+  window.addEventListener('resize', resize);
+  if (window.ResizeObserver) new ResizeObserver(resize).observe(mount);
+  resize();
   (function loop() { requestAnimationFrame(loop); controls.update(); renderer.render(scene, camera); })();
 
   // default: sample 4, textured

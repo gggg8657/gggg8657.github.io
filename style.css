@@ -266,7 +266,7 @@ blockquote.motto { font-family: var(--serif); font-size: clamp(20px, 3vw, 27px);
 .face-thumb:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 @media (max-width: 640px) { .face-gallery { grid-template-columns: 1fr; } .face-thumbs { flex-direction: row; max-height: none; overflow-x: auto; } }
 .face3d-wrap { display: flex; flex-direction: column; gap: 12px; }
-#face3d { width: 100%; height: 400px; border-radius: 14px; border: 1px solid var(--line); box-shadow: var(--shadow); background: radial-gradient(120% 100% at 50% 0%, var(--surface), var(--surface-2)); cursor: grab; touch-action: none; }
+#face3d { width: 100%; height: clamp(260px, 64vw, 400px); border-radius: 14px; border: 1px solid var(--line); box-shadow: var(--shadow); background: radial-gradient(120% 100% at 50% 0%, var(--surface), var(--surface-2)); cursor: grab; touch-action: pan-y; }
 #face3d:active { cursor: grabbing; }
 .face-toggle { display: flex; gap: 8px; }
 .face-toggle button { font-family: var(--mono); font-size: 12.5px; padding: 7px 15px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-soft); cursor: pointer; transition: border-color .15s, color .15s, background .15s; }
@@ -336,7 +336,7 @@ blockquote.motto { font-family: var(--serif); font-size: clamp(20px, 3vw, 27px);
 
 /* ---- 3D molecule viewer ---- */
 .mol-wrap { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
-#mol { width: min(340px, 100%); height: 300px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; cursor: grab; touch-action: none; box-shadow: var(--shadow); }
+#mol { width: min(340px, 100%); height: clamp(240px, 62vw, 300px); background: var(--surface); border: 1px solid var(--line); border-radius: 14px; cursor: grab; touch-action: pan-y; box-shadow: var(--shadow); }
 #mol:active { cursor: grabbing; }
 .mol-legend { font-family: var(--mono); font-size: 12.5px; color: var(--ink-soft); display: flex; flex-direction: column; gap: 6px; }
 .mol-legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; vertical-align: middle; }
