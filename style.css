@@ -1,7 +1,10 @@
 /* Kim Dongju — AI Scientist Portfolio · shared stylesheet */
 
+/* 모던 한글 조합: Wanted Sans(디스플레이) + Pretendard(본문) + JetBrains Mono(라벨) — 전부 한글 네이티브/슬라이스 로드 */
 /* ponytail: @import는 로딩 1-RTT 손해. 체감되면 각 html <head>로 <link rel="preconnect">+<link>로 승격 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+@import url('https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
   --bg: #F6F8FA;
@@ -17,9 +20,9 @@
   --signal: #B67A1E;
   --signal-soft: #B67A1E1A;
   --good: #2F8F5B;
-  --serif: "Noto Serif KR", "Iowan Old Style", "Charter", "Palatino Linotype", Palatino, Georgia, serif;
-  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  --serif: "Wanted Sans Variable", "Pretendard Variable", system-ui, -apple-system, sans-serif; /* display role */
+  --sans: "Pretendard Variable", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --mono: "JetBrains Mono", "Pretendard Variable", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --maxw: 960px;
   --shadow: 0 1px 2px rgba(20,35,48,.04), 0 8px 24px rgba(20,35,48,.06);
   /* glass + glow — light: frosted white + colored halo shadow (glow는 발광 대신 후광) */
@@ -123,7 +126,7 @@ a { color: var(--accent); }
   opacity: .9;
 }
 .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 0 0 18px; }
-h1.name { font-family: var(--serif); font-weight: 600; font-size: clamp(42px, 8.5vw, 76px); line-height: 1; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
+h1.name { font-family: var(--serif); font-weight: 800; font-size: clamp(42px, 8.5vw, 76px); line-height: 1; letter-spacing: -0.03em; margin: 0; text-wrap: balance; }
 .name .en { display: block; font-family: var(--sans); font-size: 0.4em; color: var(--ink-faint); font-weight: 500; letter-spacing: 0.02em; margin-top: 14px; }
 .role { margin: 26px 0 0; font-size: 18px; color: var(--ink-soft); }
 .role strong { color: var(--ink); font-weight: 600; }
@@ -148,7 +151,7 @@ h1.name { font-family: var(--serif); font-weight: 600; font-size: clamp(42px, 8.
 section { padding: 54px 0; border-bottom: 1px solid var(--line); }
 .sec-head { display: flex; align-items: baseline; gap: 14px; margin: 0 0 8px; }
 .sec-num { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.05em; }
-h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(24px, 4vw, 33px); letter-spacing: -0.01em; margin: 0; }
+h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(24px, 4vw, 33px); letter-spacing: -0.02em; margin: 0; }
 .lede { color: var(--ink-soft); max-width: 68ch; margin: 14px 0 28px; }
 
 /* ---- Project cards (clickable) ---- */
@@ -270,7 +273,7 @@ blockquote.motto { font-family: var(--serif); font-size: clamp(20px, 3vw, 27px);
 .back-link { font-family: var(--mono); font-size: 12.5px; text-decoration: none; color: var(--ink-soft); display: inline-flex; gap: 6px; align-items: center; }
 .back-link:hover { color: var(--accent); }
 .detail-hero .cat { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin: 26px 0 12px; }
-.detail-hero h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(30px, 5.5vw, 46px); line-height: 1.05; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
+.detail-hero h1 { font-family: var(--serif); font-weight: 800; font-size: clamp(30px, 5.5vw, 46px); line-height: 1.05; letter-spacing: -0.03em; margin: 0; text-wrap: balance; }
 .detail-hero .sub { font-size: 18px; color: var(--ink-soft); margin: 18px 0 0; max-width: 62ch; }
 .detail-hero .meta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 22px; font-family: var(--mono); font-size: 12.5px; color: var(--ink-faint); }
 .detail-hero .meta b { color: var(--ink-soft); font-weight: 500; }
