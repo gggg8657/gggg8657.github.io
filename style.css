@@ -22,6 +22,13 @@
   --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
   --maxw: 960px;
   --shadow: 0 1px 2px rgba(20,35,48,.04), 0 8px 24px rgba(20,35,48,.06);
+  /* glass + glow — light: frosted white + colored halo shadow (glow는 발광 대신 후광) */
+  --glass-bg: rgba(255,255,255,.58);
+  --glass-border: rgba(20,35,48,.09);
+  --glass-blur: 12px;
+  --glass-sat: 1.3;
+  --glow-accent: 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent), 0 6px 22px color-mix(in srgb, var(--accent) 16%, transparent);
+  --glow-signal: 0 0 0 1px color-mix(in srgb, var(--signal) 30%, transparent), 0 6px 22px color-mix(in srgb, var(--signal) 18%, transparent);
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -31,6 +38,13 @@
     --signal: #D6A24A; --signal-soft: #D6A24A1F;
     --good: #46C97E;
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    /* dark: 반투명 유리 + 진짜 발광 블룸 */
+    --glass-bg: rgba(22,28,34,.52);
+    --glass-border: rgba(255,255,255,.09);
+    --glass-blur: 14px;
+    --glass-sat: 1.25;
+    --glow-accent: 0 0 0 1px color-mix(in srgb, var(--accent) 32%, transparent), 0 0 26px color-mix(in srgb, var(--accent) 34%, transparent);
+    --glow-signal: 0 0 0 1px color-mix(in srgb, var(--signal) 40%, transparent), 0 0 26px color-mix(in srgb, var(--signal) 38%, transparent);
   }
 }
 :root[data-theme="dark"] {
@@ -39,6 +53,10 @@
   --accent: #35B8AD; --accent-2: #5CD3C8; --accent-soft: #35B8AD1F;
   --signal: #D6A24A; --signal-soft: #D6A24A1F;
   --good: #46C97E;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+  --glass-bg: rgba(22,28,34,.52); --glass-border: rgba(255,255,255,.09); --glass-blur: 14px; --glass-sat: 1.25;
+  --glow-accent: 0 0 0 1px color-mix(in srgb, var(--accent) 32%, transparent), 0 0 26px color-mix(in srgb, var(--accent) 34%, transparent);
+  --glow-signal: 0 0 0 1px color-mix(in srgb, var(--signal) 40%, transparent), 0 0 26px color-mix(in srgb, var(--signal) 38%, transparent);
 }
 :root[data-theme="light"] {
   --bg: #F6F8FA; --surface: #FFFFFF; --surface-2: #EEF2F5; --line: #DCE3E9;
@@ -46,6 +64,10 @@
   --accent: #0E8F86; --accent-2: #0B6E67; --accent-soft: #0E8F8618;
   --signal: #B67A1E; --signal-soft: #B67A1E1A;
   --good: #2F8F5B;
+  --shadow: 0 1px 2px rgba(20,35,48,.04), 0 8px 24px rgba(20,35,48,.06);
+  --glass-bg: rgba(255,255,255,.58); --glass-border: rgba(20,35,48,.09); --glass-blur: 12px; --glass-sat: 1.3;
+  --glow-accent: 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent), 0 6px 22px color-mix(in srgb, var(--accent) 16%, transparent);
+  --glow-signal: 0 0 0 1px color-mix(in srgb, var(--signal) 30%, transparent), 0 6px 22px color-mix(in srgb, var(--signal) 18%, transparent);
 }
 
 * { box-sizing: border-box; }
@@ -53,6 +75,13 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0; background: var(--bg); color: var(--ink);
   font-family: var(--sans); line-height: 1.6; -webkit-font-smoothing: antialiased;
+}
+/* 앰비언트 배경 — 유리 표면이 굴절할 은은한 색 블롭 (양 테마 공통) */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(46% 38% at 84% -2%, var(--accent-soft), transparent 70%),
+    radial-gradient(42% 40% at -4% 102%, var(--signal-soft), transparent 70%);
 }
 a { color: var(--accent); }
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
@@ -72,7 +101,17 @@ a { color: var(--accent); }
 .topbar nav { display: flex; gap: 20px; }
 .topbar nav a { font-family: var(--mono); font-size: 12.5px; text-decoration: none; color: var(--ink-soft); letter-spacing: 0.02em; }
 .topbar nav a:hover { color: var(--accent); }
-@media (max-width: 560px) { .topbar nav { display: none; } }
+.topbar nav { align-items: center; }
+.theme-toggle {
+  font-family: var(--sans); font-size: 15px; line-height: 1; cursor: pointer; padding: 0;
+  width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink-soft);
+  transition: border-color .15s, color .15s, transform .15s;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* 모바일: 앵커 링크만 숨기고 테마 토글은 유지 */
+@media (max-width: 560px) { .topbar nav a { display: none; } }
 
 /* ---- Hero ---- */
 .hero { position: relative; padding: 96px 0 56px; overflow: hidden; }
@@ -120,19 +159,19 @@ h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(24px, 4vw, 33
   text-decoration: none; color: inherit; box-shadow: var(--shadow);
   transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
 }
-.proj-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 6px 16px rgba(14,143,134,.14), 0 16px 40px rgba(20,35,48,.10); }
+.proj-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: var(--glow-accent), var(--shadow); }
 .proj-card .tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
 .proj-card h3 { font-size: 19px; margin: 0; font-weight: 650; color: var(--ink); letter-spacing: -0.01em; }
 .proj-card p { margin: 0; font-size: 14.5px; color: var(--ink-soft); flex: 1; }
 .proj-card .card-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
 .proj-card .go { font-family: var(--mono); font-size: 13px; color: var(--accent); transition: transform .18s ease; }
 .proj-card:hover .go { transform: translateX(4px); }
-/* 진행중 flagship: 조용한 금색 테두리 (펄스 없음 — 시그니처는 Figure 하나로 집중) */
-.proj-card.gold { border-color: var(--signal); box-shadow: inset 0 0 0 1px var(--signal), var(--shadow); }
+/* 진행중 flagship: 금색 글로우 (다크=발광 / 라이트=후광, 펄스 없음) */
+.proj-card.gold { border-color: var(--signal); box-shadow: var(--glow-signal), var(--shadow); }
 /* flagship (SSTR2) 상세 히어로: 단색 악센트 언더라인 */
 .detail-hero.flagship h1 { display: inline-block; }
 .detail-hero.flagship h1::after { content: ""; display: block; height: 4px; width: 72px; margin-top: 14px; border-radius: 4px; background: var(--accent); }
-.proj-card.gold:hover { border-color: var(--signal); box-shadow: inset 0 0 0 1px var(--signal), 0 6px 18px color-mix(in srgb, var(--signal) 24%, transparent), 0 16px 40px rgba(20,35,48,.10); }
+.proj-card.gold:hover { transform: translateY(-3px); border-color: var(--signal); box-shadow: var(--glow-signal), var(--shadow); }
 .proj-card.gold .go { color: var(--signal); }
 .chip.now { background: var(--signal-soft); color: var(--signal); font-weight: 600; }
 
@@ -393,6 +432,20 @@ footer .note .chip { flex: none; }
 footer .foot-links { display: flex; gap: 16px; margin-top: 18px; }
 footer .foot-links a { font-family: var(--mono); font-size: 12.5px; text-decoration: none; color: var(--ink-soft); }
 footer .foot-links a:hover { color: var(--accent); }
+
+/* ---- Glassmorphism (카드 표면 + 시그니처 Figure) ---- */
+.proj-card, .research-item, .stack-group, .sst-mut {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: saturate(var(--glass-sat)) blur(var(--glass-blur));
+  backdrop-filter: saturate(var(--glass-sat)) blur(var(--glass-blur));
+  border-color: var(--glass-border);
+}
+/* backdrop-filter 미지원 브라우저: 불투명 폴백 */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .proj-card, .research-item, .stack-group, .sst-mut { background: var(--surface); }
+}
+/* Figure는 어둠 속 발광 중심 — 은은한 accent 글로우 */
+.signature-fig .sst-mut { box-shadow: var(--glow-accent), var(--shadow); }
 
 /* ---- Motion ---- */
 [data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
