@@ -79,12 +79,17 @@ body {
   margin: 0; background: var(--bg); color: var(--ink);
   font-family: var(--sans); line-height: 1.6; -webkit-font-smoothing: antialiased;
 }
-/* 앰비언트 배경 — 유리 표면이 굴절할 은은한 색 블롭 (양 테마 공통) */
+/* 앰비언트 배경 — 유리 표면이 굴절할 은은한 색 블롭, 천천히 흐르는 오로라 */
 body::before {
-  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  content: ""; position: fixed; inset: -12%; z-index: -1; pointer-events: none;
   background:
     radial-gradient(46% 38% at 84% -2%, var(--accent-soft), transparent 70%),
     radial-gradient(42% 40% at -4% 102%, var(--signal-soft), transparent 70%);
+  animation: aurora 26s ease-in-out infinite;
+}
+@keyframes aurora {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-3%, 2.5%, 0) scale(1.12); }
 }
 a { color: var(--accent); }
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
@@ -162,7 +167,16 @@ h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(24px, 4vw, 33
   text-decoration: none; color: inherit; box-shadow: var(--shadow);
   transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
 }
-.proj-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: var(--glow-accent), var(--shadow); }
+.proj-card { overflow: hidden; }
+/* 유리 광택 스윕 — hover 시 사선 하이라이트가 카드를 훑고 지나감 */
+.proj-card::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 34%, color-mix(in srgb, var(--ink) 10%, transparent) 48%, transparent 62%);
+  transform: translateX(-130%); transition: transform .7s cubic-bezier(.2,.7,.2,1);
+}
+.proj-card:hover::before { transform: translateX(130%); }
+.proj-card > * { position: relative; z-index: 1; }
+.proj-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--glow-accent), var(--shadow); }
 .proj-card .tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
 .proj-card h3 { font-size: 19px; margin: 0; font-weight: 650; color: var(--ink); letter-spacing: -0.01em; }
 .proj-card p { margin: 0; font-size: 14.5px; color: var(--ink-soft); flex: 1; }
@@ -447,12 +461,16 @@ footer .foot-links a:hover { color: var(--accent); }
 @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
   .proj-card, .research-item, .stack-group, .sst-mut { background: var(--surface); }
 }
-/* Figure는 어둠 속 발광 중심 — 은은한 accent 글로우 */
-.signature-fig .sst-mut { box-shadow: var(--glow-accent), var(--shadow); }
+/* Figure는 어둠 속 발광 중심 — accent 글로우 + 느린 숨쉬기 */
+.signature-fig .sst-mut { box-shadow: var(--glow-accent), var(--shadow); animation: figBreath 5s ease-in-out infinite; }
+@keyframes figBreath {
+  0%, 100% { filter: drop-shadow(0 0 0 transparent); }
+  50% { filter: drop-shadow(0 0 15px color-mix(in srgb, var(--accent) 30%, transparent)); }
+}
 
 /* ---- Motion ---- */
-[data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
-[data-reveal].in { opacity: 1; transform: none; }
+[data-reveal] { opacity: 0; transform: translateY(20px) scale(.985); filter: blur(7px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1), filter .6s ease; transition-delay: var(--rd, 0ms); }
+[data-reveal].in { opacity: 1; transform: none; filter: none; }
 .hero .eyebrow, .hero h1, .hero .role, .hero .thesis, .hero .contacts, .hero .metrics { animation: rise .7s cubic-bezier(.2,.7,.2,1) backwards; }
 .hero h1 { animation-delay: .05s; }
 .hero .role { animation-delay: .12s; }
@@ -468,6 +486,6 @@ footer .foot-links a:hover { color: var(--accent); }
 }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
-  [data-reveal] { opacity: 1; transform: none; }
+  [data-reveal] { opacity: 1; transform: none; filter: none; }
   html { scroll-behavior: auto; }
 }

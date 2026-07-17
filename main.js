@@ -24,13 +24,39 @@
   });
 
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 히어로 지표 카운트업 — 숫자 앞부분만 애니메이션, 단위(만/%)·<small>은 보존
+  document.querySelectorAll('.metric .v').forEach(function (v) {
+    var node = v.firstChild;
+    if (!node || node.nodeType !== 3) return;
+    var m = node.nodeValue.trim().match(/^([\d.]+)(.*)$/);
+    if (!m) return;
+    var target = parseFloat(m[1]); if (isNaN(target)) return;
+    var suffix = m[2], dec = (m[1].split('.')[1] || '').length;
+    if (reduce) return;                                  // 정적: 원래 값 유지
+    var t0 = null;
+    function loop(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / 900, 1), e = 1 - Math.pow(1 - p, 3);
+      node.nodeValue = (target * e).toFixed(dec) + suffix;
+      if (p < 1) requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  });
+
+  // 스크롤 리빌 (+계단식 지연)
   var els = document.querySelectorAll('[data-reveal]');
   if (reduce || !('IntersectionObserver' in window)) {
     els.forEach(function (el) { el.classList.add('in'); });
   } else {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        if (!e.isIntersecting) return;
+        var sibs = e.target.parentNode ? e.target.parentNode.children : [e.target];
+        var idx = Array.prototype.indexOf.call(sibs, e.target);
+        e.target.style.setProperty('--rd', ((idx % 6) * 55) + 'ms');
+        e.target.classList.add('in');
+        io.unobserve(e.target);
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
     els.forEach(function (el) { io.observe(el); });
