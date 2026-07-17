@@ -91,6 +91,16 @@ body::before {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
   50% { transform: translate3d(-3%, 2.5%, 0) scale(1.12); }
 }
+/* 스크롤 진행 바 — 네이티브 스크롤 기반 애니메이션 (미지원 시 그냥 안 뜸) */
+@supports (animation-timeline: scroll()) {
+  body::after {
+    content: ""; position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 50;
+    transform-origin: 0 50%; transform: scaleX(0);
+    background: linear-gradient(90deg, var(--accent), var(--signal));
+    animation: scrollProgress linear both; animation-timeline: scroll(root);
+  }
+  @keyframes scrollProgress { to { transform: scaleX(1); } }
+}
 a { color: var(--accent); }
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
 .mono { font-family: var(--mono); }
@@ -165,8 +175,16 @@ h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(24px, 4vw, 33
   position: relative; display: flex; flex-direction: column; gap: 12px;
   background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px;
   text-decoration: none; color: inherit; box-shadow: var(--shadow);
+  transform: perspective(760px) rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg)) translateY(var(--ty, 0px));
   transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
 }
+/* 커서 추적 스포트라이트 (유리 위 광점) */
+.proj-card::after {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0;
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent) 20%, transparent), transparent 60%);
+  transition: opacity .25s ease;
+}
+.proj-card:hover::after { opacity: 1; }
 .proj-card { overflow: hidden; }
 /* 유리 광택 스윕 — hover 시 사선 하이라이트가 카드를 훑고 지나감 */
 .proj-card::before {
@@ -176,7 +194,7 @@ h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(24px, 4vw, 33
 }
 .proj-card:hover::before { transform: translateX(130%); }
 .proj-card > * { position: relative; z-index: 1; }
-.proj-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--glow-accent), var(--shadow); }
+.proj-card:hover { --ty: -4px; border-color: var(--accent); box-shadow: var(--glow-accent), var(--shadow); }
 .proj-card .tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
 .proj-card h3 { font-size: 19px; margin: 0; font-weight: 650; color: var(--ink); letter-spacing: -0.01em; }
 .proj-card p { margin: 0; font-size: 14.5px; color: var(--ink-soft); flex: 1; }
@@ -188,7 +206,7 @@ h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(24px, 4vw, 33
 /* flagship (SSTR2) 상세 히어로: 단색 악센트 언더라인 */
 .detail-hero.flagship h1 { display: inline-block; }
 .detail-hero.flagship h1::after { content: ""; display: block; height: 4px; width: 72px; margin-top: 14px; border-radius: 4px; background: var(--accent); }
-.proj-card.gold:hover { transform: translateY(-3px); border-color: var(--signal); box-shadow: var(--glow-signal), var(--shadow); }
+.proj-card.gold:hover { --ty: -4px; border-color: var(--signal); box-shadow: var(--glow-signal), var(--shadow); }
 .proj-card.gold .go { color: var(--signal); }
 .chip.now { background: var(--signal-soft); color: var(--signal); font-weight: 600; }
 

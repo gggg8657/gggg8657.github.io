@@ -61,4 +61,22 @@
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
     els.forEach(function (el) { io.observe(el); });
   }
+
+  // 포인터 반응 — 카드 3D 틸트 + 스포트라이트 (마우스 기기에서만, 모션 축소 시 비활성)
+  var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (!reduce && fine) {
+    document.querySelectorAll('.proj-card').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        var mx = (e.clientX - r.left) / r.width, my = (e.clientY - r.top) / r.height;
+        card.style.setProperty('--mx', (mx * 100).toFixed(1) + '%');
+        card.style.setProperty('--my', (my * 100).toFixed(1) + '%');
+        card.style.setProperty('--rx', ((mx - 0.5) * 7).toFixed(2) + 'deg');
+        card.style.setProperty('--ry', (-(my - 0.5) * 7).toFixed(2) + 'deg');
+      });
+      card.addEventListener('pointerleave', function () {
+        card.style.setProperty('--rx', '0deg'); card.style.setProperty('--ry', '0deg');
+      });
+    });
+  }
 })();
