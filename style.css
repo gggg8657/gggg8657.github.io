@@ -1,5 +1,8 @@
 /* Kim Dongju — AI Scientist Portfolio · shared stylesheet */
 
+/* ponytail: @import는 로딩 1-RTT 손해. 체감되면 각 html <head>로 <link rel="preconnect">+<link>로 승격 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&display=swap');
+
 :root {
   --bg: #F6F8FA;
   --surface: #FFFFFF;
@@ -13,7 +16,8 @@
   --accent-soft: #0E8F8618;
   --signal: #B67A1E;
   --signal-soft: #B67A1E1A;
-  --serif: "Iowan Old Style", "Charter", "Palatino Linotype", Palatino, Georgia, serif;
+  --good: #2F8F5B;
+  --serif: "Noto Serif KR", "Iowan Old Style", "Charter", "Palatino Linotype", Palatino, Georgia, serif;
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
   --maxw: 960px;
@@ -25,6 +29,7 @@
     --ink: #E6ECF1; --ink-soft: #AEBAC5; --ink-faint: #7B8894;
     --accent: #35B8AD; --accent-2: #5CD3C8; --accent-soft: #35B8AD1F;
     --signal: #D6A24A; --signal-soft: #D6A24A1F;
+    --good: #46C97E;
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
   }
 }
@@ -33,12 +38,14 @@
   --ink: #E6ECF1; --ink-soft: #AEBAC5; --ink-faint: #7B8894;
   --accent: #35B8AD; --accent-2: #5CD3C8; --accent-soft: #35B8AD1F;
   --signal: #D6A24A; --signal-soft: #D6A24A1F;
+  --good: #46C97E;
 }
 :root[data-theme="light"] {
   --bg: #F6F8FA; --surface: #FFFFFF; --surface-2: #EEF2F5; --line: #DCE3E9;
   --ink: #1B2530; --ink-soft: #4A5763; --ink-faint: #7B8894;
   --accent: #0E8F86; --accent-2: #0B6E67; --accent-soft: #0E8F8618;
   --signal: #B67A1E; --signal-soft: #B67A1E1A;
+  --good: #2F8F5B;
 }
 
 * { box-sizing: border-box; }
@@ -120,13 +127,11 @@ h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(24px, 4vw, 33
 .proj-card .card-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
 .proj-card .go { font-family: var(--mono); font-size: 13px; color: var(--accent); transition: transform .18s ease; }
 .proj-card:hover .go { transform: translateX(4px); }
-.proj-card.gold { border-color: var(--signal); box-shadow: inset 0 0 0 1px var(--signal), var(--shadow); animation: goldPulse 3s ease-in-out infinite; }
-@keyframes goldPulse { 0%, 100% { filter: drop-shadow(0 0 0 transparent); } 50% { filter: drop-shadow(0 0 11px color-mix(in srgb, var(--signal) 60%, transparent)); } }
-/* flagship (SSTR2) 히어로 무지개 악센트 */
+/* 진행중 flagship: 조용한 금색 테두리 (펄스 없음 — 시그니처는 Figure 하나로 집중) */
+.proj-card.gold { border-color: var(--signal); box-shadow: inset 0 0 0 1px var(--signal), var(--shadow); }
+/* flagship (SSTR2) 상세 히어로: 단색 악센트 언더라인 */
 .detail-hero.flagship h1 { display: inline-block; }
-.detail-hero.flagship h1::after { content: ""; display: block; height: 5px; margin-top: 12px; border-radius: 4px; background: linear-gradient(90deg, #ff5f6d, #ffb347, #ffe14d, #4fd07a, #35b8ad, #4674ff, #a24bff); background-size: 220% 100%; animation: rainbowShift 6s linear infinite; }
-.detail-hero.flagship .cat { color: transparent; background: linear-gradient(90deg, #ff5f6d, #ffb347, #4fd07a, #35b8ad, #4674ff, #a24bff); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; animation: rainbowShift 6s linear infinite; }
-@keyframes rainbowShift { to { background-position: 220% 0; } }
+.detail-hero.flagship h1::after { content: ""; display: block; height: 4px; width: 72px; margin-top: 14px; border-radius: 4px; background: var(--accent); }
 .proj-card.gold:hover { border-color: var(--signal); box-shadow: inset 0 0 0 1px var(--signal), 0 6px 18px color-mix(in srgb, var(--signal) 24%, transparent), 0 16px 40px rgba(20,35,48,.10); }
 .proj-card.gold .go { color: var(--signal); }
 .chip.now { background: var(--signal-soft); color: var(--signal); font-weight: 600; }
@@ -315,6 +320,13 @@ blockquote.motto { font-family: var(--serif); font-size: clamp(20px, 3vw, 27px);
 /* ---- Video embed ---- */
 .video-embed { position: relative; width: 100%; padding-top: 56.25%; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: #000; }
 .video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* ---- Signature figure (journal-style, promoted to home) ---- */
+.signature-fig { margin: 28px 0 0; }
+.signature-fig figcaption { margin-top: 14px; font-size: 13.5px; line-height: 1.6; color: var(--ink-soft); max-width: 74ch; }
+.signature-fig figcaption b { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.02em; color: var(--ink); }
+.signature-fig figcaption a { font-family: var(--mono); font-size: 12.5px; text-decoration: none; white-space: nowrap; }
+.signature-fig figcaption a:hover { text-decoration: underline; }
 
 /* ---- SST-14 mutation animation ---- */
 .sst-mut { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; box-shadow: var(--shadow); }

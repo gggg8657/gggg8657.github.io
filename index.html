@@ -10,8 +10,32 @@
 <meta property="og:title" content="김동주 — AI Scientist Portfolio">
 <meta property="og:description" content="KAERI 인공지능응용연구실 AI Scientist. 지능형 CCTV, 방사성의약품 SSTR2, Robot AI, 배터리 ML.">
 <meta property="og:url" content="https://gggg8657.github.io">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://gggg8657.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gggg8657.github.io/og.png">
+<link rel="canonical" href="https://gggg8657.github.io/">
 <link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "김동주",
+  "alternateName": "Kim Dongju",
+  "jobTitle": "AI Scientist",
+  "worksFor": { "@type": "Organization", "name": "한국원자력연구원 (KAERI) 인공지능응용연구실" },
+  "url": "https://gggg8657.github.io",
+  "image": "https://gggg8657.github.io/og.png",
+  "email": "mailto:dongjukim.dev@gmail.com",
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "광운대학교" },
+  "knowsAbout": ["Agentic AI", "Computer Vision", "Anomaly Detection", "Bio AI", "Radiopharmaceutical in silico", "Physics-Informed ML", "3D Face Reconstruction", "MLOps"],
+  "sameAs": [
+    "https://github.com/gggg8657",
+    "https://www.linkedin.com/in/dongju-kim-ai/"
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -40,15 +64,48 @@
       <a href="https://my.surfit.io/w/167689643" target="_blank" rel="noopener">Surfit</a>
     </div>
     <div class="metrics">
-      <div class="metric"><div class="v">82.4<small>%</small></div><div class="k">지능형 CCTV AUC, 265 FPS 실시간</div></div>
+      <div class="metric"><div class="v">82.4<small>%</small></div><div class="k">지능형 CCTV AUC · 265 FPS, 폐쇄망 온프레미스 측정</div></div>
       <div class="metric"><div class="v">6.7만<small>+</small></div><div class="k">SSTR2 자동 in silico 스크리닝 실험, Wet-lab 진행 중</div></div>
-      <div class="metric"><div class="v">0.88</div><div class="k">AUDISP 3D 얼굴 복원 F1 (SOTA 상회)</div></div>
+      <div class="metric"><div class="v">0.88</div><div class="k">AUDISP 얼굴 AU 검출 F1 · DECA·EMOCA 상회</div></div>
       <div class="metric"><div class="v">8</div><div class="k">학회 논문상, 경진대회 수상</div></div>
     </div>
   </div>
 </header>
 
 <main class="wrap">
+
+  <section id="signature">
+    <div class="sec-head"><span class="sec-num">Figure 1</span><h2>에이전트가 후보를 탐색하는 방식</h2></div>
+    <p class="lede">단발성 모델이 아니라, 계획·생성·평가 에이전트가 루프를 돌며 스스로 후보를 좁혀가는 시스템을 만든다. 아래는 방사성의약품 SSTR2 파이프라인(Silo B)의 변이 탐색을 실제 동작 그대로 시각화한 것.</p>
+    <figure class="signature-fig">
+      <div class="sst-mut" id="sst14-mut" data-reveal>
+        <div class="mut-pipeline">
+          <span class="mut-step" data-k="planner"><b>Planner</b><small>위치 선택</small></span>
+          <span class="mut-sep">&rarr;</span>
+          <span class="mut-step" data-k="builder"><b>Builder</b><small>변이 생성</small></span>
+          <span class="mut-sep">&rarr;</span>
+          <span class="mut-step" data-k="qc"><b>QCRanker</b><small>게이트 평가</small></span>
+        </div>
+        <div class="mut-stage">
+          <div class="beads"></div>
+          <div class="mut-callout"></div>
+        </div>
+        <div class="mut-meta">
+          <span class="mut-agent">준비 중…</span>
+          <span class="mut-iter"></span>
+          <span class="mut-score"></span>
+        </div>
+        <div class="mut-legend">
+          <span><i class="sw hyd"></i>소수성</span>
+          <span><i class="sw pol"></i>극성</span>
+          <span><i class="sw pos"></i>양전하</span>
+          <span><i class="sw neg"></i>음전하</span>
+          <span><i class="sw cys"></i>Cys · 이황화 고정</span>
+        </div>
+      </div>
+      <figcaption><b>Figure 1.</b> LLM 5-Agent가 공개 서열 SST-14를 출발점으로 변이 위치를 고르고, 새 잔기를 생성해 게이트로 평가하는 루프. 표시된 변이는 예시(랜덤)이며 실제 후보 서열은 대외비. <a href="/projects/sstr2.html">SSTR2 파이프라인 상세 &rarr;</a></figcaption>
+    </figure>
+  </section>
 
   <section id="research">
     <div class="sec-head"><span class="sec-num">01</span><h2>연구 분야</h2></div>
@@ -309,5 +366,6 @@
 </footer>
 
 <script src="/main.js"></script>
+<script src="/projects/sst14-mut.js?v=3"></script>
 </body>
 </html>
