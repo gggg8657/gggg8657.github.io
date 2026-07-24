@@ -458,16 +458,25 @@ blockquote.motto { font-family: var(--serif); font-size: clamp(20px, 3vw, 27px);
 .mol-legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; vertical-align: middle; }
 
 /* ---- Research table (VLM 등 데이터 비교) ---- */
-.rtable-wrap { overflow-x: auto; margin: 8px 0 6px; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); }
-.rtable { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--surface); min-width: 520px; }
-.rtable th, .rtable td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
-.rtable thead th { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint); background: var(--surface-2); position: sticky; top: 0; }
+.rtable-wrap { overflow-x: auto; margin: 10px 0 6px; border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); background: var(--surface); -webkit-overflow-scrolling: touch; }
+.rtable { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 560px; }
+.rtable thead th { text-align: left; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); padding: 13px 16px; background: var(--surface-2); border-bottom: 2px solid var(--line); white-space: nowrap; }
+.rtable td { padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: middle; color: var(--ink-soft); line-height: 1.45; }
+.rtable tbody tr:nth-child(even) td { background: color-mix(in srgb, var(--surface-2) 45%, transparent); }
 .rtable tbody tr:last-child td { border-bottom: none; }
 .rtable tbody tr:hover td { background: var(--accent-soft); }
-.rtable td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--ink); }
+.rtable td:first-child { color: var(--ink); font-weight: 600; }
+.rtable td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--ink); white-space: nowrap; text-align: right; }
+/* 채택/강조 행 */
+.rtable tr.feat td { background: var(--signal-soft) !important; }
+.rtable tr.feat td:first-child { box-shadow: inset 3px 0 0 var(--signal); }
+/* 인라인 점수 막대 */
+.rtable .score { display: inline-flex; align-items: center; gap: 9px; justify-content: flex-end; font-variant-numeric: tabular-nums; }
+.rtable .track { display: inline-block; width: 54px; height: 6px; background: var(--surface-2); border-radius: 3px; overflow: hidden; flex: none; }
+.rtable .track i { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
 .rtable .yes { color: var(--good); font-weight: 600; }
 .rtable .no { color: var(--signal); }
-.rtable caption { caption-side: bottom; text-align: left; font-size: 12px; color: var(--ink-faint); padding: 10px 4px 0; line-height: 1.5; }
+.rtable caption { caption-side: bottom; text-align: left; font-size: 12px; color: var(--ink-faint); padding: 12px 16px 4px; line-height: 1.55; background: var(--surface); }
 .tag-unsure { font-family: var(--mono); font-size: 10.5px; color: var(--signal); background: var(--signal-soft); padding: 1px 6px; border-radius: 5px; white-space: nowrap; }
 
 /* ---- Footer ---- */

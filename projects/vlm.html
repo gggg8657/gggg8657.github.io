@@ -21,17 +21,13 @@
 
 <header class="detail-hero wrap">
   <a class="back-link" href="/projects/cctv.html">&larr; 지능형 CCTV</a>
-  <p class="cat">VLM 리서치 노트 · 2026년 7월</p>
+  <p class="cat">VLM 자료 조사 노트 · 2026년 7월</p>
   <h1>VLM 지형과 벤치마크 읽는 법</h1>
-  <p class="sub">지능형 CCTV의 2차 검증 레이어로 VLM을 고르며 시작한 조사. "벤치마크 점수가 무엇을 의미하는가"에서 출발해 2026년 7월 기준 성능·리더보드·오픈/클로즈드 지형과 태스크 적합성을 정리하고, 직접 수행한 DeepSeek Janus vs Qwen2.5-VL 비교 스터디와 연결했다.</p>
+  <p class="sub">2026년 7월 기준 VLM(비전-언어 모델)을 정리해 공유하는 조사 노트. "벤치마크 점수가 무엇을 의미하는가"에서 출발해 성능·리더보드 현황, 오픈/클로즈드 지형, 태스크 적합성까지 훑는다. 온프레미스 VLM을 직접 골라야 했던 경험이 이 조사의 계기이며, 관련 비교 스터디는 끝에 연계 사례로 연결해 둔다.</p>
   <div class="meta">
     <span><b>기준일</b> 2026-07-24</span>
-    <span><b>방법</b> 리서치 서브에이전트 + 웹조사, 교차검증(codex·agy·cursor-agent)</span>
-    <span><b>축</b> DeepSeek 멀티모달 이해 비교 스터디</span>
-  </div>
-  <div class="links">
-    <a class="btn primary" href="https://github.com/gggg8657/DeepSeek_multimodal_understanding_comparison" target="_blank" rel="noopener">비교 스터디 레포 &rarr;</a>
-    <a class="btn" href="https://github.com/gggg8657/AI_CCTV_final" target="_blank" rel="noopener">AI_CCTV_final &rarr;</a>
+    <span><b>범위</b> 벤치마크 해석 · 리더보드 · 오픈/클로즈드 · 태스크 적합성</span>
+    <span><b>검증</b> 리서치 서브에이전트 + 웹조사 + codex·agy·cursor-agent 교차검증</span>
   </div>
 </header>
 
@@ -61,22 +57,25 @@
   <section>
     <div class="sec-head"><span class="sec-num">02</span><h2>성능·리더보드 현황</h2></div>
     <p class="lede">오픈웨이트는 검증 가능한 수치로, 프런티어(상용)는 원표 접근 제약이 커 대체로 추정으로만 다룬다. 비교의 엄밀도 자체가 비대칭임을 먼저 밝힌다.</p>
-    <p class="subhead">오픈웨이트 (MMMU 기준)</p>
+    <p class="subhead">오픈웨이트 타임라인 (MMMU val 기준, 최신순)</p>
     <div class="rtable-wrap" data-reveal>
       <table class="rtable">
-        <thead><tr><th>모델</th><th>파라미터</th><th>MMMU</th><th>OCRBench</th></tr></thead>
+        <thead><tr><th>모델</th><th>공개</th><th>파라미터</th><th>MMMU</th><th>MathVision</th><th>근거</th></tr></thead>
         <tbody>
-          <tr><td>Llama 4 Maverick</td><td>400B MoE(17B active)</td><td class="num">~73.4%</td><td class="num">~870</td></tr>
-          <tr><td>InternVL3-78B</td><td>78B</td><td class="num">~72.2%</td><td class="num">~865</td></tr>
-          <tr><td>Qwen2.5-VL-72B</td><td>72B</td><td class="num">~70.2%</td><td class="num">~888</td></tr>
-          <tr><td>Qwen2.5-VL-7B</td><td>7B</td><td class="num">~60.7%</td><td class="num">~864</td></tr>
-          <tr><td>Phi-4-Multimodal</td><td>5.6B</td><td class="num">~57.4%</td><td class="num">~742</td></tr>
+          <tr><td>GLM-4.6V</td><td class="num">2025-12</td><td>106B·A12B MoE (+9B Flash)</td><td class="num">SOTA 주장 <span class="tag-unsure">2차</span></td><td class="num">—</td><td>zai-org/GLM-V</td></tr>
+          <tr><td>Qwen3-VL-235B-A22B</td><td class="num">2025-09</td><td>235B·A22B MoE</td><td class="num">80.6 <span class="tag-unsure">2차</span></td><td class="num">—</td><td>OpenRouter</td></tr>
+          <tr><td>Qwen3-VL-32B (Thinking)</td><td class="num">2025-09</td><td>32B</td><td class="num"><span class="score"><span class="track"><i style="width:78.1%"></i></span>78.1</span></td><td class="num">70.2</td><td>arXiv:2511.21631</td></tr>
+          <tr><td>InternVL3.5-241B-A28B</td><td class="num">2025-08</td><td>241B·A28B MoE</td><td class="num"><span class="score"><span class="track"><i style="width:77.7%"></i></span>77.7</span></td><td class="num">63.9</td><td>arXiv:2508.18265</td></tr>
+          <tr><td>InternVL3.5-30B-A3B</td><td class="num">2025-08</td><td>30B·A3B MoE</td><td class="num"><span class="score"><span class="track"><i style="width:75.6%"></i></span>75.6</span></td><td class="num">55.7</td><td>arXiv:2508.18265</td></tr>
+          <tr><td>Llama 4 Maverick</td><td class="num">2025-04</td><td>400B·A17B MoE</td><td class="num"><span class="score"><span class="track"><i style="width:73.4%"></i></span>73.4</span></td><td class="num">—</td><td>presenc <span class="tag-unsure">2차</span></td></tr>
+          <tr><td>InternVL3-78B</td><td class="num">2025-04</td><td>78B</td><td class="num"><span class="score"><span class="track"><i style="width:72.2%"></i></span>72.2</span></td><td class="num">—</td><td>presenc <span class="tag-unsure">2차</span></td></tr>
+          <tr><td>Qwen2.5-VL-72B</td><td class="num">2025-02</td><td>72B</td><td class="num"><span class="score"><span class="track"><i style="width:70.2%"></i></span>70.2</span></td><td class="num">—</td><td>presenc <span class="tag-unsure">2차</span></td></tr>
         </tbody>
-        <caption>OpenCompass 2차 집계(presenc.ai, as-of 2026-05-23). 이 표는 <strong>구버전 스냅샷</strong>이라 최신 오픈 모델이 빠져 있음 — 아래 최신 릴리스 참고. 최신 경쟁 구도를 대표하지 않음.</caption>
+        <caption>MMMU(val) %. arXiv 표기 행은 <strong>기술보고서 1차 수치</strong>, "2차"는 집계·문서 재인용(독립 대조 전). 막대는 점수 시각화용. 보고서마다 val/test·thinking 여부로 값이 갈리므로 절대 비교는 주의.</caption>
       </table>
     </div>
     <div class="prose">
-      <p><strong>최신 오픈(2025 하반기, 위 표에 미반영).</strong> InternVL3.5-241B-A28B가 <strong>자체 기술보고서 기준</strong> MMMU ≈ 77.7(arXiv:2508.18265) — 독립 리더보드 대조 전이라 "오픈 최고"는 보고서 주장 수준으로 읽는다. Qwen3-VL은 <strong>2025-09 릴리스, 기술보고서 2025-11 공개</strong>(arXiv:2511.21631)로 오픈 최상위 경쟁자이나 공식 평균 수치는 원표 미확인 <span class="tag-unsure">불확실</span>.</p>
+      <p><strong>2026 상반기 신규(오픈).</strong> STEP3-VL-10B(2026-01, arXiv:2601.09668), Jan-v2-VL-Max(30B), DeepSeek V4(2026-04, 멀티모달 통합) 등이 이어졌으나 공개 비전 벤치 수치는 아직 정리 중이라 <span class="tag-unsure">불확실</span>로 둔다. GLM-4.6V(2025-12)는 9B Flash를 상업 이용 무료로 공개해 경량 온프레미스 선택지를 넓혔다.</p>
       <p><strong>프런티어(상용).</strong> 교차검증 결과 Gemini 3 Pro·Gemini 3.5 Flash·GPT-5.4·Meta muse-spark 등은 <strong>실존 확인</strong>됐다. 다만 LMArena Vision 스크랩(as-of 2026-07-21)상 상위권 Elo 1278~1318 같은 <strong>정확한 점수·순위</strong>와 OpenVLM 상용 평균은 원표 접근 실패로 <span class="tag-unsure">미확인</span>. 이 문서는 상용 순위를 단정하지 않는다.</p>
     </div>
   </section>
@@ -116,8 +115,8 @@
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">05</span><h2>스터디 축 — Janus 계열 vs Qwen2.5-VL, 온프레미스</h2></div>
-    <p class="lede">지능형 CCTV의 2차 검증 레이어를 고르며 DeepSeek Janus 계열을 직접 추론·비교했다. 아래는 <strong>소표본 정성 관찰</strong>이며 정량 벤치가 아니다(표본 수·프롬프트·디코딩 설정·모델 버전을 통제한 실험이 아님) — 특정 모델의 일반 성능이 아니라 <strong>이 실험 조건에서의 경향</strong>으로만 읽어야 한다.</p>
+    <div class="sec-head"><span class="sec-num">05</span><h2>연계 사례 — 온프레미스·한국어 VLM 선택</h2></div>
+    <p class="lede">위 조사가 실제 선택으로 이어진 작은 적용 사례. 지능형 CCTV의 2차 검증 레이어를 고르며 DeepSeek Janus 계열을 직접 추론·비교했다. 아래는 <strong>소표본 정성 관찰</strong>이며 정량 벤치가 아니다(표본 수·프롬프트·디코딩 설정·모델 버전을 통제한 실험이 아님) — 특정 모델의 일반 성능이 아니라 <strong>이 실험 조건에서의 경향</strong>으로만 읽어야 한다.</p>
     <div class="prose">
       <h3>관찰 (한국어 장면 이해)</h3>
       <ul>
@@ -145,6 +144,10 @@
       <h3>선택 (결론이 아니라 정합적 판단)</h3>
       <p>폐쇄망 고보안 + <strong>한국어</strong> 장면 2차 검증이라는 제약에서, 생성통합형(Janus/JanusFlow)이나 중국어 편향(VL2)보다 이해·한국어·온프레미스 안정성이 앞서 보인 <strong>Qwen2.5-VL을 2차 검증 레이어로 채택</strong>했다. 이는 위 정성 관찰과 정합적인 합리적 선택이지, 정량 검증을 통과한 최적성 증명은 아니다. Qwen2.5-VL 자체의 실패 모드(환각·한국어 OCR 오류·장문 붕괴)는 동일 강도로 측정하지 못했고, 한국어 전용 테스트셋·채점 기준을 세운 정량 A/B는 후속 과제로 남는다. 지금 시점(2026-07)에는 <strong>Qwen3-VL·InternVL3.5</strong>를 동일 조건에서 재평가하는 것이 자연스러운 다음 단계다.</p>
     </div>
+    <div class="links">
+      <a class="btn" href="https://github.com/gggg8657/DeepSeek_multimodal_understanding_comparison" target="_blank" rel="noopener">비교 스터디 상세 (레포) &rarr;</a>
+      <a class="btn" href="/projects/cctv.html">지능형 CCTV 프로젝트 &rarr;</a>
+    </div>
   </section>
 
   <section>
@@ -170,7 +173,7 @@
     </div>
     <div class="prose">
       <p>벤치마크 해석과 리더보드는 리서치 서브에이전트가, 오픈/클로즈드·태스크·온프레미스는 직접 웹조사로 수집한 뒤, 세 개의 독립 CLI 에이전트로 사실성·편향·과신을 교차검증했다. 견제 과정에서 지적된 편향(소표본을 확정 결론처럼 서술, 배치 우위와 성능 우위 혼동, 목적이 다른 모델을 같은 잣대로 평가)은 본문 서술에 반영했다.</p>
-      <p><strong>한계.</strong> 프런티어 상용 리더보드 원표(OpenVLM HF Space·아레나)는 JS 렌더링·403으로 완전 확보에 실패해 상용 순위·모델명은 불확실하다. 2차 집계는 갱신 지연으로 최신 오픈 모델이 누락될 수 있다. 스터디 축의 결과는 소표본 정성 관찰이다.</p>
+      <p><strong>한계.</strong> 프런티어 상용 리더보드 원표(OpenVLM HF Space·아레나)는 JS 렌더링·403으로 완전 확보에 실패해 상용 순위·모델명은 불확실하다. 2차 집계는 갱신 지연으로 최신 오픈 모델이 누락될 수 있다. 연계 사례(§5)의 결과는 소표본 정성 관찰이다.</p>
     </div>
     <div class="arch-note"><span class="chip conf">대외비</span><span>KAERI 내부 과제의 정량 수치, 폐쇄망 운영 세부, 비공개 레포 구현은 포함하지 않는다. 공개 벤치·모델카드·학회 발표로 검증 가능한 범위만 수록.</span></div>
     <p class="edu-note">주요 출처: llm-stats.com · opencompass-open-vlm-leaderboard.hf.space · lmarena-ai(HF) · arXiv 2409.02813(MMMU-Pro) · 2403.20330(MMStar) · 2508.18265(InternVL3.5) · 2511.21631(Qwen3-VL) · presenc.ai · bentoml.com · HF 모델카드(Qwen2.5-VL·Janus-Pro).</p>
