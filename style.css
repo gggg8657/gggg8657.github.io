@@ -457,6 +457,19 @@ blockquote.motto { font-family: var(--serif); font-size: clamp(20px, 3vw, 27px);
 .mol-legend { font-family: var(--mono); font-size: 12.5px; color: var(--ink-soft); display: flex; flex-direction: column; gap: 6px; }
 .mol-legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; vertical-align: middle; }
 
+/* ---- Research table (VLM 등 데이터 비교) ---- */
+.rtable-wrap { overflow-x: auto; margin: 8px 0 6px; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); }
+.rtable { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--surface); min-width: 520px; }
+.rtable th, .rtable td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.rtable thead th { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint); background: var(--surface-2); position: sticky; top: 0; }
+.rtable tbody tr:last-child td { border-bottom: none; }
+.rtable tbody tr:hover td { background: var(--accent-soft); }
+.rtable td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--ink); }
+.rtable .yes { color: var(--good); font-weight: 600; }
+.rtable .no { color: var(--signal); }
+.rtable caption { caption-side: bottom; text-align: left; font-size: 12px; color: var(--ink-faint); padding: 10px 4px 0; line-height: 1.5; }
+.tag-unsure { font-family: var(--mono); font-size: 10.5px; color: var(--signal); background: var(--signal-soft); padding: 1px 6px; border-radius: 5px; white-space: nowrap; }
+
 /* ---- Footer ---- */
 footer { padding: 40px 0 64px; color: var(--ink-faint); font-size: 13px; }
 footer .note { font-family: var(--mono); font-size: 12px; line-height: 1.7; display: flex; gap: 10px; align-items: flex-start; }

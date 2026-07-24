@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VLM 지형과 벤치마크 읽는 법 (2026-07) — 김동주</title>
+<meta name="description" content="비전-언어 모델(VLM) 벤치마크가 무엇을 의미하는지, 2026년 7월 기준 성능·리더보드·오픈/클로즈드 지형과 태스크 적합성을 정리하고, DeepSeek Janus vs Qwen2.5-VL 온프레미스 비교 스터디와 연결한 리서치 노트.">
+<meta property="og:title" content="VLM 지형과 벤치마크 읽는 법 (2026-07) — 김동주">
+<meta property="og:description" content="VLM 벤치마크 해석 · 2026-07 리더보드 · 오픈/클로즈드 · 태스크 적합성 · Janus vs Qwen 온프레미스 비교.">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="/">김동주<span class="dot">.</span></a>
+    <nav><a href="/#projects">프로젝트</a><a href="/#career">이력</a><a href="/#contact">연락</a><button id="theme-toggle" class="theme-toggle" type="button" aria-label="테마 전환">☾</button></nav>
+  </div>
+</div>
+
+<header class="detail-hero wrap">
+  <a class="back-link" href="/projects/cctv.html">&larr; 지능형 CCTV</a>
+  <p class="cat">VLM 리서치 노트 · 2026년 7월</p>
+  <h1>VLM 지형과 벤치마크 읽는 법</h1>
+  <p class="sub">지능형 CCTV의 2차 검증 레이어로 VLM을 고르며 시작한 조사. "벤치마크 점수가 무엇을 의미하는가"에서 출발해 2026년 7월 기준 성능·리더보드·오픈/클로즈드 지형과 태스크 적합성을 정리하고, 직접 수행한 DeepSeek Janus vs Qwen2.5-VL 비교 스터디와 연결했다.</p>
+  <div class="meta">
+    <span><b>기준일</b> 2026-07-24</span>
+    <span><b>방법</b> 리서치 서브에이전트 + 웹조사, 교차검증(codex·agy·cursor-agent)</span>
+    <span><b>축</b> DeepSeek 멀티모달 이해 비교 스터디</span>
+  </div>
+  <div class="links">
+    <a class="btn primary" href="https://github.com/gggg8657/DeepSeek_multimodal_understanding_comparison" target="_blank" rel="noopener">비교 스터디 레포 &rarr;</a>
+    <a class="btn" href="https://github.com/gggg8657/AI_CCTV_final" target="_blank" rel="noopener">AI_CCTV_final &rarr;</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="sec-head"><span class="sec-num">01</span><h2>벤치마크 점수의 의미</h2></div>
+    <p class="lede">2026년 중반, 문서·OCR·이진 판별형 등 <strong>고전 벤치마크 상당수가 포화(saturation)</strong>됐다 — 상위 모델들이 상단(예: DocVQA 92~96%)에 뭉쳐 절대치만으로는 변별이 어렵다. 반면 MMMU-Pro·MathVision·HallusionBench처럼 아직 여유가 큰 축도 있다. 그래서 "몇 점"보다 "그 점수가 무엇을 재고, 지금도 변별력이 있는가"가 중요하다. 변별은 아래 표에서 <strong>굵게</strong> 표시한 어려운 축으로 이동했다.</p>
+    <div class="rtable-wrap" data-reveal>
+      <table class="rtable">
+        <thead><tr><th>축</th><th>대표 벤치마크</th><th>측정</th><th>척도</th><th>2026 상태</th></tr></thead>
+        <tbody>
+          <tr><td>종합 추론</td><td><strong>MMMU / MMMU-Pro</strong></td><td>대학·전문가 6분야 멀티모달 추론</td><td class="num">정확도 %</td><td>MMMU 포화 진행 → <strong>MMMU-Pro</strong>가 변별(같은 모델도 점수 뚝)</td></tr>
+          <tr><td>종합 이해</td><td>MMBench, <strong>MMStar</strong></td><td>20세부능력 / "비전 필수" 문항</td><td class="num">%</td><td>포화. MMStar의 MG(멀티모달 게인) 낮으면 텍스트 편법 의심</td></tr>
+          <tr><td>수학</td><td>MathVista → <strong>MathVision</strong></td><td>시각적 수학 / 경시 난도</td><td class="num">%</td><td>MathVista 포화, MathVision 변별(단 오염 위험)</td></tr>
+          <tr><td>문서·OCR</td><td>DocVQA·ChartQA·<strong>OCRBench</strong>·<strong>InfoVQA</strong></td><td>문서/차트/장면 텍스트</td><td class="num">ANLS·%·1000점</td><td>대부분 포화(92~96%=기본값). InfoVQA·OCRBench v2 변별</td></tr>
+          <tr><td>환각</td><td>POPE·<strong>HallusionBench</strong></td><td>없는 객체 답변 / 착시·논리</td><td class="num">F1·%</td><td>POPE 포화 → adversarial·Yes비율, HallusionBench 쌍정확도(qAcc)가 신호</td></tr>
+          <tr><td>대결형</td><td><strong>LMArena Vision</strong></td><td>사용자 블라인드 선호</td><td class="num">Elo</td><td>능력이 아닌 "선호". 텍스트 1등 ≠ 비전 1등</td></tr>
+          <tr><td>비디오</td><td>Video-MME·MVBench</td><td>장·단 영상 / 시간 이해</td><td class="num">%</td><td>긴 영상·자막 없을수록 급락</td></tr>
+          <tr><td>그라운딩·GUI</td><td>RefCOCO·<strong>ScreenSpot-Pro</strong></td><td>bbox / UI 좌표 지목</td><td class="num">%</td><td>"어느 ScreenSpot인지" 필수 — Pro가 진짜 에이전트 신호</td></tr>
+        </tbody>
+        <caption>척도 주의: MME 2800 만점, OCRBench 1000 만점, DocVQA/InfoVQA ANLS(0~1), 나머지 정확도 %, LMArena Elo. 출처: MMMU-Pro(arXiv 2409.02813), MMStar(arXiv 2403.20330), llm-stats.com, emergentmind, opencompass.</caption>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">02</span><h2>성능·리더보드 현황</h2></div>
+    <p class="lede">오픈웨이트는 검증 가능한 수치로, 프런티어(상용)는 원표 접근 제약이 커 대체로 추정으로만 다룬다. 비교의 엄밀도 자체가 비대칭임을 먼저 밝힌다.</p>
+    <p class="subhead">오픈웨이트 (MMMU 기준)</p>
+    <div class="rtable-wrap" data-reveal>
+      <table class="rtable">
+        <thead><tr><th>모델</th><th>파라미터</th><th>MMMU</th><th>OCRBench</th></tr></thead>
+        <tbody>
+          <tr><td>Llama 4 Maverick</td><td>400B MoE(17B active)</td><td class="num">~73.4%</td><td class="num">~870</td></tr>
+          <tr><td>InternVL3-78B</td><td>78B</td><td class="num">~72.2%</td><td class="num">~865</td></tr>
+          <tr><td>Qwen2.5-VL-72B</td><td>72B</td><td class="num">~70.2%</td><td class="num">~888</td></tr>
+          <tr><td>Qwen2.5-VL-7B</td><td>7B</td><td class="num">~60.7%</td><td class="num">~864</td></tr>
+          <tr><td>Phi-4-Multimodal</td><td>5.6B</td><td class="num">~57.4%</td><td class="num">~742</td></tr>
+        </tbody>
+        <caption>OpenCompass 2차 집계(presenc.ai, as-of 2026-05-23). 이 표는 <strong>구버전 스냅샷</strong>이라 최신 오픈 모델이 빠져 있음 — 아래 최신 릴리스 참고. 최신 경쟁 구도를 대표하지 않음.</caption>
+      </table>
+    </div>
+    <div class="prose">
+      <p><strong>최신 오픈(2025 하반기, 위 표에 미반영).</strong> InternVL3.5-241B-A28B가 <strong>자체 기술보고서 기준</strong> MMMU ≈ 77.7(arXiv:2508.18265) — 독립 리더보드 대조 전이라 "오픈 최고"는 보고서 주장 수준으로 읽는다. Qwen3-VL은 <strong>2025-09 릴리스, 기술보고서 2025-11 공개</strong>(arXiv:2511.21631)로 오픈 최상위 경쟁자이나 공식 평균 수치는 원표 미확인 <span class="tag-unsure">불확실</span>.</p>
+      <p><strong>프런티어(상용).</strong> 교차검증 결과 Gemini 3 Pro·Gemini 3.5 Flash·GPT-5.4·Meta muse-spark 등은 <strong>실존 확인</strong>됐다. 다만 LMArena Vision 스크랩(as-of 2026-07-21)상 상위권 Elo 1278~1318 같은 <strong>정확한 점수·순위</strong>와 OpenVLM 상용 평균은 원표 접근 실패로 <span class="tag-unsure">미확인</span>. 이 문서는 상용 순위를 단정하지 않는다.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">03</span><h2>오픈 vs 클로즈드</h2></div>
+    <p class="lede">한 가지를 분리해 둔다: 오픈웨이트의 강점은 <strong>배치 제약(온프레미스·데이터주권) 우위</strong>이지, 그 자체로 <strong>모델 품질 우위</strong>는 아니다. 둘은 별개 축이다.</p>
+    <div class="rtable-wrap" data-reveal>
+      <table class="rtable">
+        <thead><tr><th>계열</th><th>공개</th><th>라이선스</th><th>크기</th><th>온프레미스</th></tr></thead>
+        <tbody>
+          <tr><td>Qwen2.5-VL / Qwen3-VL</td><td class="yes">오픈웨이트</td><td>모델별 상이(예: Qwen3-VL-235B Apache-2.0, Qwen2.5-VL-72B는 Qwen 라이선스)</td><td>2B~72B, 235B MoE</td><td class="yes">가능</td></tr>
+          <tr><td>InternVL3 / 3.5</td><td class="yes">오픈웨이트</td><td>MIT(계열별 확인 필요)</td><td>8B~241B MoE</td><td class="yes">가능</td></tr>
+          <tr><td>DeepSeek-VL2 / Janus 계열</td><td class="yes">오픈웨이트</td><td>코드 MIT · <strong>가중치 DeepSeek Model License</strong></td><td>1B~7B급</td><td class="yes">가능(경량)</td></tr>
+          <tr><td>Llama 4 (Maverick/Scout)</td><td class="yes">오픈웨이트</td><td>Llama 커뮤니티(제약 있음)</td><td>100B~400B MoE</td><td>대형</td></tr>
+          <tr><td>GPT · Gemini · Claude · Grok</td><td class="no">클로즈드/API</td><td>독점</td><td>비공개</td><td class="no">공개 가중치 없음<sup>*</sup></td></tr>
+        </tbody>
+        <caption>라이선스는 "오픈웨이트" 한 라벨로 뭉뚱그릴 수 없다 — 코드/가중치 라이선스가 다르고(예: Janus는 코드 MIT·가중치 DeepSeek 라이선스), 재배포·상용 조항이 계열마다 달라 배포 전 개별 확인 필수. <sup>*</sup>클로즈드도 전용 클라우드·계약형 격리 배포가 가능한 경우가 있어 "온프레미스 절대 불가"는 아님. 출처: 각 HF 모델카드.</caption>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">04</span><h2>태스크 적합성 (가이드라인)</h2></div>
+    <p class="lede">아래는 동일 프로토콜 A/B 실험 결과가 아니라, 공개 벤치·모델카드 기반의 <strong>출발점 가이드</strong>다. 실제 선택은 자기 데이터로 재평가해야 한다.</p>
+    <div class="prose">
+      <ul>
+        <li><strong>범용 vision-language + 문서 OCR</strong> — Qwen3-VL / Qwen2.5-VL</li>
+        <li><strong>문서 이해·차트 분석</strong> — InternVL3(.5)</li>
+        <li><strong>롱컨텍스트 멀티모달 챗</strong> — Llama 4 Scout</li>
+        <li><strong>경량·온디바이스</strong> — Qwen2.5-VL-3B/7B, MiniCPM-V, Phi-vision</li>
+        <li><strong>GUI 에이전트(좌표 지목)</strong> — ScreenSpot-Pro 강자 확인 후 선택</li>
+        <li><strong>비디오</strong> — Video-MME(long)·MVBench로 검증, 긴 영상은 전반적으로 약함</li>
+      </ul>
+      <p>관련 벤치: OmniDocBench(문서), OVBench·PerceptionTest(비디오), MobileWorld(GUI 그라운딩).</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">05</span><h2>스터디 축 — Janus 계열 vs Qwen2.5-VL, 온프레미스</h2></div>
+    <p class="lede">지능형 CCTV의 2차 검증 레이어를 고르며 DeepSeek Janus 계열을 직접 추론·비교했다. 아래는 <strong>소표본 정성 관찰</strong>이며 정량 벤치가 아니다(표본 수·프롬프트·디코딩 설정·모델 버전을 통제한 실험이 아님) — 특정 모델의 일반 성능이 아니라 <strong>이 실험 조건에서의 경향</strong>으로만 읽어야 한다.</p>
+    <div class="prose">
+      <h3>관찰 (한국어 장면 이해)</h3>
+      <ul>
+        <li><strong>Janus-Pro</strong> — 한국어 서술은 되지만 반복·환각(포스터 오독), 짧은 프롬프트 불안정.</li>
+        <li><strong>JanusFlow</strong> — 이해 태스크 사실상 실패("알 수 없습니다" 반복). 단, JanusFlow는 <strong>생성(Rectified Flow) 특화</strong>이므로 이해 잣대만으로 탈락시키는 건 불공정한 비교임을 명시한다.</li>
+        <li><strong>DeepSeek-VL2 (MoE)</strong> — OCR·문서 강점이나 한국어 질의에 <strong>중국어로 출력</strong>되는 문제.</li>
+      </ul>
+      <h3>구조 정리</h3>
+      <p>Janus = 분리 인코더 + AR 생성 통합 / Janus-Pro = 직계 확장(1B·7B, 합성데이터) / JanusFlow = 분리 인코더 + Rectified Flow <strong>별도 계열</strong> / VL2 = 이미지 생성 없는 <strong>MoE 이해 특화</strong>.</p>
+      <h3>온프레미스 VRAM (양자화 기준)</h3>
+    </div>
+    <div class="rtable-wrap" data-reveal>
+      <table class="rtable">
+        <thead><tr><th>모델</th><th>FP16</th><th>Q4</th><th>비고</th></tr></thead>
+        <tbody>
+          <tr><td>Qwen2.5-VL-3B</td><td class="num">~8GB</td><td class="num">~6GB</td><td>경량, 단일 소비자 GPU</td></tr>
+          <tr><td>Qwen2.5-VL-7B</td><td class="num">~12–16GB</td><td class="num">~10GB</td><td>2차 검증에 현실적</td></tr>
+          <tr><td>Qwen2.5-VL-72B</td><td class="num">—</td><td class="num">~42GB</td><td>A100/H100급 필요</td></tr>
+          <tr><td>DeepSeek Janus-Pro-7B</td><td class="num">~30GB+</td><td class="num">~8–12GB</td><td>생성 시 17–18GB</td></tr>
+        </tbody>
+        <caption>대략값이며 실제 VRAM은 입력 해상도·프레임 수·컨텍스트 길이·양자화 백엔드·KV 캐시 설정에 크게 좌우된다. 출처: deepwiki QwenLM/Qwen2.5-VL, HF Qwen2.5-VL-3B/7B discussions, HF deepseek-ai/Janus-Pro-7B.</caption>
+      </table>
+    </div>
+    <div class="prose">
+      <h3>선택 (결론이 아니라 정합적 판단)</h3>
+      <p>폐쇄망 고보안 + <strong>한국어</strong> 장면 2차 검증이라는 제약에서, 생성통합형(Janus/JanusFlow)이나 중국어 편향(VL2)보다 이해·한국어·온프레미스 안정성이 앞서 보인 <strong>Qwen2.5-VL을 2차 검증 레이어로 채택</strong>했다. 이는 위 정성 관찰과 정합적인 합리적 선택이지, 정량 검증을 통과한 최적성 증명은 아니다. Qwen2.5-VL 자체의 실패 모드(환각·한국어 OCR 오류·장문 붕괴)는 동일 강도로 측정하지 못했고, 한국어 전용 테스트셋·채점 기준을 세운 정량 A/B는 후속 과제로 남는다. 지금 시점(2026-07)에는 <strong>Qwen3-VL·InternVL3.5</strong>를 동일 조건에서 재평가하는 것이 자연스러운 다음 단계다.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">06</span><h2>점수를 읽는 6원칙</h2></div>
+    <div class="values">
+      <div class="value" data-reveal><span class="mark">01</span><p><strong>포화된 벤치는 절대치만으로 변별력이 낮다.</strong> DocVQA·ChartQA·TextVQA·AI2D·MMBench·MME·POPE는 상단이 뭉쳐 순위 결정을 맡기기 어렵다(단 오류 유형·신뢰구간을 보면 차이가 남기도 한다).</p></div>
+      <div class="value" data-reveal><span class="mark">02</span><p><strong>변별은 어려운 축에서.</strong> MMMU-Pro, MathVision, InfoVQA, HallusionBench(qAcc), ScreenSpot-Pro, Video-MME(long).</p></div>
+      <div class="value" data-reveal><span class="mark">03</span><p><strong>포맷 함정.</strong> 객관식=위치·선택지 편향, 개방형=LLM 채점기 의존, 이진=Yes 편향, Elo=장황함·스타일 영향.</p></div>
+      <div class="value" data-reveal><span class="mark">04</span><p><strong>"비전이 진짜 필요한가" 검증.</strong> MMStar의 멀티모달 게인이 낮은데 종합점수만 높으면 텍스트·암기 편법을 의심.</p></div>
+      <div class="value" data-reveal><span class="mark">05</span><p><strong>오염 경계.</strong> 경시·공개 데이터 기반(MathVision, RefCOCO)일수록 급격한 점프는 추론력 향상과 데이터 누출을 구분해 볼 것.</p></div>
+      <div class="value" data-reveal><span class="mark">06</span><p><strong>척도 단위 혼동 주의.</strong> MME 2800·OCRBench 1000·ANLS(0~1)·정확도 %·Elo를 섞어 읽지 말 것.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">07</span><h2>방법 · 교차검증 · 한계</h2></div>
+    <div class="chips" style="margin-bottom:14px;" data-reveal>
+      <span class="chip">리서치 서브에이전트 2</span>
+      <span class="chip">웹 조사</span>
+      <span class="chip">codex 점검</span>
+      <span class="chip">agy 검증</span>
+      <span class="chip">cursor-agent 견제</span>
+    </div>
+    <div class="prose">
+      <p>벤치마크 해석과 리더보드는 리서치 서브에이전트가, 오픈/클로즈드·태스크·온프레미스는 직접 웹조사로 수집한 뒤, 세 개의 독립 CLI 에이전트로 사실성·편향·과신을 교차검증했다. 견제 과정에서 지적된 편향(소표본을 확정 결론처럼 서술, 배치 우위와 성능 우위 혼동, 목적이 다른 모델을 같은 잣대로 평가)은 본문 서술에 반영했다.</p>
+      <p><strong>한계.</strong> 프런티어 상용 리더보드 원표(OpenVLM HF Space·아레나)는 JS 렌더링·403으로 완전 확보에 실패해 상용 순위·모델명은 불확실하다. 2차 집계는 갱신 지연으로 최신 오픈 모델이 누락될 수 있다. 스터디 축의 결과는 소표본 정성 관찰이다.</p>
+    </div>
+    <div class="arch-note"><span class="chip conf">대외비</span><span>KAERI 내부 과제의 정량 수치, 폐쇄망 운영 세부, 비공개 레포 구현은 포함하지 않는다. 공개 벤치·모델카드·학회 발표로 검증 가능한 범위만 수록.</span></div>
+    <p class="edu-note">주요 출처: llm-stats.com · opencompass-open-vlm-leaderboard.hf.space · lmarena-ai(HF) · arXiv 2409.02813(MMMU-Pro) · 2403.20330(MMStar) · 2508.18265(InternVL3.5) · 2511.21631(Qwen3-VL) · presenc.ai · bentoml.com · HF 모델카드(Qwen2.5-VL·Janus-Pro).</p>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="foot-links">
+    <a href="/projects/cctv.html">← 지능형 CCTV</a>
+    <a href="/#projects">프로젝트 목록</a>
+    <a href="mailto:dongjukim.dev@gmail.com">Email</a>
+    <a href="https://github.com/gggg8657" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+<script src="/main.js"></script>
+</body>
+</html>
