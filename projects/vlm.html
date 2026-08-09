@@ -82,7 +82,54 @@
 
   <section>
     <div class="sec-head"><span class="sec-num">03</span><h2>오픈 vs 클로즈드</h2></div>
-    <p class="lede">한 가지를 분리해 둔다: 오픈웨이트의 강점은 <strong>배치 제약(온프레미스·데이터주권) 우위</strong>이지, 그 자체로 <strong>모델 품질 우위</strong>는 아니다. 둘은 별개 축이다.</p>
+    <p class="lede">한 가지를 분리해 둔다: 오픈웨이트의 강점은 <strong>배치 제약(온프레미스·데이터주권) 우위</strong>이지, 그 자체로 <strong>모델 품질 우위</strong>는 아니다. 둘은 별개 축이다. 폐쇄망에서 진짜 갈리는 지점은 <strong>데이터가 망 경계를 넘느냐</strong>다.</p>
+    <figure class="diagram" data-reveal>
+      <svg viewBox="0 0 760 278" role="img" aria-label="오픈웨이트는 폐쇄망 안에서 추론이 완결되어 데이터가 경계를 넘지 않지만, 클로즈드/API 모델은 매 요청마다 이미지를 벤더 클라우드로 전송해 폐쇄망 경계를 넘어야 한다." style="width:100%;height:auto;color:var(--ink)">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+          <marker id="ahS" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--signal)"/></marker>
+        </defs>
+
+        <!-- titles -->
+        <text x="185" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">오픈웨이트 · 로컬 추론</text>
+        <text x="558" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">클로즈드 / API</text>
+        <line x1="378" y1="40" x2="378" y2="252" stroke="currentColor" stroke-width="1" opacity="0.18"/>
+
+        <!-- LEFT: open-weight, everything inside boundary -->
+        <rect x="34" y="48" width="302" height="158" rx="10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 5" opacity="0.5"/>
+        <text x="46" y="66" font-size="10.5" font-family="ui-monospace,monospace" fill="currentColor" opacity="0.65">폐쇄망 · 온프레미스</text>
+        <rect x="50" y="104" width="80" height="46" rx="7" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <text x="90" y="132" text-anchor="middle" font-size="11.5" fill="currentColor">영상 입력</text>
+        <rect x="150" y="104" width="96" height="46" rx="7" fill="none" stroke="var(--accent)" stroke-width="1.8"/>
+        <text x="198" y="126" text-anchor="middle" font-size="11.5" fill="currentColor">VLM 가중치</text>
+        <text x="198" y="140" text-anchor="middle" font-size="10" fill="var(--accent)">로컬 실행</text>
+        <rect x="266" y="104" width="66" height="46" rx="7" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <text x="299" y="132" text-anchor="middle" font-size="11.5" fill="currentColor">결과</text>
+        <line x1="130" y1="127" x2="148" y2="127" stroke="currentColor" stroke-width="1.6" marker-end="url(#ah)"/>
+        <line x1="246" y1="127" x2="264" y2="127" stroke="currentColor" stroke-width="1.6" marker-end="url(#ah)"/>
+        <text x="185" y="188" text-anchor="middle" font-size="11.5" fill="var(--accent)">데이터가 경계를 넘지 않음</text>
+
+        <!-- RIGHT: closed/API, request crosses boundary -->
+        <rect x="402" y="48" width="214" height="158" rx="10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 5" opacity="0.5"/>
+        <text x="414" y="66" font-size="10.5" font-family="ui-monospace,monospace" fill="currentColor" opacity="0.65">폐쇄망</text>
+        <rect x="416" y="104" width="72" height="46" rx="7" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <text x="452" y="132" text-anchor="middle" font-size="11.5" fill="currentColor">영상 입력</text>
+        <rect x="508" y="104" width="64" height="46" rx="7" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <text x="540" y="132" text-anchor="middle" font-size="11.5" fill="currentColor">앱</text>
+        <line x1="488" y1="127" x2="506" y2="127" stroke="currentColor" stroke-width="1.6" marker-end="url(#ah)"/>
+        <!-- vendor cloud OUTSIDE boundary -->
+        <rect x="650" y="98" width="96" height="58" rx="10" fill="none" stroke="var(--signal)" stroke-width="1.6"/>
+        <text x="698" y="122" text-anchor="middle" font-size="11" fill="currentColor">벤더 클라우드</text>
+        <text x="698" y="138" text-anchor="middle" font-size="9.5" font-family="ui-monospace,monospace" fill="currentColor" opacity="0.7">GPT·Gemini·Claude</text>
+        <!-- crossing arrows (data leaves) -->
+        <line x1="572" y1="119" x2="649" y2="119" stroke="var(--signal)" stroke-width="1.8" marker-end="url(#ahS)"/>
+        <text x="610" y="110" text-anchor="middle" font-size="10.5" style="fill:var(--signal)">이미지 전송</text>
+        <line x1="649" y1="140" x2="572" y2="140" stroke="var(--signal)" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#ahS)"/>
+        <text x="610" y="153" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">응답</text>
+        <text x="509" y="188" text-anchor="middle" font-size="11.5" style="fill:var(--signal)">매 요청이 폐쇄망 밖으로 나감</text>
+      </svg>
+      <figcaption><b>그림.</b> 폐쇄망 관점의 실제 차이 — 오픈웨이트는 가중치를 망 안에서 실행해 영상이 경계를 넘지 않지만, 클로즈드/API는 매 추론마다 이미지를 벤더 클라우드로 전송해야 한다. KAERI처럼 외부 반출이 막힌 환경에서 오픈웨이트가 "선택지"가 되는 이유는 성능이 아니라 이 경계 때문이다.</figcaption>
+    </figure>
     <div class="rtable-wrap" data-reveal>
       <table class="rtable">
         <thead><tr><th>계열</th><th>공개</th><th>라이선스</th><th>크기</th><th>온프레미스</th></tr></thead>
