@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>에이전트 페이지 · 사내 LLM 에이전트 포털 — 김동주</title>
+<meta name="description" content="폐쇄망 온프레미스 LLM 위에 업무·연구용 에이전트 20여 종과 이를 한 화면에 모은 포털을 직접 구축. 문서·연구·CAD·음성 에이전트. KAERI 인공지능응용연구실.">
+<meta property="og:title" content="에이전트 페이지 · 사내 LLM 에이전트 포털 — 김동주">
+<meta property="og:description" content="포트 하나로 들어가는 사내 에이전트 포털 + 업무·연구 에이전트 20여 종. 폐쇄망 온프레미스 LLM.">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="/">김동주<span class="dot">.</span></a>
+    <nav><a href="/#projects">프로젝트</a><a href="/#career">이력</a><a href="/#contact">연락</a><button id="theme-toggle" class="theme-toggle" type="button" aria-label="테마 전환">☾</button></nav>
+  </div>
+</div>
+
+<header class="detail-hero wrap">
+  <a class="back-link" href="/#projects">&larr; 프로젝트 목록</a>
+  <p class="cat">KAERI 현직 · Agentic AI / 사내 플랫폼</p>
+  <h1>에이전트 페이지 · 사내 LLM 에이전트 포털</h1>
+  <p class="sub">폐쇄망 온프레미스 LLM 위에 문서·연구·설계·음성 업무용 에이전트 20여 종을 만들고, 이를 한 화면에서 찾고 실행하는 포털까지 직접 구축.</p>
+  <div class="meta">
+    <span><b>소속</b> KAERI 인공지능응용연구실</span>
+    <span><b>역할</b> 포털 설계·개발 + 에이전트 전체 구축</span>
+    <span><b>공개</b> 기관 내부 플랫폼 — 코드 비공개</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="sec-head"><span class="sec-num">아키텍처</span></div>
+    <div class="arch">
+      <div class="arch-block" data-reveal>
+        <div class="a-head"><span class="a-tag">단일 진입점 · 공용 LLM</span></div>
+        <div class="flow">
+          <div class="stage"><div class="s-t">사용자</div><div class="s-d">브라우저 · 포트 하나</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage"><div class="s-t">포털</div><div class="s-d">검색·실행·통계 · 리버스 프록시</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage"><div class="s-t">에이전트 20여 종</div><div class="s-d">도구별 독립 프로세스·작업 폴더</div></div>
+          <span class="arrow">&rarr;</span>
+          <div class="stage out"><div class="s-t">온프레미스 LLM</div><div class="s-d">GPU 서빙 · 외부 API 없음</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="prose">
+      <h3>문제</h3>
+      <p>폐쇄망 연구기관에서는 외부 LLM 서비스 사용 불가. 문서 작성·데이터 정리·연구 보조처럼 반복되는 업무를 LLM으로 줄이려면, 내부 GPU에서 도는 모델과 실제 업무 형식(HWP·HWPX·DXF 등)에 맞춘 도구가 필요.</p>
+
+      <h3>접근 — 포털</h3>
+      <ul>
+        <li><strong>단일 진입점.</strong> 모든 에이전트를 포털 아래 경로로 리버스 프록시(스트리밍 응답·파일 다운로드 포함). 사용자는 포트 하나만 열면 됨.</li>
+        <li><strong>찾고 실행하기.</strong> 검색·카테고리·인기 순위·노하우 피드, 에이전트별 시작/중지와 사용 설명 보기. 신규 에이전트 등록 화면 제공.</li>
+        <li><strong>운영.</strong> 공용 LLM 백엔드를 모든 에이전트에 연결, 데이터는 도구별 작업 폴더 한곳에 모아 백업 단순화. 표준 라이브러리만으로 구현해 폐쇄망 설치 부담 최소화.</li>
+      </ul>
+
+      <h3>접근 — 구축한 에이전트</h3>
+      <ul>
+        <li><strong>문서·사무.</strong>
+          <ul>
+            <li>HWP·PDF 요약·질의응답, 공문서 초안 HWPX 생성</li>
+            <li>주간보고 개인 작성·실 단위 취합, HWPX·DOCX 출력</li>
+            <li>업무 메일 작성·회신·윤문(수치 보존 검사), 축사·공지문 글쓰기, 한글 번역투 교정</li>
+            <li>출처 기반 인용 채팅·노트 정리</li>
+          </ul>
+        </li>
+        <li><strong>연구 보조.</strong>
+          <ul>
+            <li>논문 투고 전 사전 심사 — 인용 확인된 지적·예상 질문 + 그림·수치·약어 점검</li>
+            <li>단백질 구조 예측·결합 친화도 순위·서열 설계(Boltz-2 + ProteinMPNN)</li>
+            <li>배터리 성능·열화 예측(PyBaMM), 방사선 차폐·선량 간이 계산</li>
+            <li>그래프 이미지 → 수치 데이터, 표 → 편집 가능한 차트(XLSX·PPTX·DOCX·HWPX), 자연어 → SQL</li>
+          </ul>
+        </li>
+        <li><strong>설계·시각화.</strong>
+          <ul>
+            <li>말로 설명하면 3D 부품·2D 판재·배치도 생성, 기존 DXF 수정</li>
+            <li>텍스트·손그림 → 논문 스타일 다이어그램</li>
+          </ul>
+        </li>
+        <li><strong>음성·영상.</strong>
+          <ul>
+            <li>녹음 → 화자 분리 → 회의록·인사이트</li>
+            <li>한국어 음성 합성, 사진+음성 샘플 기반 립싱크 아바타</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>결과</h3>
+      <p>외부망 없이 쓰는 업무·연구용 에이전트 20여 종을 하나의 포털로 통합. 에이전트를 추가해도 사용자 접속 경로는 그대로 유지되는 구조로 확장 중.</p>
+
+      <h3>기술</h3>
+      <p>Python · Ollama(GPU 서빙) · 리버스 프록시(SSE) · SQLite · HWPX/DOCX/DXF 생성 · Whisper STT · TTS · Boltz-2 · ProteinMPNN · PyBaMM.</p>
+    </div>
+    <div class="arch-note"><span>KAERI 인공지능응용연구실 내부 플랫폼. 기관 보안상 코드·접속 정보는 공개하지 않으며, 여기서는 구성과 역할만 개념 수준으로 서술.</span></div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="foot-links">
+    <a href="/#projects">← 프로젝트 목록</a>
+    <a href="mailto:dongjukim.dev@gmail.com">Email</a>
+    <a href="https://github.com/gggg8657" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+<script src="/main.js"></script>
+</body>
+</html>

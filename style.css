@@ -318,6 +318,7 @@ blockquote.motto { font-family: var(--serif); font-size: clamp(20px, 3vw, 27px);
 .prose p { margin: 0 0 14px; color: var(--ink-soft); font-size: 15.5px; }
 .prose ul { margin: 0 0 14px; padding-left: 20px; color: var(--ink-soft); font-size: 15.5px; }
 .prose li { margin: 6px 0; }
+.prose li > ul { margin: 4px 0 0; }
 .prose strong { color: var(--ink); }
 .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 8px 0 6px; }
 .result { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; box-shadow: var(--shadow); }
